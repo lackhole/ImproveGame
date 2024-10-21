@@ -586,8 +586,8 @@ ImproveConfigs: {
 	}
 
 	DisableNonPlayerBombsExplosions: {
-		Label: "[centeritem:TNTBarrel] 禁止非玩家爆炸物破坏物块"
-		Tooltip: 禁止各种非玩家主观上想造成爆炸破坏物块的情况
+		Label: "[centeritem:TNTBarrel] Non-player Explosives Don't Destroy Tiles"
+		Tooltip: Prevent various occasions of accidental tile destruction
 	}
 
 	WorldFeaturePanel: {
@@ -731,28 +731,28 @@ ImproveConfigs: {
 	}
 
 	PylonPlaceNoRestriction: {
-		Label: "[centeritem:TeleportationPylonPurity] 移除晶塔放置限制"
-		Tooltip: 在任何地点都可以放置不限量的晶塔
+		Label: "[centeritem:TeleportationPylonPurity] Unlimited Pylon Placement"
+		Tooltip: Place any number of pylons anywhere
 	}
 
 	PylonTeleNoNear: {
-		Label: "[centeritem:TeleportationPylonUnderground] 晶塔传送无需靠近"
-		Tooltip: 无论在哪都可立即传送到晶塔
+		Label: "[centeritem:TeleportationPylonUnderground] Global Pylon Teleportation"
+		Tooltip: Teleport to Pylons from anywhere
 	}
 
 	PylonTeleNoNPC: {
-		Label: "[centeritem:TeleportationPylonHallow] 晶塔传送无需NPC"
-		Tooltip: 就算NPC死光了也能传送到晶塔
+		Label: "[centeritem:TeleportationPylonHallow] NPC-less Pylon Teleportation"
+		Tooltip: Teleport to pylons even if there's no town NPC beside
 	}
 
 	PylonTeleNoDanger: {
-		Label: "[centeritem:TeleportationPylonJungle] 晶塔传送无视危险"
-		Tooltip: Boss打到一半也可以传送到晶塔开溜
+		Label: "[centeritem:TeleportationPylonJungle] Danger-indendent Pylon Teleportation"
+		Tooltip: Teleport to pylons even when a boss is alive
 	}
 
 	PylonTeleNoBiome: {
-		Label: "[centeritem:TeleportationPylonMushroom] 晶塔传送无视生物群落"
-		Tooltip: 我说它是森林它就是森林
+		Label: "[centeritem:TeleportationPylonMushroom] Biome-independent Pylon Teleportation"
+		Tooltip: "\"It is if you say so.\""
 	}
 }
 
@@ -1085,16 +1085,21 @@ BombsNotDamageType: {
 
 DisableNonPlayerBombsExplosionsType: {
 	Tooltip: ""
-	Disabled.Label: 关闭
+	Disabled.Label: Off
 
 	FTW: {
-		Label: FTW特供
-		Tooltip: 仅FTW里，由罐子、摇树、机械骷髅王发射的炸弹不破坏物块
+		Label: For the Worthy Only
+		Tooltip:
+			'''
+			Only in For the Worthy worlds, bombs produced by pots,
+			shaking trees or the Mech Prime do not destroy tiles
+			'''
 	}
 
 	FTWAndExplosives: {
-		Label: 全部涵盖
-		Tooltip: 炸药、FTW里，由罐子、摇树、机械骷髅王发射的炸弹均不破坏物块
+		Label: All
+		Tooltip: The Explosives tile, and natrually generated explosives do not destrroy tiles 
+			
 	}
 }
 

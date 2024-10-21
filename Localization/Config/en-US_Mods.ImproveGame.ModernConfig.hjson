@@ -73,7 +73,7 @@ GameMechanics: {
 
 PylonMechanics: {
 	Label: Pylon Mechanics
-	Tooltip: 可在此解除晶塔的各种限制
+	Tooltip: Remove various pylon limitations.
 }
 
 NpcSettings: {
@@ -122,8 +122,8 @@ Minimap: {
 }
 
 Keybinds: {
-	Label: 控件
-	Tooltip: 在此处管理更好的体验的所有快捷键，右键单击条目可将其重置为默认快捷键。
+	Label: Controls
+	Tooltip: Manage Quality of Terraria hotkeys, right click on an entry to set it to default.
 	// 快捷键会在Tooltip显示其默认绑定的键位
-	Default: 默认绑定：{0}
+	Default: Default: {0}
 }

@@ -45,7 +45,7 @@ CreateWand: {
 }
 
 WallPlace: {
-	DisplayName: Wand of Technology (放置器模式)
+	DisplayName: Wand of Technology (Placing)
 	Tooltip:
 		'''
 		Summons a wall placer at your cursor
@@ -53,7 +53,7 @@ WallPlace: {
 		The recognized room can have at most 10000 tiles of space
 		Considers solid blocks, platforms and doors as boundaries
 		Each player can only summon one, use again to recall it
-		右键点击可切换至框选模式
+		Right click to switch to Selection mode
 		'''
 }
 
@@ -75,8 +75,8 @@ PotionBag: {
 		[c/0099ff:<left>] while holding a potion to deposit
 		[c/0099ff:<right>] to open potion bag
 		{TooltipByKeybind}
-		自动收纳即将进入背包的药水
-		仅背包中位列第一的药水袋可以自动收纳
+		Automatically collect potions picked up,
+		but only when this Potion Bag is the first in inventory
 		Can store up to 200 stacks of potions
 		'''
 	TooltipByKeybind: Press [c/0099ff:{KeybindName}] to collect potions from portable storages
@@ -90,8 +90,8 @@ BannerChest: {
 		[c/0099ff:<left>] while banner a potion to deposit
 		[c/0099ff:<right>] to open banner box
 		{TooltipByKeybind}
-		自动收纳即将进入背包的旗帜
-		仅背包中位列第一的旗帜盒可以自动收纳
+		Automatically collect banners picked up,
+		but only when this Banner Box is the first in inventory
 		Can store up to 500 stacks of banners
 		'''
 	TooltipByKeybind: Press [c/0099ff:{KeybindName}] to collect banners from portable storages
@@ -347,30 +347,31 @@ LicenseBook: {
 }
 
 LiquidWandAdvanced: {
-	DisplayName: 终极液体魔杖
+	DisplayName: Ultimate Wand of Liquids
 	Tooltip:
 		'''
 		Absorbs/Places chosen liquid in a selected area
 		<right> while holding to open the liquid control panel
-		可以无限放置液体
+		Unlimited amount of liquids
 		'''
 }
 
 WallPlaceSelectorMode: {
-	DisplayName: Wand of Technology (框选模式)
+	DisplayName: Wand of Technology (Selecting)
 	Tooltip:
 		'''
-		框选一片区域，放置背包中的墙体
-		右键点击可切换至放置器模式
+		Select a rectangualr area,
+		place walls in inventory in it
+		Right click to switch to Placement mode
 		'''
 }
 
 ActuationRodMkII: {
-	DisplayName: 终极致动魔杖
+	DisplayName: Ultimate Wand of Actuation
 	Tooltip:
 		'''
-		框选并致动一大片区域
-		不需要放置致动器
+		Select a rectangular area then actuate it
+		No need of Actuator
 		'''
 }
 

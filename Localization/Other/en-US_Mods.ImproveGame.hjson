@@ -117,23 +117,20 @@ Tips: {
 			'''
 			The buff [c/88CCEE:[{BuffName}][c/88CCEE:]] is already applied.
 			If you just want to disable buff of this item,
-			请对着该物品按下 {KeybindName} 或左键点击增益图标
-			on the buff icon to open buff tracker,
-			to enable/disable that buff.
+			please press {KeybindName} on the item or left click on the buff icon
+			to open buff tracker, enable/disable that buff.
 			'''
 		Disabled:
 			'''
 			Item buff [c/88CCEE:[{BuffName}][c/88CCEE:]] has been disabled
 			due to configuration.
-			对着该物品按下 {KeybindName} 或左键点击增益图标
-			buff icon to open buff tracker, to
-			enable/disable that buff.
+			Press {KeybindName} on the item or left click on the buff icon
+			to open buff tracker, enable/disable that buff.
 			'''
 		Hided:
 			'''
 			Buff icons have been hidden.
-			To display them, disable "Hide buff icons of
-			infinite potions" in [c/CC88AA:Personal Config].
+			To display them, configure it in [c/CC88AA:Personal Config].
 			'''
 		NonHided:
 			'''
@@ -360,7 +357,7 @@ RecipeGroup: {
 Keybinds: {
 	HugeInventory: {
 		DisplayName: Big Backpack
-		Tip: 按下后打开大背包，也可以在总控面板中打开
+		Tip: Open the Big Backpack; also can open it from Control Panel
 	}
 
 	BuffTracker: {
@@ -369,8 +366,8 @@ Keybinds: {
 	}
 
 	GrabBagLoot: {
-		DisplayName: Display Grab Bag Loot
-		Tip: 对着一个摸彩袋（宝藏袋、宝匣等）按下此快捷键可查看其各物品掉率
+		DisplayName: Grab Bag Loots
+		Tip: Show loots and drop rates of the grab bag your cursor's hovering on
 	}
 
 	HotbarSwitch: {
@@ -380,22 +377,22 @@ Keybinds: {
 
 	AutoTrashKeybind: {
 		DisplayName: Hide/Show the Auto-Trash Bin
-		Tip: 仅隐藏功能，并不会关闭，若想彻底关闭此功能可在“体系化功能”配置中调节
+		Tip: "Only hides the bin, not disabling it. To disable it, use the \"Others\" config"
 	}
 
 	DiscordRodKeybind: {
 		DisplayName: Use Teleportation Rods
-		Tip: 按下后快捷使用物品栏中的传送法杖（混沌传送杖与调谐传送杖）
+		Tip: Use Rod of Discord/Harmony in inventory
 	}
 
 	HomeKeybind: {
 		DisplayName: Use Recall Items
-		Tip: 按下后快捷使用物品栏中的回程物品（优先级：无限返回药水>无限回忆药水>魔镜类物品）
+		Tip: Use home-returning items in inventory (Return Potion > Recall Potion > magic mirrors)
 	}
 
 	OpenBagGUI: {
 		DisplayName: Bag Opener
-		Tip: 按下后打开快速开袋界面，也可以在总控面板中打开
+		Tip: Open the Bag Opener, also can open it from Control Panel
 	}
 
 	MasterControl: {
@@ -408,8 +405,8 @@ Keybinds: {
 	}
 
 	ItemInteract: {
-		DisplayName: 随身物品特殊交互快捷键
-		Tip: 用于部分物品的快捷交互，如激活坐骑、打开猪猪存钱罐等
+		DisplayName: Special Interactions
+		Tip: Interact with some items, e.g. mounts and Piggy Bank
 	}
 }
 
