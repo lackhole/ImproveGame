@@ -61,7 +61,7 @@ Magic Storage开源链接: https://github.com/blushiemagic/MagicStorage
 
 ### GetAmmoChainSequence
 获取指定物品的弹药链序列
-建议将本模组源码的 [AmmoChain.cs](Content\Functions\ChainedAmmo\AmmoChain.cs) 和 [ItemTypeData.cs](Core\ItemTypeData.cs) 复制到你的模组源码中，以便操作弹药链
+建议将本模组源码的 [AmmoChain.cs](Content/Functions/ChainedAmmo/AmmoChain.cs) 和 [ItemTypeData.cs](Core/ItemTypeData.cs) 复制到你的模组源码中，以便操作弹药链
 #### 参数
 - `Item` 要获取弹药链序列的物品实例
 #### 返回值
