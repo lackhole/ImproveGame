@@ -196,13 +196,13 @@ public class ShimmerTech : ModItem
 
             if (tip.Text == Language.GetTextValue("ItemName.CombatBookVolumeTwo"))
             {
-                if (NPC.peddlersSatchelWasUsed) tip.OverrideColor = Color.Green;
+                if (NPC.combatBookVolumeTwoWasUsed) tip.OverrideColor = Color.Green;
                 else tip.OverrideColor = Color.Red;
             }
 
             if (tip.Text == Language.GetTextValue("ItemName.PeddlersSatchel"))
             {
-                if (NPC.combatBookVolumeTwoWasUsed) tip.OverrideColor = Color.Green;
+                if (NPC.peddlersSatchelWasUsed) tip.OverrideColor = Color.Green;
                 else tip.OverrideColor = Color.Red;
             }
         }
