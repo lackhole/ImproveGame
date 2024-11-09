@@ -238,11 +238,11 @@ public class StructureDatas : ModSystem
         tag["unlocked"] = (byte)StructuresUnlocked;
         tag["shimmer"] = ShimmerPosition;
         tag["temple"] = TemplePosition;
-        tag["pyramids"] = PyramidPositions;
-        tag["skyHouses"] = SkyHousePositions;
-        tag["skyLakes"] = SkyLakePositions;
-        tag["planteras"] = PlanteraPositions;
-        tag["swords"] = EnchantedSwordPositions;
+        tag["pyramids"] = PyramidPositions ?? [];
+        tag["skyHouses"] = SkyHousePositions ?? [];
+        tag["skyLakes"] = SkyLakePositions ?? [];
+        tag["planteras"] = PlanteraPositions ?? [];
+        tag["swords"] = EnchantedSwordPositions ?? [];
     }
 
     public override void LoadWorldData(TagCompound tag)
@@ -250,11 +250,11 @@ public class StructureDatas : ModSystem
         StructuresUnlocked = tag.Get<byte>("unlocked");
         ShimmerPosition = tag.Get<Point16>("shimmer");
         TemplePosition = tag.Get<Point16>("temple");
-        PyramidPositions = tag.Get<List<Point16>>("pyramids");
-        SkyHousePositions = tag.Get<List<Point16>>("skyHouses");
-        SkyLakePositions = tag.Get<List<Point16>>("skyLakes");
-        PlanteraPositions = tag.Get<List<Point16>>("planteras");
-        EnchantedSwordPositions = tag.Get<List<Point16>>("swords");
+        PyramidPositions = tag.Get<List<Point16>>("pyramids") ?? [];
+        SkyHousePositions = tag.Get<List<Point16>>("skyHouses") ?? [];
+        SkyLakePositions = tag.Get<List<Point16>>("skyLakes") ?? [];
+        PlanteraPositions = tag.Get<List<Point16>>("planteras") ?? [];
+        EnchantedSwordPositions = tag.Get<List<Point16>>("swords") ?? [];
     }
 
     public override void NetSend(BinaryWriter writer)

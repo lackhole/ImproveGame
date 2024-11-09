@@ -32,6 +32,8 @@ public class ItemTypeData(Item item) : TagSerializable
             }
             else
             {
+                if (Item.ModItem.Mod is null || string.IsNullOrEmpty(Item.ModItem.Mod.Name) || string.IsNullOrEmpty(Item.ModItem.Name))
+                    return tag;
                 tag.Set("mod", Item.ModItem.Mod.Name);
                 tag.Set("name", Item.ModItem.Name);
             }

@@ -59,9 +59,13 @@ public class KeybindSystem : ModSystem
 
     public override void PostUpdateEverything()
     {
+        if (Main.netMode is NetmodeID.Server)
+            return;
+
         // 如果玩家不设置此快捷键则强制设置为默认按键
         if (ItemInteractKeybind.GetAssignedKeys().Count == 0)
-            PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus[ItemInteractKeybind.FullName] = [ItemInteractKeybind.DefaultBinding];
+            PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus[ItemInteractKeybind.FullName] =
+                [ItemInteractKeybind.DefaultBinding];
     }
 
     private void DrawHoverText(On_UIKeybindingListItem.orig_DrawSelf orig, UIKeybindingListItem self,
