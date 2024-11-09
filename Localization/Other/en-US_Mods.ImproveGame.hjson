@@ -377,7 +377,7 @@ Keybinds: {
 
 	AutoTrashKeybind: {
 		DisplayName: Hide/Show the Auto-Trash Bin
-		Tip: "Only hides the bin, not disabling it. To disable it, use the \"Others\" config"
+		Tip: Only hides the bin, not disabling it. To disable it, use the "Others" config
 	}
 
 	DiscordRodKeybind: {

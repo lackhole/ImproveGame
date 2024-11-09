@@ -23,7 +23,7 @@ public class UIConfigs : ModConfig
     public object SuicideButton;
 
     [Header("UIHeader")]
-    [DefaultValue(true)]
+    [DefaultValue(false)]
     [DrawTicks]
     public bool GlassVfxOn;
 

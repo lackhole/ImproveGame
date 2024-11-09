@@ -752,7 +752,7 @@ ImproveConfigs: {
 
 	PylonTeleNoBiome: {
 		Label: "[centeritem:TeleportationPylonMushroom] Biome-independent Pylon Teleportation"
-		Tooltip: "\"It is if you say so.\""
+		Tooltip: '''"It is if you say so."'''
 	}
 }
 
@@ -1098,8 +1098,7 @@ DisableNonPlayerBombsExplosionsType: {
 
 	FTWAndExplosives: {
 		Label: All
-		Tooltip: The Explosives tile, and natrually generated explosives do not destrroy tiles 
-			
+		Tooltip: The Explosives tile, and natrually generated explosives do not destrroy tiles
 	}
 }
 
