@@ -401,7 +401,11 @@ QuickShimmer: {
 	CoinLuck: 已转换为{0}点钱币幸运
 	AlreadyUnlocked: 该世界已经解锁了快速微光
 	Unlocked: 快速微光已解锁！请在总控页面打开
-	Locked: 使用 [i:ImproveGame/ShellShipInBottle_Shimmered] 以解锁快速微光
+	Locked:
+		'''
+		使用 [i:ImproveGame/ShellShipInBottle_Shimmered] {$Mods.ImproveGame.Items.ShellShipInBottle_Shimmered.DisplayName} 以解锁快速微光
+		将 [i:ImproveGame/ShellShipInBottle] {$Mods.ImproveGame.Items.ShellShipInBottle.DisplayName} 丢入微光湖试试吧！
+		'''
 }
 
 Autofisher: {

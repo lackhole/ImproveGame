@@ -377,7 +377,11 @@ ActuationRodMkII: {
 
 ShellShipInBottle: {
 	DisplayName: Shell Ship In Bottle
-	Tooltip: Throw it into shimmer lake and see what would happen!
+	Tooltip:
+		'''
+		Ask the Guide how to make it with Sea Shell
+		And then Throw it into shimmer lake and see what would happen!
+		'''
 }
 
 ShellShipInBottle_Shimmered: {
