@@ -11,38 +11,49 @@ namespace ImproveGame.Content.Items
 {
     public class MagickWand : SelectorItem
     {
+        public bool WallMode;
+        public bool TileMode;
+
         public override bool IsLoadingEnabled(Mod mod) => Config.LoadModItems.MagickWand;
 
         public override bool ModifySelectedTiles(Player player, int i, int j)
         {
-            if (UIConfigs.Instance.ExplosionEffect)
+            // 单人模式下直接设置成WandSystem.TileMode，物品的LiquidMode是给多人用的
+            if (Main.netMode is not NetmodeID.Server)
+            {
+                TileMode = WandSystem.TileMode;
+                WallMode = WandSystem.WallMode;
+            }
+
+            if (UIConfigs.Instance.ExplosionEffect && Main.netMode is not NetmodeID.Server)
             {
                 SoundEngine.PlaySound(SoundID.Item14, Main.MouseWorld);
                 BongBong(new Vector2(i, j) * 16f, 16, 16);
             }
 
-            if (Main.tile[i, j].WallType > 0 && WandSystem.WallMode)
+            if (Main.tile[i, j].WallType > 0 && WallMode)
             {
                 WorldGen.KillWall(i, j);
             }
 
-            if (WandSystem.TileMode && Main.tile[i, j].HasTile)
+            if (TileMode && Main.tile[i, j].HasTile)
                 TryKillTile(i, j, player);
             return true;
         }
 
         public override void PostModifyTiles(Player player, int minI, int minJ, int maxI, int maxJ)
         {
+            var size = new Point(maxI - minI, maxJ - minJ).Abs();
+            size.X += 2;
+            size.Y += 2;
+            var center = new Point(minI + size.X / 2, minJ + size.Y / 2).ToWorldCoordinates();
+            var rect = new Rectangle(minI, minJ, size.X, size.Y);
+
             if (Main.netMode is NetmodeID.Server)
-            {
-                var size = new Point(maxI - minI, maxJ - minJ).Abs();
-                size.X += 2;
-                size.Y += 2;
                 NetMessage.SendTileSquare(-1, minI - 1, minJ - 1, size.X , size.Y);
-            }
-            
-            DoBoomPacket.Send(TileRect);
-            PlaySoundPacket.PlaySound(LegacySoundIDs.Item, Main.MouseWorld, style: 14, false);
+
+            DoBoomPacket.Send(rect);
+            PlaySoundPacket.SendSound(LegacySoundIDs.Item, center, style: 14);
         }
 
         public override bool AltFunctionUse(Player player) => true;
@@ -62,6 +73,7 @@ namespace ImproveGame.Content.Items
             Item.rare = ItemRarityID.Cyan;
             Item.value = Item.sellPrice(0, 2, 0, 0);
 
+            MaxTilesPerFrame = 100;
             SelectRange = new(20, 20);
             KillSize = new(5, 3);
             ExtraRange = new(5, 3);
@@ -107,7 +119,6 @@ namespace ImproveGame.Content.Items
                     PlaySoundPacket.PlaySound(LegacySoundIDs.Item, Main.MouseWorld, style: 14);
                 ForeachTile(rectangle, (x, y) =>
                 {
-                    
                     if (Main.tile[x, y].WallType > 0 && WandSystem.WallMode)
                     {
                         WorldGen.KillWall(x, y);
@@ -179,6 +190,20 @@ namespace ImproveGame.Content.Items
             rect.Width = KillSize.X;
             rect.Height = KillSize.Y;
             return rect;
+        }
+
+        public override void NetSend(BinaryWriter writer)
+        {
+            WallMode = WandSystem.WallMode;
+            TileMode = WandSystem.TileMode;
+            writer.Write(new BitsByte(WallMode, TileMode));
+        }
+
+        public override void NetReceive(BinaryReader reader)
+        {
+            var bitsByte = (BitsByte)reader.ReadByte();
+            WallMode = bitsByte[0];
+            TileMode = bitsByte[1];
         }
 
         public override void AddRecipes()

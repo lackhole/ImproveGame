@@ -12,10 +12,14 @@ public class PlaySoundPacket : NetModule
     private byte _soundID;
     private Point16 _position; // 存short物块坐标，减少包大小
     private byte _style;
-    
+
     public static void PlaySound(int soundID, Vector2? position = null, int style = 1, bool playForSelf = true) =>
         Get(soundID, position, style).Send(runLocally: playForSelf);
-        
+
+    public static void SendSound(int soundID, Vector2? position = null, int style = 1, int toClient = -1,
+        int ignoreClient = -1) =>
+        Get(soundID, position, style).Send(toClient, ignoreClient);
+
     public static PlaySoundPacket Get(int soundID, Vector2? position = null, int style = 1)
     {
         var packet = ModContent.GetInstance<PlaySoundPacket>();
@@ -32,7 +36,7 @@ public class PlaySoundPacket : NetModule
             Send(-1, Sender);
             return;
         }
-        
+
         if (!UIConfigs.Instance.ExplosionEffect && _soundID is LegacySoundIDs.Item && _style is 14)
             return;
 

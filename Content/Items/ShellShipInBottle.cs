@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Terraria.ModLoader.IO;
 
 namespace ImproveGame.Content.Items;
+
 public class ShellShipInBottle : ModItem
 {
     public override void SetStaticDefaults()
@@ -38,9 +39,9 @@ public class ShellShipInBottle : ModItem
             .Register();
     }
 }
+
 public class ShellShipInBottle_Shimmered : ModItem
 {
-
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.CombatBook);
@@ -60,32 +61,57 @@ public class ShellShipInBottle_Shimmered : ModItem
                 AddNotification(GetText("UI.QuickShimmer.AlreadyUnlocked"), Color.Pink);
             return null;
         }
+
         QuickShimmerSystem.Unlocked = true;
         WorldGen.BroadcastText(NetworkText.FromKey("Mods.ImproveGame.UI.QuickShimmer.Unlocked"), Color.Pink);
         return true;
     }
-    public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+
+    public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame,
+        Color drawColor, Color itemColor, Vector2 origin, float scale)
     {
         base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
     }
-    public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+
+    public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation,
+        float scale, int whoAmI)
     {
         base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
     }
 }
-public class QuickShimmerSystem : ModSystem 
+
+public class QuickShimmerSystem : ModSystem
 {
     public static bool Unlocked;
     public static bool Enabled => Unlocked && Config.QuickShimmer;
+
     public override void SaveWorldData(TagCompound tag)
     {
         if (Unlocked) tag.Add("unlocked", true);
         base.SaveWorldData(tag);
     }
+
     public override void LoadWorldData(TagCompound tag)
     {
         if (tag.ContainsKey("unlocked")) Unlocked = tag.GetBool("unlocked");
 
         base.LoadWorldData(tag);
+    }
+
+    public override void NetSend(BinaryWriter writer)
+    {
+        var states = new BitsByte(Unlocked);
+        writer.Write(states);
+    }
+
+    public override void NetReceive(BinaryReader reader)
+    {
+        var states = (BitsByte) reader.ReadByte();
+        Unlocked = states[0];
+    }
+
+    public override void ClearWorld()
+    {
+        Unlocked = false;
     }
 }

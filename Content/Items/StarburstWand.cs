@@ -11,6 +11,7 @@ namespace ImproveGame.Content.Items
 
         public override void SetItemDefaults()
         {
+            base.SetItemDefaults();
             Item.width = 40;
             Item.height = 46;
             Item.rare = ItemRarityID.Red;
