@@ -145,6 +145,12 @@ public class ModernConfigOption : TimerView
 
         if (ConfigOptionsPanel.CurrentCategory.LocalizationKey is nameof(Favorites))
             ConfigOptionsPanel.Instance.RefreshCurrentPage();
+
+        // 特效
+        SoundEngine.PlaySound(FavoritedOptionDatabase.IsFavorited(Config, OptionName)
+            ? SoundID.ResearchComplete
+            : SoundID.Research);
+        ModernConfigUI.Instance.GenerateParticleAtMouse();
     }
 
     private void CheckAttributes()

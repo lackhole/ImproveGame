@@ -6,6 +6,7 @@ using ImproveGame.UIFramework.Common;
 using ImproveGame.UIFramework.Graphics2D;
 using ImproveGame.UIFramework.SUIElements;
 using Microsoft.Xna.Framework.Input;
+using Terraria.Graphics.Renderers;
 using Terraria.ModLoader.UI;
 
 namespace ImproveGame.UI.ModernConfig;
@@ -33,6 +34,15 @@ public sealed class ModernConfigUI : UIState
 
     // 主栏下放描述
     public TooltipPanel TooltipPanel;
+
+    // 有点爽的东西，中键收藏生成粒子
+    private UIParticleLayer _particleSystem = new()
+    {
+        Width = new StyleDimension(0f, 1f),
+        Height = new StyleDimension(0f, 1f),
+        AnchorPositionOffsetByPercents = Vector2.One / 2f,
+        AnchorPositionOffsetByPixels = Vector2.Zero
+    };
 
     public override void OnInitialize()
     {
@@ -88,6 +98,8 @@ public sealed class ModernConfigUI : UIState
         };
         TooltipPanel.SetSize(0f, tooltipPanelHeight, 1f, 0f);
         TooltipPanel.JoinParent(mainPanelContainer);
+
+        MainPanel.Append(_particleSystem);
 
         // 返回按钮
         var backButton = new UITextPanel<LocalizedText>(Language.GetText("UI.Back"), 0.7f, large: true)
@@ -164,7 +176,7 @@ public sealed class ModernConfigUI : UIState
         base.Update(gameTime);
 
         if (Main.keyState.IsKeyDown(Keys.Escape) && !Main.oldKeyState.IsKeyDown(Keys.Escape) &&
-            UISystem.FocusedEditableText is null)
+            UISystem.FocusedEditableText is null && Main.gameMenu) // 游戏里按照物品栏快捷键关闭，只有gameMenu才用Esc
         {
             Close();
         }
@@ -172,6 +184,35 @@ public sealed class ModernConfigUI : UIState
         // 适配即时风格切换
         MainPanel.BorderColor = ConfigColors.MainPanelBorder;
         MainPanel.BgColor = ConfigColors.MainPanelBg;
+    }
+
+    public void GenerateParticleAtMouse()
+    {
+        var parentPosition = Instance.MainPanel.GetInnerDimensions().Center();
+        var mousePosition = Main.MouseScreen;
+        var finalPosition = mousePosition - parentPosition;
+        finalPosition.Y += 4f;
+        Instance.GenerateParticleAt(finalPosition);
+    }
+
+    public void GenerateParticleAt(Vector2 position)
+    {
+        Vector2 accelerationPerFrame = new (0f, 0.16350001f);
+        var texture = Main.Assets.Request<Texture2D>("Images/UI/Creative/Research_Spark");
+
+        for (int i = 0; i < 12; i++)
+        {
+            Vector2 initialVelocity = Main.rand.NextVector2Circular(4f, 3f);
+
+            initialVelocity.Y -= 2f;
+
+            _particleSystem.AddParticle(new CreativeSacrificeParticle(texture, null, initialVelocity, position)
+            {
+                AccelerationPerFrame = accelerationPerFrame,
+                ScaleOffsetPerFrame = -1f / 60f,
+                _scale = Main.rand.NextFloat(0.2f, 0.5f)
+            });
+        }
     }
 
     #region Mica - 云母效果特殊处理

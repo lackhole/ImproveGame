@@ -18,7 +18,21 @@ public class ModernConfigDetours : ILoadable
         MonoModHooks.Add(drawMenuMethod, DrawMenuDetour);
 
         On_Main.CanPauseGame += orig =>
-            orig.Invoke() || (Main.netMode is NetmodeID.SinglePlayer && ModernConfigUI.Instance?.Enabled is true);
+            orig.Invoke() || (Main.netMode is NetmodeID.SinglePlayer && Main.InGameUI.CurrentState is ModernConfigUI);
+
+        On_IngameFancyUI.Close += orig =>
+        {
+            // 现记录，因为执行完原版之后CurrentState就是null了
+            bool isInGameModernConfig = !Main.gameMenu && Main.InGameUI.CurrentState is ModernConfigUI;
+
+            orig.Invoke();
+
+            if (!isInGameModernConfig)
+                return;
+
+            Main.playerInventory = false;
+            ModernConfigUI.Instance.Enabled = false;
+        };
     }
 
     private static void PopulateConfigsDetour(Action<UIModConfigList> orig, UIModConfigList self)

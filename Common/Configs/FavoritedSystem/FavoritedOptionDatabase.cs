@@ -32,6 +32,9 @@ public class FavoritedOptionDatabase
         ];
     }
 
+    public static bool IsFavorited(ModConfig config, string optionName) =>
+        FavoritedOptions.Contains($"{config.Name}.{optionName}");
+
     public static void ToggleFavoriteForOption(ModConfig config, string optionName)
     {
         string name = $"{config.Name}.{optionName}";
