@@ -60,11 +60,11 @@ With the exception of GetXX-prefixed calls, all other Mod.Call methods return a 
 
 ### GetAmmoChainSequence
 Get the ammo chain sequence of the specified item
-It is recommended to copy the [AmmoChain.cs](Content\Functions\ChainedAmmo\AmmoChain.cs) and [ItemTypeData.cs](Core\ItemTypeData.cs) to your mod source to easily operate ammo chains
+It is recommended to copy the [AmmoChain.cs](Content/Functions/ChainedAmmo/AmmoChain.cs) and [ItemTypeData.cs](Core/ItemTypeData.cs) to your mod source to easily operate ammo chains
 #### Parameters
 - `Item` The item instance you are getting ammo chain from
 #### Return Value
-- `TagCompound` Ammo chain data saved as TagCompound. See [AmmoChain.cs](Content\Functions\ChainedAmmo\AmmoChain.cs) and [ItemTypeData.cs](Core\ItemTypeData.cs) to learn how to read the data. Returns `null` if the item has no ammo chain
+- `TagCompound` Ammo chain data saved as TagCompound. See [AmmoChain.cs](Content/Functions/ChainedAmmo/AmmoChain.cs) and [ItemTypeData.cs](Core/ItemTypeData.cs) to learn how to read the data. Returns `null` if the item has no ammo chain
 
 ### GetUniversalAmmoId
 Get the item ID of "Unspecified Ammo", an item used in ammo chains to indicate that this ammo can be anything. Usually used with ammo chain related logic.
