@@ -144,6 +144,12 @@ public class VeinMinerSystem : ModSystem
         // 此方法仅在操作方客户端运行
         On_Player.PickTile += (orig, self, x, y, power) =>
         {
+            if (!VeinMiningEnabled)
+            {
+                orig.Invoke(self, x, y, power);
+                return;
+            }
+
             var tile = Main.tile[x, y];
             int type = tile.TileType;
 
@@ -152,7 +158,7 @@ public class VeinMinerSystem : ModSystem
                              !Main.tileSpelunker[type]);
             if (!_usingMiningTools || isNotOre)
             {
-                orig.Invoke(self, x, y , power);
+                orig.Invoke(self, x, y, power);
                 return;
             }
 
@@ -160,7 +166,7 @@ public class VeinMinerSystem : ModSystem
             MinerIndex = self.whoAmI;
 
             bool tileActiveOld = tile.HasTile;
-            orig.Invoke(self, x, y , power);
+            orig.Invoke(self, x, y, power);
             bool tileActiveNow = tile.HasTile;
 
             // 如果破坏了方块

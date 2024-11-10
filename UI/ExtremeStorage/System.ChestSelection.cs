@@ -1,5 +1,6 @@
 ﻿using ImproveGame.Packets.NetChest;
 using ImproveGame.UIFramework.Graphics2D;
+using Terraria.UI.Chat;
 
 namespace ImproveGame.UI.ExtremeStorage
 {
@@ -37,13 +38,29 @@ namespace ImproveGame.UI.ExtremeStorage
                 return;
             }
 
-            bool clicked = Main.mouseLeft && Main.mouseLeftRelease;
+            bool clicked = Main.mouseLeft;
 
             Main.cursorOverride = CursorOverrideID.GamepadDefaultCursor;
             Main.cursorColor = Color.SkyBlue;
 
             var nearbyChestIndexes = ExtremeStorageGUI.Storage.FindAllNearbyChests();
             char groupIdentifier = ExtremeStorageGUI.RealGroup.GetIdentifier();
+
+            // 右键点击以取消 提示
+            string tip = GetText("UI.ExtremeStorage.AddChestTip");
+            var scale = new Vector2(0.4f);
+            var font = FontAssets.DeathText.Value;
+            var size = ChatManager.GetStringSize(font, tip, Vector2.One);
+            var center = ExtremeStorageGUI.Storage.Position.ToWorldCoordinates(24, -12) - Main.screenPosition;
+            var realSize = size * scale;
+            var position = center - realSize / 2f;
+            var rectangle = new Rectangle((int)position.X, (int)position.Y, (int)realSize.X, (int)realSize.Y);
+            rectangle.Inflate(40, 30);
+
+            Main.spriteBatch.Draw(ModAsset.BlurredBar.Value, rectangle, Color.Black * 0.5f);
+            ChatManager.DrawColorCodedStringWithShadow(Main.spriteBatch, font, tip,
+                center, Color.Cyan, 0f, size / 2f,
+                scale, spread: 1.5f);
 
             foreach (int index in nearbyChestIndexes)
             {
@@ -79,13 +96,14 @@ namespace ImproveGame.UI.ExtremeStorage
                                 : $"{groupIdentifier}{chest.name}";
 
                         ChestNamePacketByID.Send((ushort)index, chest.name);
-                        IsSelecting = false;
+                        // IsSelecting = false;
                         return;
                     }
                 }
 
                 var drawPosition = positionInWorld.ToVector2() - Main.screenPosition - new Vector2(2f);
-                SDFRectangle.HasBorder(drawPosition, hitbox.Size() + new Vector2(4f), new Vector4(4), color * 0.2f, 2f, color, ui: false);
+                SDFRectangle.HasBorder(drawPosition, hitbox.Size() + new Vector2(4f), new Vector4(4), color * 0.2f, 2f,
+                    color, ui: false);
             }
         }
     }

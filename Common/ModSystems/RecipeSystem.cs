@@ -110,6 +110,8 @@ public class RecipeSystem : ModSystem
     {
         // 控制微光
         // 液体法杖月后可直接微光转换为终极液体法杖
+        if (!Config.LoadModItems.LiquidWand || !Config.LoadModItems.LiquidWandAdvanced)
+            return;
         int liquidWand = ModContent.ItemType<LiquidWand>();
         int liquidWandAdvanced = ModContent.ItemType<LiquidWandAdvanced>();
         ItemID.Sets.ShimmerTransformToItem[liquidWand] = NPC.downedMoonlord ? liquidWandAdvanced : -1;

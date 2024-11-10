@@ -142,6 +142,7 @@ PlayerStats: {
 
 ExtremeStorage: {
 	AddChest: 添加箱子
+	AddChestTip: 右键点击以取消
 	RejectNearbyStack: 附近有玩家在使用储存管理器，无法快速堆叠到附近箱子
 	CloseCraftingWindow: 关闭合成窗口
 	OpenCraftingWindow: 打开合成窗口

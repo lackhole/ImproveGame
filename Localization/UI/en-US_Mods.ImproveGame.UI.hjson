@@ -142,6 +142,7 @@ PlayerStats: {
 
 ExtremeStorage: {
 	AddChest: Add Chest
+	AddChestTip: Right click to cancel
 	RejectNearbyStack: Failed to stack to nearby chests, likely because another player is using a nearby Storage Manager
 	CloseCraftingWindow: Close Crafting Window
 	OpenCraftingWindow: Open Crafting Window

@@ -57,18 +57,23 @@ namespace ImproveGame.Common.Utils
             Reset();
         }
 
-        public void Load(Mod mod) {
+        public void Load(Mod mod)
+        {
             IL_Player.UpdateBiomes += SimulateUpdateBiomes;
         }
 
         private void SimulateUpdateBiomes(ILContext il)
         {
             var c = new ILCursor(il);
-            if (!c.TryGotoNext(MoveType.After, i => i.MatchCallvirt<BiomeLoader>(nameof(BiomeLoader.UpdateBiomes)))) {
+            if (!c.TryGotoNext(MoveType.Before, i => i.MatchCallvirt<BiomeLoader>(nameof(BiomeLoader.UpdateBiomes))))
+            {
                 return;
             }
+
+            c.Index -= 2;
             var label = c.DefineLabel(); // 记录位置
-            c.Emit(OpCodes.Call, typeof(TileCounter).GetMethod($"get_{nameof(Simulating)}", BindingFlags.Static | BindingFlags.Public));
+            c.Emit(OpCodes.Call,
+                typeof(TileCounter).GetMethod($"get_{nameof(Simulating)}", BindingFlags.Static | BindingFlags.Public));
             c.Emit(OpCodes.Brfalse_S, label); // 为false就跳到下面
             c.Emit(OpCodes.Ret); // 为true直接return
             c.MarkLabel(label);
@@ -76,7 +81,8 @@ namespace ImproveGame.Common.Utils
 
         public void Unload() { }
 
-        public void Simulate(Player player) {
+        public void Simulate(Player player)
+        {
             Simulating = true;
 
             int evilTileCount = Main.SceneMetrics.EvilTileCount;
@@ -124,7 +130,8 @@ namespace ImproveGame.Common.Utils
 
             SystemLoader.ResetNearbyTileEffects();
 
-            Rectangle tileRectangle = new Rectangle(tileCoord.X - Main.buffScanAreaWidth / 2, tileCoord.Y - Main.buffScanAreaHeight / 2, Main.buffScanAreaWidth, Main.buffScanAreaHeight);
+            Rectangle tileRectangle = new Rectangle(tileCoord.X - Main.buffScanAreaWidth / 2,
+                tileCoord.Y - Main.buffScanAreaHeight / 2, Main.buffScanAreaWidth, Main.buffScanAreaHeight);
             tileRectangle = WorldUtils.ClampToWorld(tileRectangle);
             for (int i = tileRectangle.Left; i < tileRectangle.Right; i++)
             {
@@ -161,6 +168,7 @@ namespace ImproveGame.Common.Utils
                                 _ => -1,
                             };
                         }
+
                         break;
                     }
                 }
@@ -175,15 +183,25 @@ namespace ImproveGame.Common.Utils
         /// </summary>
         private void ExportTileCountsToMain()
         {
-            HallowTileCount = _tileCounts[109] + _tileCounts[492] + _tileCounts[110] + _tileCounts[113] + _tileCounts[117] + _tileCounts[116] + _tileCounts[164] + _tileCounts[403] + _tileCounts[402];
-            CorruptionTileCount = _tileCounts[23] + _tileCounts[24] + _tileCounts[25] + _tileCounts[32] + _tileCounts[112] + _tileCounts[163] + _tileCounts[400] + _tileCounts[398] + -10 * _tileCounts[27];
-            CrimsonTileCount = _tileCounts[199] + _tileCounts[203] + _tileCounts[200] + _tileCounts[401] + _tileCounts[399] + _tileCounts[234] + _tileCounts[352] - 10 * _tileCounts[27];
-            SnowTileCount = _tileCounts[147] + _tileCounts[148] + _tileCounts[161] + _tileCounts[162] + _tileCounts[164] + _tileCounts[163] + _tileCounts[200];
-            JungleTileCount = _tileCounts[60] + _tileCounts[61] + _tileCounts[62] + _tileCounts[74] + _tileCounts[226] + _tileCounts[225];
+            HallowTileCount = _tileCounts[109] + _tileCounts[492] + _tileCounts[110] + _tileCounts[113] +
+                              _tileCounts[117] + _tileCounts[116] + _tileCounts[164] + _tileCounts[403] +
+                              _tileCounts[402];
+            CorruptionTileCount = _tileCounts[23] + _tileCounts[24] + _tileCounts[25] + _tileCounts[32] +
+                                  _tileCounts[112] + _tileCounts[163] + _tileCounts[400] + _tileCounts[398] +
+                                  -10 * _tileCounts[27];
+            CrimsonTileCount = _tileCounts[199] + _tileCounts[203] + _tileCounts[200] + _tileCounts[401] +
+                _tileCounts[399] + _tileCounts[234] + _tileCounts[352] - 10 * _tileCounts[27];
+            SnowTileCount = _tileCounts[147] + _tileCounts[148] + _tileCounts[161] + _tileCounts[162] +
+                            _tileCounts[164] + _tileCounts[163] + _tileCounts[200];
+            JungleTileCount = _tileCounts[60] + _tileCounts[61] + _tileCounts[62] + _tileCounts[74] + _tileCounts[226] +
+                              _tileCounts[225];
             MushroomTileCount = _tileCounts[70] + _tileCounts[71] + _tileCounts[72] + _tileCounts[528];
             MeteorTileCount = _tileCounts[37];
-            DungeonTileCount = _tileCounts[41] + _tileCounts[43] + _tileCounts[44] + _tileCounts[481] + _tileCounts[482] + _tileCounts[483];
-            SandTileCount = _tileCounts[53] + _tileCounts[112] + _tileCounts[116] + _tileCounts[234] + _tileCounts[397] + _tileCounts[398] + _tileCounts[402] + _tileCounts[399] + _tileCounts[396] + _tileCounts[400] + _tileCounts[403] + _tileCounts[401];
+            DungeonTileCount = _tileCounts[41] + _tileCounts[43] + _tileCounts[44] + _tileCounts[481] +
+                               _tileCounts[482] + _tileCounts[483];
+            SandTileCount = _tileCounts[53] + _tileCounts[112] + _tileCounts[116] + _tileCounts[234] +
+                            _tileCounts[397] + _tileCounts[398] + _tileCounts[402] + _tileCounts[399] +
+                            _tileCounts[396] + _tileCounts[400] + _tileCounts[403] + _tileCounts[401];
             GraveyardTileCount = _tileCounts[85];
             GraveyardTileCount -= _tileCounts[27] / 2;
 
@@ -220,7 +238,14 @@ namespace ImproveGame.Common.Utils
             Main.SceneMetrics.ActiveFountainColor = ActiveFountainColor;
 
             // 暂时用作Fargo喷泉的适配，有问题再改回来
-            PlayerLoader.PostUpdateMiscEffects(player);
+            try
+            {
+                PlayerLoader.PostUpdateMiscEffects(player);
+            }
+            catch (Exception e)
+            {
+                // ignored
+            }
 
             Main.SceneMetrics.ActiveFountainColor = activeFountainColor;
         }

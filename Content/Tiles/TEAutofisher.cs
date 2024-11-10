@@ -1,3 +1,4 @@
+using ImproveGame.Common.GlobalItems;
 using ImproveGame.Common.ModPlayers;
 using ImproveGame.Common.ModSystems;
 using ImproveGame.Core;
@@ -31,8 +32,9 @@ namespace ImproveGame.Content.Tiles
         public bool AutoDeposit = true;
         public List<ItemTypeData> ExcludedItems = [];
 
-        public bool IsEmpty => accessory.IsAir && bait.IsAir && fishingPole.IsAir && (fish is null || fish.All(item => item.IsAir));
-        
+        public bool IsEmpty => accessory.IsAir && bait.IsAir && fishingPole.IsAir &&
+                               (fish is null || fish.All(item => item.IsAir));
+
         public bool HasBait => !bait.IsAir;
 
         public override bool IsTileValidForEntity(int x, int y)
@@ -48,7 +50,8 @@ namespace ImproveGame.Content.Tiles
                 Autofisher.TipType.FishingWarning => Language.GetTextValue("GameUI.FishingWarning"),
                 Autofisher.TipType.NotEnoughWater => Language.GetTextValue("GameUI.NotEnoughWater"),
                 Autofisher.TipType.FishingPower => Language.GetTextValue("GameUI.FishingPower", fishingLevel),
-                Autofisher.TipType.FullFishingPower => Language.GetTextValue("GameUI.FullFishingPower", fishingLevel, 0.0 - Math.Round(waterQuality * 100f)),
+                Autofisher.TipType.FullFishingPower => Language.GetTextValue("GameUI.FullFishingPower", fishingLevel,
+                    0.0 - Math.Round(waterQuality * 100f)),
                 Autofisher.TipType.Unavailable => GetText("UI.Autofisher.Unavailable"),
                 Autofisher.TipType.InShimmer => GetText("UI.Autofisher.InShimmer"),
                 _ => ""
@@ -66,7 +69,8 @@ namespace ImproveGame.Content.Tiles
             {
                 var player = Main.player[i];
                 // 距离用 DistanceSQ 判断，没有开方操作运行更快
-                if (player.active && !player.DeadOrGhost && player.Center.DistanceSQ(Position.ToWorldCoordinates()) <= distance)
+                if (player.active && !player.DeadOrGhost &&
+                    player.Center.DistanceSQ(Position.ToWorldCoordinates()) <= distance)
                     FishingTipPacket.Get(ID, tipType, fishingLevel, waterQuality).Send(i);
             }
         }
@@ -77,6 +81,7 @@ namespace ImproveGame.Content.Tiles
             {
                 fish[k] = new();
             }
+
             fishingPole = new();
             bait = new();
             accessory = new();
@@ -92,7 +97,14 @@ namespace ImproveGame.Content.Tiles
             return placedEntity;
         }
 
-        public static Player GetClosestPlayer(Point16 Position) => Main.player[Player.FindClosest(new Vector2(Position.X * 16, Position.Y * 16), 1, 1)];
+        public static int GetClosestPlayerIndex(Point16 Position) =>
+            Player.FindClosest(new Vector2(Position.X * 16, Position.Y * 16), 1, 1);
+
+        public static Player GetClosestPlayer(Point16 Position)
+        {
+            int index = GetClosestPlayerIndex(Position);
+            return Main.player.IndexInRange(index) ? Main.player[index] : Main.player[0];
+        }
 
         #region 钓鱼
 
@@ -127,7 +139,8 @@ namespace ImproveGame.Content.Tiles
             if (Main.rand.NextBool(60))
                 FishingTimer += 60;
 
-            bool accAvailable = ModIntegrationsSystem.FishingStatLookup.TryGetValue(accessory.type, out FishingStat stat);
+            bool accAvailable =
+                ModIntegrationsSystem.FishingStatLookup.TryGetValue(accessory.type, out FishingStat stat);
 
             float fishingSpeedBonus = accAvailable ? stat.SpeedMultiplier : 1f;
 
@@ -140,8 +153,9 @@ namespace ImproveGame.Content.Tiles
                     bassCount += fish[i].stack;
                 }
             }
+
             fishingSpeedBonus += Math.Min(bassCount * 0.05f, 5f);
-            
+
             // 肉后提升200%钓鱼速度
             if (Main.hardMode)
                 fishingSpeedBonus += 2f;
@@ -187,12 +201,14 @@ namespace ImproveGame.Content.Tiles
             fisher.X = locatePoint.X;
             fisher.Y = locatePoint.Y;
             fisher.bobberType = fishingPole.shoot;
-            GetFishingPondState(fisher.X, fisher.Y, out fisher.inLava, out fisher.inHoney, out bool inShimmer, out fisher.waterTilesCount, out fisher.chumsInWater);
+            GetFishingPondState(fisher.X, fisher.Y, out fisher.inLava, out fisher.inHoney, out bool inShimmer,
+                out fisher.waterTilesCount, out fisher.chumsInWater);
             if (fisher.waterTilesCount < 75)
             {
                 SetFishingTip(Autofisher.TipType.NotEnoughWater);
                 return;
             }
+
             if (inShimmer)
             {
                 SetFishingTip(Autofisher.TipType.InShimmer);
@@ -203,10 +219,13 @@ namespace ImproveGame.Content.Tiles
             if (fisher.playerFishingConditions.BaitItemType == ItemID.TruffleWorm)
             {
                 SetFishingTip(Autofisher.TipType.FishingWarning);
-                if (Main.rand.NextBool(5) && (fisher.X < 380 || fisher.X > Main.maxTilesX - 380) && fisher.waterTilesCount > 1000 && player.active && !player.dead && player.Distance(new(fisher.X * 16, fisher.Y * 16)) <= 2000 && NPC.CountNPCS(NPCID.DukeFishron) < 3)
+                if (Main.rand.NextBool(5) && (fisher.X < 380 || fisher.X > Main.maxTilesX - 380) &&
+                    fisher.waterTilesCount > 1000 && player.active && !player.dead &&
+                    player.Distance(new(fisher.X * 16, fisher.Y * 16)) <= 2000 && NPC.CountNPCS(NPCID.DukeFishron) < 3)
                 {
                     // 召唤猪鲨 （？？？   上限是3个
-                    int npc = NPC.NewNPC(NPC.GetBossSpawnSource(player.whoAmI), fisher.X * 16, fisher.Y * 16, NPCID.DukeFishron, 1);
+                    int npc = NPC.NewNPC(NPC.GetBossSpawnSource(player.whoAmI), fisher.X * 16, fisher.Y * 16,
+                        NPCID.DukeFishron, 1);
                     if (npc == 200)
                         return;
 
@@ -224,8 +243,11 @@ namespace ImproveGame.Content.Tiles
                             Main.NewText(Language.GetTextValue("Announcement.HasAwoken", typeName), 175, 75);
                             break;
                         case NetmodeID.Server:
-                            ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.ImproveGame.Autofisher.CarefulNextTime"), new(175, 75, 255));
-                            ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Announcement.HasAwoken", Main.npc[npc].GetTypeNetName()), new Color(175, 75, 255));
+                            ChatHelper.BroadcastChatMessage(
+                                NetworkText.FromKey("Mods.ImproveGame.Autofisher.CarefulNextTime"), new(175, 75, 255));
+                            ChatHelper.BroadcastChatMessage(
+                                NetworkText.FromKey("Announcement.HasAwoken", Main.npc[npc].GetTypeNetName()),
+                                new Color(175, 75, 255));
                             break;
                     }
 
@@ -235,6 +257,7 @@ namespace ImproveGame.Content.Tiles
 
                     UISystem.Instance.AutofisherGUI.RefreshItems(ItemSyncPacket.Bait);
                 }
+
                 return;
             }
 
@@ -242,7 +265,8 @@ namespace ImproveGame.Content.Tiles
             if (fisher.fishingLevel == 0)
                 return;
 
-            fisher.CanFishInLava = ItemID.Sets.CanFishInLava[fisher.playerFishingConditions.PoleItemType] || ItemID.Sets.IsLavaBait[fisher.playerFishingConditions.BaitItemType] || _lavaFishing;
+            fisher.CanFishInLava = ItemID.Sets.CanFishInLava[fisher.playerFishingConditions.PoleItemType] ||
+                                   ItemID.Sets.IsLavaBait[fisher.playerFishingConditions.BaitItemType] || _lavaFishing;
             if (fisher.chumsInWater > 0)
                 fisher.fishingLevel += 11;
 
@@ -312,6 +336,7 @@ namespace ImproveGame.Content.Tiles
                 {
                     fisher.heightLevel = 4;
                 }
+
                 if (fisher.heightLevel == 2 && Main.rand.NextBool(2))
                 {
                     fisher.heightLevel = 1;
@@ -338,7 +363,8 @@ namespace ImproveGame.Content.Tiles
                 fisher.heightLevel = 4;
             }
 
-            FishingCheck_RollDropLevels(player, fisher.fishingLevel, out fisher.common, out fisher.uncommon, out fisher.rare, out fisher.veryrare, out fisher.legendary, out fisher.crate);
+            FishingCheck_RollDropLevels(player, fisher.fishingLevel, out fisher.common, out fisher.uncommon,
+                out fisher.rare, out fisher.veryrare, out fisher.legendary, out fisher.crate);
             //FishingCheck_ProbeForQuestFish(ref fisher);
             //FishingCheck_RollEnemySpawns(ref fisher);
 
@@ -348,31 +374,45 @@ namespace ImproveGame.Content.Tiles
                 owner = 255
             };
 
-            Main.player[255].Center = Position.ToWorldCoordinates();
-            TileCounter tileCounter = new();
-            tileCounter.ScanAndExportToMain(Position);
-            tileCounter.Simulate(Main.player[255]);
-            tileCounter.FargosFountainSupport(Main.player[255]);
+            AutofishItemListener.ListeningAutofisher = this;
 
-            // AssemblyPublicizer 使得 FishingCheck_RollItemDrop 可以直接访问
-            fakeProj.FishingCheck_RollItemDrop(ref fisher);
-
-            AdvancedPopupRequest sonar = new();
-            Vector2 sonarPosition = new(-1145141f, -919810f); // 直接fake到世界外面
-            PlayerLoader.CatchFish(Main.player[255], fisher, ref fisher.rolledItemDrop, ref fisher.rolledEnemySpawn, ref sonar, ref sonarPosition);
-
-            if (fisher.rolledItemDrop != 0)
+            try
             {
-                GiveItemToStorage(player, fisher.rolledItemDrop);
-                //Main.NewText($"[i:{fisher.rolledItemDrop}]");
-            }
+                Main.player[255].Center = Position.ToWorldCoordinates();
+                Main.player[255].whoAmI = 255; // 玩家不进入世界初始化，是没有whoAmI的
+                TileCounter tileCounter = new();
+                tileCounter.ScanAndExportToMain(Position);
+                tileCounter.Simulate(Main.player[255]);
+                tileCounter.FargosFountainSupport(Main.player[255]);
 
-            // 单人模式里这还作为视效的判定，因此得强制更新
-            if (Main.netMode == NetmodeID.SinglePlayer)
-                Main.LocalPlayer.ForceUpdateBiomes();
+                // AssemblyPublicizer 使得 FishingCheck_RollItemDrop 可以直接访问
+                fakeProj.FishingCheck_RollItemDrop(ref fisher);
+
+                AdvancedPopupRequest sonar = new();
+                Vector2 sonarPosition = new(-1145141f, -919810f); // 直接fake到世界外面
+                PlayerLoader.CatchFish(Main.player[255], fisher, ref fisher.rolledItemDrop, ref fisher.rolledEnemySpawn,
+                    ref sonar, ref sonarPosition);
+
+                if (fisher.rolledItemDrop != 0)
+                {
+                    GiveCatchToStorage(player, fisher.rolledItemDrop);
+                    //Main.NewText($"[i:{fisher.rolledItemDrop}]");
+                }
+
+                // 单人模式里这还作为视效的判定，因此得强制更新
+                if (Main.netMode == NetmodeID.SinglePlayer)
+                    Main.LocalPlayer.ForceUpdateBiomes();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            } finally
+            {
+                AutofishItemListener.ListeningAutofisher = null;
+            }
         }
 
-        private void GiveItemToStorage(Player player, int itemType)
+        public void GiveCatchToStorage(Player player, int itemType)
         {
             // 怎么可能？
             if (!ContentSamples.ItemsByType.ContainsKey(itemType))
@@ -466,6 +506,31 @@ namespace ImproveGame.Content.Tiles
                 CombatText.NewText(rect, Color.Pink, "要装不下了...");
             }
 
+            DirectAddItemToStorage(item);
+
+            // 必须是消耗了，也就是真的能存 | TryConsumeBait返回true表示鱼饵消耗了
+            if (item.stack != oldStack)
+            {
+                // 用dummyItem，因为填充后item可能是Air
+                Chest.VisualizeChestTransfer(locatePoint.ToWorldCoordinates(), Position.ToWorldCoordinates(16, 16),
+                    dummyItem, dummyItem.stack);
+
+                if (TryConsumeBait(player) && Main.netMode is NetmodeID.Server)
+                {
+                    // 没了
+                    if (bait.IsAir)
+                        ItemSyncPacket.Get(ID, ItemSyncPacket.Bait).Send(runLocally: false);
+                    else // 还在，同步stack
+                        ItemsStackChangePacket.Get(ID, ItemSyncPacket.Bait, -1).Send(runLocally: false);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 将物品实例添加到储存中
+        /// </summary>
+        public void DirectAddItemToStorage(Item item)
+        {
             // 先填充和物品相同的
             for (int i = 0; i < fish.Length; i++)
             {
@@ -477,13 +542,16 @@ namespace ImproveGame.Content.Tiles
                     for (int p = 0; p < Main.maxPlayers; p++)
                     {
                         var client = Main.player[p];
-                        if (client.active && !client.DeadOrGhost && client.GetModPlayer<AutofishPlayer>().IsAutofisherOpened)
+                        if (client.active && !client.DeadOrGhost &&
+                            client.GetModPlayer<AutofishPlayer>().IsAutofisherOpened)
                             ItemsStackChangePacket.Get(ID, (byte)i, fish[i].stack - oldStackSlot).Send(p);
                     }
                 }
+
                 if (item.IsAir)
-                    goto FilledEnd;
+                    return;
             }
+
             // 后填充空位
             for (int i = 0; i < fish.Length; i++)
             {
@@ -494,26 +562,9 @@ namespace ImproveGame.Content.Tiles
                     {
                         ItemSyncPacket.Get(ID, (byte)i).Send(runLocally: false);
                     }
+
                     item = new();
-                    goto FilledEnd;
-                }
-            }
-
-            FilledEnd:;
-
-            // 必须是消耗了，也就是真的能存 | TryConsumeBait返回true表示鱼饵消耗了
-            if (item.stack != oldStack)
-            {
-                // 用dummyItem，因为填充后item可能是Air
-                Chest.VisualizeChestTransfer(locatePoint.ToWorldCoordinates(), Position.ToWorldCoordinates(16, 16), dummyItem, dummyItem.stack);
-
-                if (TryConsumeBait(player) && Main.netMode is NetmodeID.Server)
-                {
-                    // 没了
-                    if (bait.IsAir)
-                        ItemSyncPacket.Get(ID, ItemSyncPacket.Bait).Send(runLocally: false);
-                    else // 还在，同步stack
-                        ItemsStackChangePacket.Get(ID, ItemSyncPacket.Bait, -1).Send(runLocally: false);
+                    return;
                 }
             }
 
@@ -564,12 +615,15 @@ namespace ImproveGame.Content.Tiles
                         WorldGen.BroadcastText(NetworkText.FromLiteral(finalText), Color.OrangeRed);
                     }
                 }
+
                 return true;
             }
+
             return false;
         }
 
-        private static void FishingCheck_RollDropLevels(Player closetPlayer, int fishingLevel, out bool common, out bool uncommon, out bool rare, out bool veryrare, out bool legendary, out bool crate)
+        private static void FishingCheck_RollDropLevels(Player closetPlayer, int fishingLevel, out bool common,
+            out bool uncommon, out bool rare, out bool veryrare, out bool legendary, out bool crate)
         {
             int commonChance = 150 / fishingLevel;
             int uncommonChance = 150 * 2 / fishingLevel;
@@ -620,7 +674,8 @@ namespace ImproveGame.Content.Tiles
                 crate = true;
         }
 
-        private void GetFishingPondState(int x, int y, out bool lava, out bool honey, out bool shimmer, out int numWaters, out int chumCount)
+        private void GetFishingPondState(int x, int y, out bool lava, out bool honey, out bool shimmer,
+            out int numWaters, out int chumCount)
         {
             chumCount = 0;
             lava = false;
@@ -653,7 +708,8 @@ namespace ImproveGame.Content.Tiles
         private int GetFishingPondSize(int x, int y, ref bool lava, ref bool honey, ref bool shimmer, ref int chumCount)
         {
             Point16 arrayLeftTop = new(Position.X + 1 - checkWidth, Position.Y + 1 - checkHeight);
-            if (x - arrayLeftTop.X < 0 || x - arrayLeftTop.X > checkWidth * 2 || y - arrayLeftTop.Y < 0 || y - arrayLeftTop.Y > checkHeight * 2)
+            if (x - arrayLeftTop.X < 0 || x - arrayLeftTop.X > checkWidth * 2 || y - arrayLeftTop.Y < 0 ||
+                y - arrayLeftTop.Y > checkHeight * 2)
                 return 0;
             if (tileChecked[x - arrayLeftTop.X, y - arrayLeftTop.Y])
                 return 0;
@@ -676,6 +732,7 @@ namespace ImproveGame.Content.Tiles
                 int bottom = GetFishingPondSize(x, y + 1, ref lava, ref honey, ref shimmer, ref chumCount);
                 return left + right + up + bottom + 1;
             }
+
             return 0;
         }
 
@@ -738,6 +795,8 @@ namespace ImproveGame.Content.Tiles
             if (Main.bloodMoon)
                 num *= 1.1f;
 
+            if (!player.active)
+                return num;
             PlayerLoader.GetFishingLevel(player, pole, bait, ref num);
             return num;
         }
@@ -751,7 +810,8 @@ namespace ImproveGame.Content.Tiles
             Point16 center = Position + new Point16(1, 1);
             for (int i = 0; i < Main.maxChests; i++)
             {
-                if (Main.chest[i] == null || Main.chest[i].x < 0 || Main.chest[i].y < 0 || Chest.IsLocked(Main.chest[i].x, Main.chest[i].y))
+                if (Main.chest[i] == null || Main.chest[i].x < 0 || Main.chest[i].y < 0 ||
+                    Chest.IsLocked(Main.chest[i].x, Main.chest[i].y))
                     continue;
 
                 Point16 chestPosition = new(Main.chest[i].x, Main.chest[i].y);
@@ -766,7 +826,7 @@ namespace ImproveGame.Content.Tiles
 
             // 按照距离排序
             chests.Sort((a, b) => a.Item2.CompareTo(b.Item2));
-            
+
             // 逐个箱子尝试存放
             foreach ((int index, float distance) in chests)
             {
@@ -788,7 +848,7 @@ namespace ImproveGame.Content.Tiles
 
                     var dummyItem = item.Clone();
                     int oldStack = item.stack;
-                
+
                     item = ItemStackToInventory(chest.item, fish[i], false);
 
                     // 必须是消耗了，也就是真的能存 | TryConsumeBait返回true表示鱼饵消耗了
@@ -799,9 +859,10 @@ namespace ImproveGame.Content.Tiles
                             ItemSyncPacket.Get(ID, (byte)i).Send(runLocally: false);
                         else // 还在，同步stack
                             ItemsStackChangePacket.Get(ID, (byte)i, -1).Send(runLocally: false);
-                    
+
                         // 用dummyItem，因为填充后item可能是Air
-                        Chest.VisualizeChestTransfer(Position.ToWorldCoordinates(16, 16), new Vector2(chest.x * 16 + 16, chest.y * 16 + 16), dummyItem, dummyItem.stack);
+                        Chest.VisualizeChestTransfer(Position.ToWorldCoordinates(16, 16),
+                            new Vector2(chest.x * 16 + 16, chest.y * 16 + 16), dummyItem, dummyItem.stack);
                     }
 
                     if (Main.netMode is NetmodeID.SinglePlayer)
@@ -810,7 +871,7 @@ namespace ImproveGame.Content.Tiles
                     if (!item.IsAir)
                         fullyDeposited = false;
                 }
-                
+
                 if (fullyDeposited)
                     break;
             }
@@ -832,7 +893,8 @@ namespace ImproveGame.Content.Tiles
         private void SpawnDropItem(ref Item item)
         {
             var position = Position.ToWorldCoordinates();
-            int i = Item.NewItem(new EntitySource_Misc("FishingMachine"), (int)position.X, (int)position.Y, 32, 32, item.type);
+            int i = Item.NewItem(new EntitySource_Misc("FishingMachine"), (int)position.X, (int)position.Y, 32, 32,
+                item.type);
             item.position = Main.item[i].position;
             Main.item[i] = item;
             var drop = Main.item[i];

@@ -24,6 +24,21 @@ namespace ImproveGame.Content.Items
 
         public override void AddRecipes()
         {
+            if (!Config.LoadModItems.LiquidWand)
+            {
+                CreateRecipe()
+                    .AddRecipeGroup(RecipeGroupID.Wood, 24)
+                    .AddRecipeGroup(RecipeSystem.AnyShadowScale, 8)
+                    .AddRecipeGroup(RecipeSystem.AnyGoldBar, 6)
+                    .AddIngredient(ItemID.UltraAbsorbantSponge)
+                    .AddIngredient(ItemID.BottomlessLavaBucket)
+                    .AddIngredient(ItemID.BottomlessHoneyBucket)
+                    .AddIngredient(ItemID.BottomlessShimmerBucket)
+                    .AddTile(TileID.MythrilAnvil)
+                    .Register();
+                return;
+            }
+
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<LiquidWand>())
                 .AddIngredient(ItemID.UltraAbsorbantSponge)
