@@ -13,7 +13,7 @@ SpaceWand: {
 	DisplayName: Wand of Space
 	Tooltip:
 		'''
-		[c/0099ff:Right click to open the Control Panel]
+		[c/0099ff:<right> to open the Control Panel]
 		Places selected type of tile in the indicated area
 		Uses the first applicable item in your inventory
 		<right> while selecting area to cancel placement
@@ -50,10 +50,10 @@ WallPlace: {
 		'''
 		Summons a wall placer at your cursor
 		Automatically recognizes possible rooms and places walls from your inventory
-		The recognized room can have at most 10000 tiles of space
+		Recognized rooms can have up to 10000 tiles of space
 		Considers solid blocks, platforms and doors as boundaries
 		Each player can only summon one, use again to recall it
-		Right click to switch to Selection mode
+		<right> to switch to selection mode
 		'''
 }
 
@@ -75,8 +75,8 @@ PotionBag: {
 		[c/0099ff:<left>] while holding a potion to deposit
 		[c/0099ff:<right>] to open potion bag
 		{TooltipByKeybind}
-		Automatically collect potions picked up,
-		but only when this Potion Bag is the first in inventory
+		Automatically collects picked up potions,
+		but only when this Potion Bag is the first in the inventory
 		Can store up to 200 stacks of potions
 		'''
 	TooltipByKeybind: Press [c/0099ff:{KeybindName}] to collect potions from portable storages
@@ -90,8 +90,8 @@ BannerChest: {
 		[c/0099ff:<left>] while banner a potion to deposit
 		[c/0099ff:<right>] to open banner box
 		{TooltipByKeybind}
-		Automatically collect banners picked up,
-		but only when this Banner Box is the first in inventory
+		Automatically collect picked up banners,
+		but only when this Banner Box is the first in the inventory
 		Can store up to 500 stacks of banners
 		'''
 	TooltipByKeybind: Press [c/0099ff:{KeybindName}] to collect banners from portable storages
@@ -210,8 +210,8 @@ DevMark: {
 	DisplayName: Developer's Mark
 	Tooltip:
 		'''
-		When in inventory, Wand of Construction will not consume materials
-		Only works in single	player
+		When in the inventory, Wand of Construction will not consume materials
+		Only works in single player
 		[c/ff0000:Developer's item]
 		'''
 }
@@ -350,7 +350,7 @@ LiquidWandAdvanced: {
 	DisplayName: Ultimate Wand of Liquids
 	Tooltip:
 		'''
-		Absorbs/Places chosen liquid in a selected area
+		Absorbs/places chosen liquid in a selected area
 		<right> while holding to open the liquid control panel
 		Unlimited amount of liquids
 		'''
@@ -360,9 +360,8 @@ WallPlaceSelectorMode: {
 	DisplayName: Wand of Technology (Selecting)
 	Tooltip:
 		'''
-		Select a rectangualr area,
-		place walls in inventory in it
-		Right click to switch to Placement mode
+		Select a rectangular area and place walls from the inventory in it
+		<right> to switch to placement mode
 		'''
 }
 
@@ -370,8 +369,8 @@ ActuationRodMkII: {
 	DisplayName: Ultimate Wand of Actuation
 	Tooltip:
 		'''
-		Select a rectangular area then actuate it
-		No need of Actuator
+		Select a rectangular area to actuate it
+		Doesn't need placed actuators
 		'''
 }
 
@@ -380,7 +379,7 @@ ShellShipInBottle: {
 	Tooltip:
 		'''
 		Ask the Guide how to make it with Sea Shell
-		And then Throw it into shimmer lake and see what would happen!
+		And then throw it into shimmer lake and see what will happen!
 		'''
 }
 

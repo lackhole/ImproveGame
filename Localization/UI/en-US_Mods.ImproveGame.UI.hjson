@@ -189,7 +189,7 @@ ExtremeStorage: {
 		Chest for this slot is being used by another player
 		No action can be taken
 		'''
-	// 介绍使用了手动换行让排版看起来舒服点
+	// The Introduction's lines are manually divided so that they look better
 	BasicIntroduction:
 		'''
 		Note:
@@ -293,12 +293,12 @@ WorldFeature: {
 
 	Halloween: {
 		Label: Halloween
-		Tooltip: Toggles Halloween status.
+		Tooltip: Toggles Halloween status
 	}
 
 	XMas: {
 		Label: Christmas
-		Tooltip: Toggles Christmas status.
+		Tooltip: Toggles Christmas status
 	}
 
 	Drunk:
@@ -330,7 +330,7 @@ WorldFeature: {
 		'''
 		No traps
 		Seeds: no traps | notraps
-		P.S. No effect if toggled inside a world.
+		P.S. No effect if toggled in an already generated world
 		'''
 	Remix:
 		'''
@@ -341,10 +341,10 @@ WorldFeature: {
 		'''
 		Get fixed boi
 		Seeds: get fixed boi | getfixedboi
-		P.S. Get fixed boi is only complete with all other secrete seeds enabled.
+		P.S. Get fixed boi is only complete with all other secrete seeds enabled
 		'''
 	OpenWiki: <right> to open its wiki page
-	NotPermitted: You have no permission to modify this world's features.
+	NotPermitted: You have no permission to modify this world's features
 }
 
 ItemSearcher: {
@@ -356,14 +356,14 @@ ItemSearcher: {
 		Label: Fuzzy Search
 		Tooltip:
 			'''
-			Allows deviation of 1 character in searching.
-			E.g. "obsdian" can search "obsidian".
+			Allows deviation of 1 character in searching
+			E.g. "obsdian" can search "obsidian"
 			'''
 	}
 
 	SearchTooltip: {
 		Label: Search Tooltip
-		Tooltip: Searches item tooltips instead of names.
+		Tooltip: Searches item tooltips instead of names
 	}
 }
 
@@ -373,14 +373,14 @@ OpenBag: {
 	Open: Open All
 	Stop: Stop
 	EmptyText: Grab Bag
-	NotFullyDisplayed: Besides, {0} items are hidden
+	NotFullyDisplayed: {0} items are currently hidden
 
 	SellAll: {
 		Name: Sell All
 		Tooltip:
 			'''
-			Sell all items at 110% of their base price.
-			Coins will go to your coin slots.
+			Sells all items at 110% of their base price
+			Coins will go to your coin slots
 			'''
 	}
 
@@ -388,8 +388,8 @@ OpenBag: {
 		Name: Are you sure?
 		Tooltip:
 			'''
-			<left> to sell,
-			<right> to cancel.
+			<left> to sell
+			<right> to cancel
 			'''
 	}
 }
@@ -400,7 +400,7 @@ QuickShimmer: {
 	Open: Transmute All
 	Stop: Stop
 	EmptyText: Shimmer Transmuting
-	NotFullyDisplayed: Besides, {0} items are hidden
+	NotFullyDisplayed: {0} items are currently hidden
 	CoinLuck: Shimmered into {0} 'coin luck'
 	AlreadyUnlocked: Quick Shimmer is already available in this world
 	Unlocked: Quick Shimmer is unlocked! Open it via the Control Panel
@@ -418,7 +418,7 @@ Autofisher: {
 	SelectPool: Please select fishing pool
 	CarefulNextTime: Be careful next time!
 	Unavailable: Currently no fishing info
-	InShimmer: Ain't working in Shimmer
+	InShimmer: Does not work in shimmer!
 	CatchCratesFilter: Crates
 	CatchAccessoriesFilter: Accessories
 	CatchToolsFilter: Tools and weapons
@@ -437,7 +437,7 @@ MapLayer: {
 	Pyramid: Pyramid
 	FloatingIsland: Floating Island
 	FloatingLake: Floating Lake
-	EmptyAutofisher: Fishing Machine (Bait-lacking)
+	EmptyAutofisher: Fishing Machine (No bait!)
 }
 
 ThemePreview.Title: Theme Preview

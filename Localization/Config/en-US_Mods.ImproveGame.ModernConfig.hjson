@@ -28,7 +28,7 @@ Presets: {
 
 	ExplorerPreset: {
 		Label: "[centeritem:GravityGlobe] Explorer"
-		Tooltip: Best for vanilla-paced playthrough. Explore while facing typical challenges with moderate assistance. Might work well with mods like Thorium or Spirit.
+		Tooltip: Best for vanilla-like playthroughs. Explore while facing typical challenges with moderate assistance. Might work well with mods like Thorium or Spirit.
 		Link: TODO Add Wiki page
 	}
 
@@ -40,25 +40,25 @@ Presets: {
 
 	VanillaPreset: {
 		Label: "[centeritem:MusicBoxCredits] Vanilla Enjoyer"
-		Tooltip: Just like vanilla. Play with few QoL features.
+		Tooltip: Just like vanilla. Play with a few QoL features.
 		Link: TODO Add Wiki page
 	}
 
 	AddPreset: {
 		Label: "[centeritem:ImproveGame/AddIconDummy] Save as Preset"
-		Tooltip: Save the current config as a preset.
+		Tooltip: Saves the current config as a preset.
 		Link: TODO Add Wiki page
 	}
 
 	OpenFolder: {
 		Label: "[centeritem:ImproveGame/OpenFolderDummy] Open Preset Folder"
-		Tooltip: Open the preset folder.
+		Tooltip: Opens the preset folder.
 	}
 }
 
 Favorites: {
 	Label: Favorited Entries
-	Tooltip: Right click an entry to favorite it. Favorited entries will show up here.
+	Tooltip: <right> an entry to favorite it. Favorited entries will show up here.
 }
 
 Everything: {
@@ -118,12 +118,12 @@ ModFeatures: {
 
 Minimap: {
 	Label: Map
-	Tooltip: Edit map featuers, e.g. Locators.
+	Tooltip: Edit map features, e.g. Locators.
 }
 
 Keybinds: {
 	Label: Controls
-	Tooltip: Manage Quality of Terraria hotkeys, right click on an entry to set it to default.
+	Tooltip: Manage Quality of Terraria hotkeys, <right> on an entry to set it to default.
 	// 快捷键会在Tooltip显示其默认绑定的键位
 	Default: Default: {0}
 }
