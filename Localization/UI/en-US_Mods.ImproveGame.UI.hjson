@@ -373,7 +373,7 @@ OpenBag: {
 	Open: Open All
 	Stop: Stop
 	EmptyText: Grab Bag
-	NotFullyDisplayed: {0} items are currently hidden
+	NotFullyDisplayed: {0} other items are currently hidden
 
 	SellAll: {
 		Name: Sell All
@@ -400,7 +400,7 @@ QuickShimmer: {
 	Open: Transmute All
 	Stop: Stop
 	EmptyText: Shimmer Transmuting
-	NotFullyDisplayed: {0} items are currently hidden
+	NotFullyDisplayed: {0} other items are currently hidden
 	CoinLuck: Shimmered into {0} 'coin luck'
 	AlreadyUnlocked: Quick Shimmer is already available in this world
 	Unlocked: Quick Shimmer is unlocked! Open it via the Control Panel
