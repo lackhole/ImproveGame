@@ -751,7 +751,7 @@ ImproveConfigs: {
 
 	PylonTeleNoBiome: {
 		Label: "[centeritem:TeleportationPylonMushroom] Biome-independent Pylon Teleportation"
-		Tooltip: '''"It is if you say so."'''
+		Tooltip: "'Should I command such...'"
 	}
 }
 
