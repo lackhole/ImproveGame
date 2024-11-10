@@ -36,15 +36,6 @@ public class FavoritedConfigs : ModConfig
 
             UIModConfig.WrapIt(configUI.mainConfigList, ref top, variable, _pendingConfig, order++);
         }
-
-        AddHeader(configUI, "News", order++);
-        foreach (PropertyFieldWrapper variable in ConfigManager.GetFieldsAndProperties(_pendingConfig))
-        {
-            if (!FavoritedOptionDatabase.NewOptions.Contains(variable.Name))
-                continue;
-
-            UIModConfig.WrapIt(configUI.mainConfigList, ref top, variable, _pendingConfig, order++);
-        }
     }
 
     private static void AddHeader(UIModConfig configUI, string localizationKey, int order)
