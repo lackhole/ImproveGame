@@ -1035,6 +1035,21 @@ UIConfigs: {
 		Label: "[centeritem:ImproveGame/SearchIcon] Recipe Search"
 		Tooltip: Shows a search bar when recipe menu is extend
 	}
+
+	RemoveGraveyardVisual: {
+		Label: "[centeritem:RichGravestone2] Remove Graveyard Visual"
+		Tooltip: Removes graveyard visual effect. Its functionality as a biome will not be affected
+	}
+
+	RemoveGraveyardMist: {
+		Label: "[centeritem:RichGravestone2] Remove Graveyard Mist"
+		Tooltip: Removes graveyard mist effect. The mist effect can tell if you are in the biome
+	}
+
+	RemoveGraveyardMusic: {
+		Label: "[centeritem:RichGravestone2] Remove Graveyard Music"
+		Tooltip: Removes graveyard background music
+	}
 }
 
 PAPDisplayMode: {

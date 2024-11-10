@@ -375,14 +375,60 @@ namespace ImproveGame.Content.Functions
             On_Player.TakeUnityPotion += NotTakeUnityPotion;
             // 禁止非玩家爆炸物破坏物块
             On_Projectile.ExplodeTiles += NoExplodeTiles;
+            // 墓地特效
+            On_Player.UpdateGraveyard += GraveyardVisualRemoval;
+            // 墓地音乐
+            On_Main.UpdateAudio += GraveyardMusicRemoval;
+            // 墓地迷雾
+            On_AmbientWindSystem.Update += GraveyardMistRemoval;
         }
 
-        private void NoExplodeTiles(On_Projectile.orig_ExplodeTiles orig, Projectile self, Vector2 compareSpot, int radius, int minI, int maxI, int minJ, int maxJ, bool wallSplode)
+        private void GraveyardMistRemoval(On_AmbientWindSystem.orig_Update orig, AmbientWindSystem self)
         {
-            if (Config.DisableNonPlayerBombsExplosions != DisableNonPlayerBombsExplosionsType.Disabled && (self.type == ProjectileID.Bomb && self.GetGlobalProjectile<ImproveProjectile>().NonPlayer || self.type == ProjectileID.BombSkeletronPrime))
+            if (UIConfigs.Instance.RemoveGraveyardVisual && UIConfigs.Instance.RemoveGraveyardMist)
+            {
+                bool inGraveyard = Main.LocalPlayer.ZoneGraveyard;
+                Main.LocalPlayer.ZoneGraveyard = false;
+                orig.Invoke(self);
+                Main.LocalPlayer.ZoneGraveyard = inGraveyard;
+                return;
+            }
+
+            orig.Invoke(self);
+        }
+
+        private void GraveyardMusicRemoval(On_Main.orig_UpdateAudio orig, Main self)
+        {
+            if (UIConfigs.Instance.RemoveGraveyardVisual && UIConfigs.Instance.RemoveGraveyardMusic)
+            {
+                bool inGraveyard = Main.LocalPlayer.ZoneGraveyard;
+                Main.LocalPlayer.ZoneGraveyard = false;
+                orig.Invoke(self);
+                Main.LocalPlayer.ZoneGraveyard = inGraveyard;
+                return;
+            }
+
+            orig.Invoke(self);
+        }
+
+        private void GraveyardVisualRemoval(On_Player.orig_UpdateGraveyard orig, Player self, bool now)
+        {
+            orig.Invoke(self, now);
+
+            if (UIConfigs.Instance.RemoveGraveyardVisual)
+                Main.GraveyardVisualIntensity = 0f;
+        }
+
+        private void NoExplodeTiles(On_Projectile.orig_ExplodeTiles orig, Projectile self, Vector2 compareSpot,
+            int radius, int minI, int maxI, int minJ, int maxJ, bool wallSplode)
+        {
+            if (Config.DisableNonPlayerBombsExplosions != DisableNonPlayerBombsExplosionsType.Disabled &&
+                (self.type == ProjectileID.Bomb && self.GetGlobalProjectile<ImproveProjectile>().NonPlayer ||
+                 self.type == ProjectileID.BombSkeletronPrime))
                 return;
 
-            if (Config.DisableNonPlayerBombsExplosions == DisableNonPlayerBombsExplosionsType.FTWAndExplosives && self.type == ProjectileID.Explosives)
+            if (Config.DisableNonPlayerBombsExplosions == DisableNonPlayerBombsExplosionsType.FTWAndExplosives &&
+                self.type == ProjectileID.Explosives)
                 return;
 
             orig(self, compareSpot, radius, minI, maxI, minJ, maxJ, wallSplode);
@@ -421,14 +467,16 @@ namespace ImproveGame.Content.Functions
             else return orig(self, tile);
         }
 
-        private bool NoSleepRestrictions(On_PlayerSleepingHelper.orig_DoesPlayerHaveReasonToActUpInBed orig, ref PlayerSleepingHelper self, Player player)
+        private bool NoSleepRestrictions(On_PlayerSleepingHelper.orig_DoesPlayerHaveReasonToActUpInBed orig,
+            ref PlayerSleepingHelper self, Player player)
         {
             // 谁也无法阻止我睡觉！不管是Boss还是事件！
             if (Config.NoSleepRestrictions) return false;
             else return orig(ref self, player);
         }
 
-        private void PatchQuestFishCheck(On_Projectile.orig_FishingCheck_ProbeForQuestFish orig, Projectile self, ref FishingAttempt fisher)
+        private void PatchQuestFishCheck(On_Projectile.orig_FishingCheck_ProbeForQuestFish orig, Projectile self,
+            ref FishingAttempt fisher)
         {
             if (!Config.QuestFishStack)
             {

@@ -16,6 +16,9 @@ public sealed class VisualAndInterface : Category
         panel.AddValueSlider(uiConfig, nameof(uiConfig.BigFontOffsetY));
         panel.AddToggle(uiConfig, nameof(uiConfig.HideNoConsumeBuffs));
         panel.AddToggle(uiConfig, nameof(uiConfig.ExplosionEffect));
+        panel.AddToggle(uiConfig, nameof(uiConfig.RemoveGraveyardVisual));
+        panel.AddToggle(uiConfig, nameof(uiConfig.RemoveGraveyardMist));
+        panel.AddToggle(uiConfig, nameof(uiConfig.RemoveGraveyardMusic));
         panel.AddValueSlider(uiConfig, nameof(uiConfig.InfernoTransparency));
         panel.AddValueSlider(uiConfig, nameof(uiConfig.InvisibleTransparency));
     }

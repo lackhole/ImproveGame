@@ -1038,6 +1038,21 @@ UIConfigs: {
 		Label: "[centeritem:ImproveGame/SearchIcon] 搜索配方"
 		Tooltip: 展开全配方时，显示搜索框，以搜索能够合成指定物品的配方
 	}
+
+	RemoveGraveyardVisual: {
+		Label: "[centeritem:RichGravestone2] 移除墓地特效"
+		Tooltip: 开启后，移除墓地环境的视觉特效，而不影响其环境功能
+	}
+
+	RemoveGraveyardMist: {
+		Label: "[centeritem:RichGravestone2] 移除墓地迷雾"
+		Tooltip: 开启后，移除墓地环境的迷雾特效。 保留迷雾特效可以便于判断是否处于环境中
+	}
+
+	RemoveGraveyardMusic: {
+		Label: "[centeritem:RichGravestone2] 移除墓地背景音乐"
+		Tooltip: 开启后，移除墓地环境的背景音乐
+	}
 }
 
 PAPDisplayMode: {

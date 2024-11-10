@@ -104,6 +104,17 @@ public class UIConfigs : ModConfig
     [DefaultValue(true)]
     public bool AutoSummon;
 
+    [DefaultValue(false)]
+    public bool RemoveGraveyardVisual;
+
+    [DefaultValue(false)]
+    [DisplayCondition(nameof(UIConfigs), nameof(RemoveGraveyardVisual))]
+    public bool RemoveGraveyardMist;
+
+    [DefaultValue(false)]
+    [DisplayCondition(nameof(UIConfigs), nameof(RemoveGraveyardVisual))]
+    public bool RemoveGraveyardMusic;
+
     [Header("MinimapHeader")]
     [DefaultValue(1f)]
     [Increment(0.1f)]
