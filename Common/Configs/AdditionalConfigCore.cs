@@ -186,7 +186,7 @@ namespace ImproveGame.Common.Configs
             UIPlayer.PlayerInfoTogglePosition = PlayerInfoTogglePosition == Vector2.Zero
                 ? UIPlayer.PlayerInfoToggleDefPosition
                 : PlayerInfoTogglePosition;
-            
+
             MasterControlGUI.Pinned = MasterControlPinned;
         }
 
@@ -216,9 +216,18 @@ namespace ImproveGame.Common.Configs
         {
             if (Main.dedServ)
                 return;
-            Directory.CreateDirectory(ConfigManager.ModConfigPath);
-            string json = JsonConvert.SerializeObject(new AdditionalConfig(true), ConfigManager.serializerSettings);
-            File.WriteAllText(FullPath, json);
+
+            try
+            {
+                Directory.CreateDirectory(ConfigManager.ModConfigPath);
+                string json = JsonConvert.SerializeObject(new AdditionalConfig(true), ConfigManager.serializerSettings);
+                File.WriteAllText(FullPath, json);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred while saving Quality of Terraria Additional Config.");
+                Console.WriteLine(e);
+            }
         }
     }
 }
