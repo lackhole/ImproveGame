@@ -189,7 +189,7 @@ ExtremeStorage: {
 		Chest for this slot is being used by another player
 		No action can be taken
 		'''
-	// 	// 介绍使用了手动换行让排版看起来舒服点
+	// 介绍使用了手动换行让排版看起来舒服点
 	BasicIntroduction:
 		'''
 		Note:
