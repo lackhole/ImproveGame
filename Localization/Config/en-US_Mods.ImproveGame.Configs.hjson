@@ -5,11 +5,11 @@ ImproveConfigs: {
 		Label: I LOVE Balance
 		Tooltip:
 			'''
-			If you want a more vanilla-based gameplay experience, this preset will be your choice
-			In this preset, you will keep buffs on death instead of having infinite buffs
+			If you want a more vanilla-based gameplay experience, this preset will be your best choice
+			In this preset, you will keep the buffs on death instead of having infinite buffs
 			Most functions are adjusted to a relatively balanced level
 			to let you have a decent gameplay while enjoying a vanilla-like difficulty
-			(Use this mod's items on your own consideration, as some of them might be IMBA)
+			(Use this mod's items at your own consideration, as some of them might be IMBA)
 			(You can still make adjustments after choosing a preset)
 			'''
 	}
@@ -18,9 +18,9 @@ ImproveConfigs: {
 		Label: tIMBALoader
 		Tooltip:
 			'''
-			This preset includes most convenient features that significantly reduce repetitive works
-			If you are playing Calamity's Revengeance Mode or Fargo's Souls's Eternity Mode, it would be a nice option
-			Most configurations are for convenience, to make the gameplay focus on progressing and defeating bosses
+			This preset includes most convenient features that significantly reduce most repetitive work
+			If you are playing Calamity's Revengeance Mode or Fargo's Souls's Eternity Mode, this would be a nice option
+			Most configurations are quality of life, to make the gameplay focus more on progressing and defeating bosses
 			(You can still make adjustments after choosing a preset)
 			'''
 	}
@@ -53,14 +53,14 @@ ImproveConfigs: {
 		Label: "[centeritem:9] Max Stack"
 		Tooltip:
 			'''
-			Sets the max stack of items
-			The max stack of coins cannot be changed
+			Sets the max stack size for items
+			The max stack size for coins cannot be changed
 			'''
 	}
 
 	GrabDistance: {
 		Label: "[centeritem:5010] Increase Item Pickup Range (measured in blocks)"
-		Tooltip: Increases pickup range of items. Pickup speed will also be increased
+		Tooltip: Increases the pickup range for items. Pickup speed will also be increased
 	}
 
 	NoConsume_SummonItem: {
@@ -92,9 +92,8 @@ ImproveConfigs: {
 		Tooltip:
 			'''
 			Crafting stations in your inventory and personal storages will function as if they are placed
-			No need to place them down
 			E.g., if you have a Furnace in your inventory, you'll be able to craft ores into bars anywhere
-			Water Bucket is considered as a source of water, same	 for Lava Bucket and Honey Bucket
+			Water Bucket is considered as a source of water, same for Lava and Honey Buckets
 			'''
 	}
 
@@ -752,7 +751,7 @@ ImproveConfigs: {
 
 	PylonTeleNoBiome: {
 		Label: "[centeritem:TeleportationPylonMushroom] Biome-independent Pylon Teleportation"
-		Tooltip: '''"It is if you say so."'''
+		Tooltip: "'Because I said so!'"
 	}
 }
 
@@ -1038,17 +1037,17 @@ UIConfigs: {
 
 	RemoveGraveyardVisual: {
 		Label: "[centeritem:RichGravestone2] Remove Graveyard Visual"
-		Tooltip: Removes graveyard visual effect. Its functionality as a biome will not be affected
+		Tooltip: Removes the graveyard visual effect. Its functionality as a biome will not be affected
 	}
 
 	RemoveGraveyardMist: {
 		Label: "[centeritem:RichGravestone2] Remove Graveyard Mist"
-		Tooltip: Removes graveyard mist effect. The mist effect can tell if you are in the biome
+		Tooltip: Removes the graveyard mist effect. The mist effect can tell if you are in the biome
 	}
 
 	RemoveGraveyardMusic: {
 		Label: "[centeritem:RichGravestone2] Remove Graveyard Music"
-		Tooltip: Removes graveyard background music
+		Tooltip: Removes the graveyard background music
 	}
 }
 
@@ -1113,7 +1112,7 @@ DisableNonPlayerBombsExplosionsType: {
 
 	FTWAndExplosives: {
 		Label: All
-		Tooltip: The Explosives tile, and natrually generated explosives do not destrroy tiles
+		Tooltip: The Explosives tile and naturally generated explosives do not destroy tiles
 	}
 }
 
@@ -1129,7 +1128,7 @@ FavoritedConfigs: {
 		Label: A page for managing frequently used configs
 		Tooltip:
 			'''
-			Right click any Quality of Terraria config to favorite it
+			<right> any Quality of Terraria config to favorite it
 			Favorited configs will be shown in this page for quick access
 			Besides, the page shows newly added configs after updates
 			'''
@@ -1139,6 +1138,6 @@ FavoritedConfigs: {
 FishQuestResetType: {
 	Tooltip: ""
 	Disabled.Label: Disabled
-	NotResetFish.Label: Not Reset Fish
+	NotResetFish.Label: Don't Reset Fish
 	ResetFish.Label: Reset Fish
 }
