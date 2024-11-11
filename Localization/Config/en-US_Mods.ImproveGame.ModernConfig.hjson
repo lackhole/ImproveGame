@@ -40,7 +40,7 @@ Presets: {
 
 	VanillaPreset: {
 		Label: "[centeritem:MusicBoxCredits] Vanilla Enjoyer"
-		Tooltip: Just like vanilla. Play with a few QoL features
+		Tooltip: Just like vanilla. Play with few QoL features
 		Link: TODO Add Wiki page
 	}
 

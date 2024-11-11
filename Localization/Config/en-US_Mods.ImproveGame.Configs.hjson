@@ -18,7 +18,7 @@ ImproveConfigs: {
 		Label: tIMBALoader
 		Tooltip:
 			'''
-			This preset includes most convenient features that significantly reduce any repetitiveness
+			This preset includes most convenient features that significantly reduce most repetitive work
 			If you are playing Calamity's Revengeance Mode or Fargo's Souls's Eternity Mode, this would be a nice option
 			Most configurations are quality of life, to make the gameplay focus more on progressing and defeating bosses
 			(You can still make adjustments after choosing a preset)
@@ -751,7 +751,7 @@ ImproveConfigs: {
 
 	PylonTeleNoBiome: {
 		Label: "[centeritem:TeleportationPylonMushroom] Biome-independent Pylon Teleportation"
-		Tooltip: "'Should I command such...'"
+		Tooltip: "'Your wish is my command'"
 	}
 }
 

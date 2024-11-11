@@ -189,7 +189,7 @@ ExtremeStorage: {
 		Chest for this slot is being used by another player
 		No action can be taken
 		'''
-	// The Introduction's lines are manually divided so that they look better
+	// 	// 介绍使用了手动换行让排版看起来舒服点
 	BasicIntroduction:
 		'''
 		Note:
@@ -330,7 +330,7 @@ WorldFeature: {
 		'''
 		No traps
 		Seeds: no traps | notraps
-		P.S. No effect if toggled in an already generated world
+		P.S. No effect if toggled inside a world
 		'''
 	Remix:
 		'''
@@ -418,7 +418,7 @@ Autofisher: {
 	SelectPool: Please select fishing pool
 	CarefulNextTime: Be careful next time!
 	Unavailable: Currently no fishing info
-	InShimmer: Does not work in shimmer!
+	InShimmer: I ain't work in no shimmer!
 	CatchCratesFilter: Crates
 	CatchAccessoriesFilter: Accessories
 	CatchToolsFilter: Tools and weapons

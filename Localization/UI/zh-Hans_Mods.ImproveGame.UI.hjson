@@ -189,7 +189,7 @@ ExtremeStorage: {
 		该栏位所属箱子正在被另一名玩家使用
 		暂时无法进行任何操作
 		'''
-	// The Introduction's lines are manually divided so that they look better
+	// 介绍使用了手动换行让排版看起来舒服点
 	BasicIntroduction:
 		'''
 		注意:
