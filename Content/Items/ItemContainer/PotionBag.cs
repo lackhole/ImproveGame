@@ -304,6 +304,13 @@ public class PotionBag : ModItem, IItemOverrideLeftClick, IItemOverrideHover, II
             ItemIntoContainer(sourceItem, false);
         }
 
+        // 对光标位物品的特殊处理（inventory[58]是通过mouseItem.Clone来的，引用不是同一个，故需要特殊处理）
+        Main.mouseItem.stack = Main.LocalPlayer.inventory[58].stack;
+        if (Main.mouseItem.stack <= 0)
+        {
+            Main.mouseItem.TurnToAir();
+        }
+
         SortContainer();
     }
 }
