@@ -2,6 +2,7 @@
 using ImproveGame.Common.ModSystems;
 using ImproveGame.Content.Functions;
 using ImproveGame.UI;
+using ImproveGame.UI.ExtremeStorage;
 using ImproveGame.UI.ItemSearcher;
 using ImproveGame.UI.MasterControl;
 using ImproveGame.UI.OpenBag;
@@ -71,6 +72,7 @@ namespace ImproveGame.Common.Configs
         public Vector2 OpenBagPosition;
         public Vector2 PlayerInfoTogglePosition;
         public bool MasterControlPinned;
+        public bool ExtremeStorageGUIDisplayCrafting;
 
         /// <summary>
         /// (根据模组内容)获取 Config
@@ -137,6 +139,8 @@ namespace ImproveGame.Common.Configs
             UIPlayer.PlayerInfoTogglePosition = PlayerInfoTogglePosition; // 在这里也保存一下
 
             MasterControlPinned = MasterControlGUI.Pinned;
+
+            ExtremeStorageGUIDisplayCrafting = ExtremeStorageGUI.DisplayCrafting;
         }
 
         /// <summary>
@@ -188,6 +192,8 @@ namespace ImproveGame.Common.Configs
                 : PlayerInfoTogglePosition;
 
             MasterControlGUI.Pinned = MasterControlPinned;
+
+            ExtremeStorageGUI.DisplayCrafting = ExtremeStorageGUIDisplayCrafting;
         }
 
         public static void Load()
