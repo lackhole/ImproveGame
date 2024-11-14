@@ -46,6 +46,15 @@ public class InfBuffPlayer : ModPlayer
     /// </summary>
     public float LuckPotionBoost;
 
+    /// <summary>
+    /// 用于判断玩家不可开关的被Ban原版无限Buff
+    /// </summary>
+    static HashSet<int> clearVanillaBuffBan = [];
+    /// <summary>
+    /// 用于判断玩家不可开关的被Ban Mod无限Buff
+    /// </summary>
+    static HashSet<string> clearModBuffBan = [];
+
     #region 杂项
 
     public static InfBuffPlayer Get(Player player) => player.GetModPlayer<InfBuffPlayer>();
@@ -79,6 +88,14 @@ public class InfBuffPlayer : ModPlayer
 
         // 重设部分Buff站效果
         ApplyBuffStation.Reset();
+
+        // 赋值，用于下面判断玩家不可开关的被Ban无限Buff
+        DataPlayer.TryGet(Main.LocalPlayer, out var dataPlayer);
+        if (dataPlayer != null)
+        {
+            clearVanillaBuffBan = new(dataPlayer.InfBuffDisabledVanilla);
+            clearModBuffBan = new(dataPlayer.InfBuffDisabledMod);
+        }
 
         // 从玩家身上获取所有的无尽Buff物品
         ApplyAvailableBuffsFromPlayer(Player);
@@ -120,6 +137,7 @@ public class InfBuffPlayer : ModPlayer
     /// </summary>
     private static void ApplyAvailableBuffs(IEnumerable<Item> items)
     {
+
         foreach (Item item in items)
         {
             // 侏儒特判
@@ -127,6 +145,22 @@ public class InfBuffPlayer : ModPlayer
                 ApplyBuffStation.HasGardenGnome = true;
 
             var buffTypes = ApplyBuffItem.GetItemBuffType(item);
+
+            // 清除玩家可以开关的被Ban无限Buff
+            if (clearVanillaBuffBan != null)
+            {
+                HashSet<int> hashBuffTypes = new HashSet<int>(buffTypes);
+                clearVanillaBuffBan.RemoveWhere(banBuff => hashBuffTypes.Contains(banBuff));
+            }
+            if (clearModBuffBan != null)
+            {
+                HashSet<string> hashModBuffs = new HashSet<string>(buffTypes
+                        .Select(buffType => BuffLoader.GetBuff(buffType))
+                        .Where(buff => buff != null)
+                        .Select(modBuff => $"{modBuff.Mod.Name}/{modBuff.Name}")
+                );
+                clearModBuffBan.RemoveWhere(banBuff => hashModBuffs.Contains(banBuff));
+            }
 
             buffTypes.ForEach(buffType =>
             {
@@ -293,7 +327,7 @@ public class InfBuffPlayer : ModPlayer
             {
                 foreach (int buffType in dataPlayer.InfBuffDisabledVanilla)
                 {
-                    if (type == buffType)
+                    if (type == buffType && !clearVanillaBuffBan.Contains(buffType))
                     {
                         return;
                     }
@@ -307,7 +341,7 @@ public class InfBuffPlayer : ModPlayer
                     string[] names = buffFullName.Split('/');
                     string modName = names[0];
                     string buffName = names[1];
-                    if (ModContent.TryFind<ModBuff>(modName, buffName, out var modBuff) && type == modBuff.Type)
+                    if (!clearModBuffBan.Contains(buffFullName) && ModContent.TryFind<ModBuff>(modName, buffName, out var modBuff) && type == modBuff.Type)
                     {
                         return;
                     }
@@ -335,7 +369,7 @@ public class InfBuffPlayer : ModPlayer
                 {
                     foreach (int buffType in dataPlayer.InfBuffDisabledVanilla)
                     {
-                        if (Player.buffType[i] == buffType)
+                        if (Player.buffType[i] == buffType && !clearVanillaBuffBan.Contains(buffType))
                         {
                             Player.DelBuff(i);
                             i--;
@@ -343,14 +377,14 @@ public class InfBuffPlayer : ModPlayer
                     }
                 }
 
-                if (dataPlayer.InfBuffDisabledVanilla is not null)
+                if (dataPlayer.InfBuffDisabledMod is not null)
                 {
                     foreach (string buffFullName in dataPlayer.InfBuffDisabledMod)
                     {
                         string[] names = buffFullName.Split('/');
                         string modName = names[0];
                         string buffName = names[1];
-                        if (ModContent.TryFind<ModBuff>(modName, buffName, out var modBuff) &&
+                        if (!clearModBuffBan.Contains(buffFullName) && ModContent.TryFind<ModBuff>(modName, buffName, out var modBuff) &&
                             Player.buffType[i] == modBuff.Type)
                         {
                             Player.DelBuff(i);
