@@ -1,4 +1,5 @@
 ﻿using ImproveGame.Content.NPCs.Dummy;
+using ImproveGame.UI;
 using Microsoft.Xna.Framework.Input;
 using Terraria.GameInput;
 using Terraria.ID;
