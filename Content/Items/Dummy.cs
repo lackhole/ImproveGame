@@ -1,4 +1,6 @@
 ﻿using ImproveGame.Content.NPCs.Dummy;
+using Microsoft.Xna.Framework.Input;
+using Terraria.GameInput;
 using Terraria.ID;
 
 namespace ImproveGame.Content.Items;
@@ -15,52 +17,45 @@ public class Dummy : ModItem
     {
         return base.UseItem(player);
     }
-
+    public override bool AltFunctionUse(Player player)
+    {
+        return true;
+    }
     public override bool CanUseItem(Player player)
     {
-        if (Main.netMode == NetmodeID.MultiplayerClient)
+        /*if (Main.netMode == NetmodeID.MultiplayerClient)
         {
             AddNotification(GetText("Items.Dummy.CannotUse"), Color.PaleVioletRed * 1.4f);
             return false;
-        }
-
-        bool hasDummy = false;
-
-        foreach (var npc in Main.npc)
+        }*/
+        if (Main.myPlayer != player.whoAmI) return false;
+        if (player.altFunctionUse == 2)
         {
-            if (npc.active && npc.type == ModContent.NPCType<DummyNPC>() && npc.HasPlayerTarget && npc.target == player.whoAmI)
+            foreach (var npc in Main.npc)
             {
-                hasDummy = true;
-                npc.active = false;
-                DummyNPC.DummyDPS.Reset();
-
-                for (int i = 0; i < 20; i++)
+                if (npc.active && npc.ModNPC is DummyNPC dummy && dummy.Owner == player.whoAmI && npc.HasPlayerTarget && npc.target == player.whoAmI && npc.Hitbox.Contains(Main.MouseWorld.ToPoint()))
                 {
-                    int dust = Dust.NewDust(npc.position, npc.width, npc.height, DustID.Torch, Scale: 2f);
-                    Main.dust[dust].velocity.Y = -1f;
-                    Main.dust[dust].noGravity = true;
+                    //dummy.Disappear();
+                    RemoveDummyModule.Get(npc.whoAmI, player.whoAmI).Send(runLocally: true);
+                    break;
                 }
-
-                break;
             }
         }
-
-        if (!hasDummy)
+        else
         {
-            NPC npc = NPC.NewNPCDirect(null, 0, 0, ModContent.NPCType<DummyNPC>(), target: player.whoAmI);
-            npc.Center = Main.MouseWorld;
-
-            for (int i = 0; i < 20; i++)
-            {
-                int dust = Dust.NewDust(npc.position, npc.width, npc.height, DustID.Torch, Scale: 2f);
-                Main.dust[dust].velocity.Y = -1f;
-                Main.dust[dust].noGravity = true;
-            }
+            SyncDummyModule.Get(Main.MouseWorld, player.whoAmI, DummyNPC.LocalConfig).Send(runLocally: true);
         }
 
         return true;
     }
-
+    public override void HoldStyle(Player player, Rectangle heldItemFrame)
+    {
+        if (PlayerInput.MouseInfo.MiddleButton == ButtonState.Pressed && !DummyConfigurationUI.Instance.Enabled) 
+        {
+            DummyConfigurationUI.Instance.Open();
+        }
+        base.HoldStyle(player, heldItemFrame);
+    }
     public override void AddRecipes()
     {
         CreateRecipe()

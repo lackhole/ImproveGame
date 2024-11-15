@@ -409,6 +409,8 @@ QuickShimmer: {
 		'''
 }
 
+DummyConfiguration.Title: 假人配置
+
 Autofisher: {
 	Accessory: 钓鱼饰品
 	FishingPole: 钓竿

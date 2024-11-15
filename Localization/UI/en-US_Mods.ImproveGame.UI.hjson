@@ -411,6 +411,8 @@ QuickShimmer: {
 		'''
 }
 
+DummyConfiguration.Title: Dummy Configuration
+
 Autofisher: {
 	Accessory: Accessories for fishing
 	FishingPole: Fishing rod
