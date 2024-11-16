@@ -1,4 +1,5 @@
-﻿using ImproveGame.Common.ModHooks;
+﻿using ImproveGame.Common.Conditions;
+using ImproveGame.Common.ModHooks;
 using ImproveGame.Common.ModSystems;
 using ImproveGame.UI.ItemContainer;
 using Terraria.ModLoader.IO;
@@ -9,7 +10,6 @@ namespace ImproveGame.Content.Items.ItemContainer;
 // ReSharper disable once ClassNeverInstantiated.Global
 public class BannerChest : ModItem, IItemOverrideLeftClick, IItemOverrideHover, IItemContainer, IItemMiddleClickable
 {
-    public override bool IsLoadingEnabled(Mod mod) => Config.LoadModItems.BannerChest;
 
     string IItemContainer.Name => Item.Name;
     public List<Item> ItemContainer { get; private set; } = [];
@@ -249,7 +249,9 @@ public class BannerChest : ModItem, IItemOverrideLeftClick, IItemOverrideHover, 
     {
         CreateRecipe()
             .AddRecipeGroup(RecipeGroupID.IronBar, 12)
-            .AddTile(TileID.Anvils).Register();
+            .AddTile(TileID.Anvils)
+            .AddCondition(ConfigCondition.AvailableBannerChestC)
+            .Register();
     }
 
     public bool OverrideHover(Item[] inventory, int context, int slot)

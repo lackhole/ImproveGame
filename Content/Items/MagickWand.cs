@@ -1,4 +1,5 @@
 ﻿using ImproveGame.Common;
+using ImproveGame.Common.Conditions;
 using ImproveGame.Common.Configs;
 using ImproveGame.Common.ModSystems;
 using ImproveGame.Packets;
@@ -13,8 +14,6 @@ namespace ImproveGame.Content.Items
     {
         public bool WallMode;
         public bool TileMode;
-
-        public override bool IsLoadingEnabled(Mod mod) => Config.LoadModItems.MagickWand;
 
         public override bool ModifySelectedTiles(Player player, int i, int j)
         {
@@ -212,7 +211,9 @@ namespace ImproveGame.Content.Items
                 .AddRecipeGroup(RecipeGroupID.Wood, 18)
                 .AddIngredient(ItemID.JungleSpores, 6)
                 .AddIngredient(ItemID.Ruby, 1)
-                .AddTile(TileID.WorkBenches).Register();
+                .AddTile(TileID.WorkBenches)
+                .AddCondition(ConfigCondition.AvailableMagickWandC)
+                .Register();
         }
     }
 }

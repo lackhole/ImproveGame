@@ -11,8 +11,10 @@ public sealed class ItemSettings : Category
     {
         var uiConfig = UIConfigs.Instance;
         panel.AddValueText(Config, nameof(Config.ItemMaxStack));
+        panel.AddToggle(uiConfig, nameof(uiConfig.ShowModName));
         panel.AddToggle(uiConfig, nameof(uiConfig.ShowShimmerInfo));
         panel.AddToggle(uiConfig, nameof(uiConfig.AutoSummon));
+        panel.AddToggle(uiConfig, nameof(uiConfig.MagicMirrorInstantTp));
         panel.AddToggle(Config, nameof(Config.QuestFishStack));
         panel.AddToggle(Config, nameof(Config.NoConsume_SummonItem));
         panel.AddToggle(Config, nameof(Config.NoConsume_Ammo));

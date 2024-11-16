@@ -1,4 +1,5 @@
-﻿using ImproveGame.Common.ModHooks;
+﻿using ImproveGame.Common.Conditions;
+using ImproveGame.Common.ModHooks;
 using ImproveGame.Common.ModPlayers;
 using ImproveGame.Common.ModSystems;
 using ImproveGame.UI.ItemContainer;
@@ -11,7 +12,6 @@ namespace ImproveGame.Content.Items.ItemContainer;
 
 public class PotionBag : ModItem, IItemOverrideLeftClick, IItemOverrideHover, IItemContainer, IItemMiddleClickable
 {
-    public override bool IsLoadingEnabled(Mod mod) => Config.LoadModItems.PotionBag;
 
     string IItemContainer.Name => Item.Name;
     public List<Item> ItemContainer { get; private set; } = [];
@@ -286,7 +286,9 @@ public class PotionBag : ModItem, IItemOverrideLeftClick, IItemOverrideHover, II
     {
         CreateRecipe()
             .AddIngredient(ItemID.Silk, 8)
-            .AddTile(TileID.WorkBenches).Register();
+            .AddTile(TileID.WorkBenches)
+            .AddCondition(ConfigCondition.AvailablePotionBagC)
+            .Register();
     }
 
     public bool OverrideHover(Item[] inventory, int context, int slot)

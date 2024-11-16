@@ -1,5 +1,6 @@
 ﻿using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace ImproveGame.Common.GlobalNPCs
 {
@@ -15,16 +16,22 @@ namespace ImproveGame.Common.GlobalNPCs
             if (npc.type == NPCID.KingSlime)
             {
                 int itemType = ModContent.ItemType<Content.Items.SpaceWand>();
-                npcLoot.Add(new DropPerPlayerOnThePlayer(itemType, 1, 1, 1, new WandDrop(itemType)));
-                itemType = ModContent.ItemType<Content.Items.WallPlace>();
-                npcLoot.Add(new DropPerPlayerOnThePlayer(itemType, 1, 1, 1, new WandDrop(itemType)));
-            }
+                var leadingRule = new LeadingConditionRule(new SpaceWandDrop());
+                leadingRule.OnSuccess(new DropPerPlayerOnThePlayer(itemType, 1, 1, 1, new WandDrop(itemType)));
+                npcLoot.Add(leadingRule);
 
+                itemType = ModContent.ItemType<Content.Items.WallPlace>();
+                leadingRule = new LeadingConditionRule(new WallPlaceDrop());
+                leadingRule.OnSuccess(new DropPerPlayerOnThePlayer(itemType, 1, 1, 1, new WandDrop(itemType)));
+                npcLoot.Add(leadingRule);
+            }
+        }
+        public override void ModifyGlobalLoot(GlobalLoot globalLoot)
+        {
             // 钱币掉落倍率开到最大时（x25）有 0.5% 概率掉落幸运金币，它唯一的作用就是出售。
-            if (!Config.LoadModItems.CoinOne) return;
             var leadingRule = new LeadingConditionRule(new CoinOneDrop());
             leadingRule.OnSuccess(new CommonDrop(ModContent.ItemType<Content.Items.Coin.CoinOne>(), 200));
-            npcLoot.Add(leadingRule);
+            globalLoot.Add(leadingRule);
         }
 
         public override bool PreAI(NPC npc)
@@ -75,13 +82,31 @@ namespace ImproveGame.Common.GlobalNPCs
         public string GetConditionDescription() => GetText("ItemDropRule.WandDrop");
     }
     
+    public class SpaceWandDrop : IItemDropRuleCondition
+    {
+        public bool CanDrop(DropAttemptInfo info)
+            => Config.NPCCoinDropRate is 25 && AvailableConfig.AvailableCoinOne;
+
+        public bool CanShowItemDropInUI() => Config.NPCCoinDropRate is 25 && AvailableConfig.AvailableCoinOne;
+
+        public string GetConditionDescription() { return GetText("ItemDropRule.SpaceWandDrop"); }
+    }
+    public class WallPlaceDrop : IItemDropRuleCondition
+    {
+        public bool CanDrop(DropAttemptInfo info)
+            => Config.NPCCoinDropRate is 25 && AvailableConfig.AvailableCoinOne;
+
+        public bool CanShowItemDropInUI() => Config.NPCCoinDropRate is 25 && AvailableConfig.AvailableCoinOne;
+
+        public string GetConditionDescription() { return GetText("ItemDropRule.WallPlaceDrop"); }
+    }
     public class CoinOneDrop : IItemDropRuleCondition
     {
         public bool CanDrop(DropAttemptInfo info)
-            => Config.NPCCoinDropRate is 25;
+            => Config.NPCCoinDropRate is 25 && AvailableConfig.AvailableCoinOne;
 
-        public bool CanShowItemDropInUI() => Config.NPCCoinDropRate is 25;
-        
-        public string GetConditionDescription() => null;
+        public bool CanShowItemDropInUI() => Config.NPCCoinDropRate is 25 && AvailableConfig.AvailableCoinOne;
+
+        public string GetConditionDescription() { return GetText("ItemDropRule.CoinOneDrop"); }
     }
 }

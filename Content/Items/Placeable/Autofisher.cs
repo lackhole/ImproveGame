@@ -1,4 +1,5 @@
-﻿using ImproveGame.Common.ModSystems;
+﻿using ImproveGame.Common.Conditions;
+using ImproveGame.Common.ModSystems;
 using Terraria.ID;
 
 namespace ImproveGame.Content.Items.Placeable
@@ -6,8 +7,6 @@ namespace ImproveGame.Content.Items.Placeable
     public class Autofisher : ModItem
     {
         public override void SetStaticDefaults() => Item.ResearchUnlockCount = 1;
-
-        public override bool IsLoadingEnabled(Mod mod) => Config.LoadModItems.Autofisher;
 
         public override void SetDefaults()
         {
@@ -32,6 +31,7 @@ namespace ImproveGame.Content.Items.Placeable
                 .AddRecipeGroup(RecipeSystem.AnyCopperBar, 5)
                 .AddIngredient(ItemID.Cobweb, 20)
                 .AddTile(TileID.Anvils)
+                .AddCondition(ConfigCondition.AvailableAutofisherC)
                 .Register();
         }
     }

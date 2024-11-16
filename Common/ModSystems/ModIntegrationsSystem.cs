@@ -1,4 +1,5 @@
-﻿using ImproveGame.Common.ModPlayers;
+﻿using ImproveGame.Common.Conditions;
+using ImproveGame.Common.ModPlayers;
 using ImproveGame.Content.Functions;
 using ImproveGame.Content.Functions.ChainedAmmo;
 using ImproveGame.Content.Functions.HomeTeleporting;
@@ -288,15 +289,15 @@ public class ModIntegrationsSystem : ModSystem
 
         mod.Call(3, ImproveGame.Instance, "Wand", TextureAssets.Item[ModContent.ItemType<StarburstWand>()].Value,
             new NPCShop(-1, "Wand")
-                .Add<CreateWand>(gold: 10)
-                .Add<MagickWand>(gold: 10)
-                .Add<PaintWand>(gold: 5)
-                .Add<MoveChest>(gold: 15)
-                .Add<WallPlace>(Condition.DownedKingSlime, gold: 8)
-                .Add<SpaceWand>(Condition.DownedKingSlime, gold: 12, silver: 50)
-                .Add<LiquidWand>(Condition.DownedEowOrBoc, gold: 20)
-                .Add<StarburstWand>(Condition.Hardmode, gold: 50)
-                .Add<ConstructWand>(Condition.Hardmode, gold: 30));
+                .Add<CreateWand>(ConfigCondition.AvailableCreateWandC, gold: 10)
+                .Add<MagickWand>(ConfigCondition.AvailableMagickWandC, gold: 10)
+                .Add<PaintWand>(ConfigCondition.AvailablePaintWandC, gold: 5)
+                .Add<MoveChest>(ConfigCondition.AvailableMoveChestC, gold: 15)
+                .Add<WallPlace>(Item.buyPrice(gold: 8), Condition.DownedKingSlime, ConfigCondition.AvailableWallPlaceC)
+                .Add<SpaceWand>(Item.buyPrice(gold: 12, silver: 50), Condition.DownedKingSlime, ConfigCondition.AvailableSpaceWandC)
+                .Add<LiquidWand>(Item.buyPrice(gold: 20), Condition.DownedEowOrBoc, ConfigCondition.AvailableLiquidWandC)
+                .Add<StarburstWand>(Item.buyPrice(gold: 50), Condition.Hardmode, ConfigCondition.AvailableStarburstWandC)
+                .Add<ConstructWand>(Item.buyPrice(gold: 30), Condition.Hardmode, ConfigCondition.AvailableConstructWandC));
         mod.Call(3, ImproveGame.Instance, "Locator", TextureAssets.Item[ModContent.ItemType<AetherGlobe>()].Value,
             new NPCShop(-1, "Locator")
                 .Add<FloatingIslandGlobe>(gold: 8)
@@ -308,13 +309,13 @@ public class ModIntegrationsSystem : ModSystem
                 .Add<TempleGlobe>(Condition.DownedPlantera, gold: 20));
         mod.Call(3, ImproveGame.Instance, "Other", TextureAssets.Item[ModContent.ItemType<ExtremeStorage>()].Value,
             new NPCShop(-1, "Other")
-                .Add<BannerChest>(gold: 2, silver: 50)
-                .Add<ExtremeStorage>(gold: 12)
-                .Add<Autofisher>(gold: 4)
-                .Add<DetectorDrone>(gold: 2, silver: 20)
-                .Add<StorageCommunicator>(Condition.Hardmode, gold: 50)
-                .Add<BaitSupplier>(gold: 30)
-                .Add<PotionBag>(gold: 2, silver: 50)
+                .Add<BannerChest>(ConfigCondition.AvailableBannerChestC, gold: 2, silver: 50)
+                .Add<ExtremeStorage>(ConfigCondition.AvailableExtremeStorageC, gold: 12)
+                .Add<Autofisher>(ConfigCondition.AvailableAutofisherC, gold: 4)
+                .Add<DetectorDrone>(ConfigCondition.AvailableDetectorDroneC, gold: 2, silver: 20)
+                .Add<StorageCommunicator>(Item.buyPrice(gold: 50), Condition.Hardmode, ConfigCondition.AvailableExtremeStorageC)
+                .Add<BaitSupplier>(ConfigCondition.AvailableBaitSupplierC, gold: 30)
+                .Add<PotionBag>(ConfigCondition.AvailablePotionBagC, gold: 2, silver: 50)
                 .Add<Dummy>(silver: 50)
                 .Add<WeatherBook>(Condition.DownedEowOrBoc, gold: 25, silver: 60));
     }

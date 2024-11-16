@@ -10,6 +10,7 @@ public sealed class CategorySidePanel : SUIPanel
     {
         new PlayerAbility(),
         new ItemSettings(),
+        new ModItemSettings(),
         new PlantSettings(),
         new NpcSettings(),
         new EnemySettings(),

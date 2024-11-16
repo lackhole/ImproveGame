@@ -104,14 +104,12 @@ public class ImprovePlayer : ModPlayer
         // 玩家背包
         foreach (var item in from i in Player.inventory where !i.IsAir select i)
         {
-            if (Config.LoadModItems.BannerChest &&
-                BannerChest is null && item.ModItem is BannerChest bannerChest)
+            if (BannerChest is null && item.ModItem is BannerChest bannerChest)
             {
                 BannerChest = bannerChest;
             }
 
-            if (Config.LoadModItems.PotionBag &&
-                PotionBag is null && item.ModItem is PotionBag potionBag)
+            if (PotionBag is null && item.ModItem is PotionBag potionBag)
             {
                 PotionBag = potionBag;
             }
@@ -121,14 +119,12 @@ public class ImprovePlayer : ModPlayer
         Item[] superVault = Player.GetModPlayer<DataPlayer>().SuperVault;
         foreach (var item in from i in superVault where !i.IsAir select i)
         {
-            if (Config.LoadModItems.BannerChest &&
-                BannerChest is null && item.ModItem is BannerChest bannerChest)
+            if (BannerChest is null && item.ModItem is BannerChest bannerChest)
             {
                 BannerChest = bannerChest;
             }
 
-            if (Config.LoadModItems.PotionBag &&
-                PotionBag is null && item.ModItem is PotionBag potionBag)
+            if (PotionBag is null && item.ModItem is PotionBag potionBag)
             {
                 PotionBag = potionBag;
             }
