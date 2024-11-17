@@ -140,25 +140,6 @@ public class ImprovePlayer : ModPlayer
             }
         }
 
-        switch (Config.NoCD_FishermanQuest)
-        {
-            case FishQuestResetType.NotResetFish:
-                if (Main.anglerQuestFinished || Main.anglerWhoFinishedToday.Contains(Name))
-                {
-                    Main.anglerQuestFinished = false;
-                    Main.anglerWhoFinishedToday.Clear();
-                    AddNotification(GetText("Tips.AnglerQuest"), Color.Cyan);
-                }
-                break;
-            case FishQuestResetType.ResetFish:
-                if (Main.anglerQuestFinished || Main.anglerWhoFinishedToday.Contains(Name))
-                {
-                    Main.AnglerQuestSwap();
-                    AddNotification(GetText("Tips.AnglerQuest"), Color.Cyan);
-                }
-                break;
-        }
-
         if (Player.whoAmI == Main.myPlayer)
         {
             Player.tileRangeX += Config.ModifyPlayerTileRange;

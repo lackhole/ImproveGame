@@ -1,4 +1,5 @@
 ﻿using ImproveGame.Common.Configs;
+using ImproveGame.Common.GlobalNPCs;
 using ImproveGame.Common.GlobalProjectiles;
 using ImproveGame.Content.Items;
 using Mono.Cecil.Cil;
@@ -227,6 +228,25 @@ namespace ImproveGame.Content.Functions
                 timeRate *= Config.BedTimeRate / 5f;
                 tileUpdateRate *= Config.BedTimeRate / 5f;
                 eventUpdateRate *= Config.BedTimeRate / 5f;
+            }
+        }
+
+        public override void PostUpdateEverything()
+        {
+            if (Main.anglerQuestFinished || Main.anglerWhoFinishedToday.Count > 0)
+            {
+                switch (Config.NoCD_FishermanQuest)
+                {
+                    case FishQuestResetType.NotResetFish:
+                        Main.anglerQuestFinished = false;
+                        Main.anglerWhoFinishedToday.Clear();
+                        AddNotification(GetText("Tips.AnglerQuest"), Color.Cyan);
+                        break;
+                    case FishQuestResetType.ResetFish:
+                        Main.AnglerQuestSwap();
+                        AddNotification(GetText("Tips.AnglerQuest"), Color.Cyan);
+                        break;
+                }
             }
         }
 
