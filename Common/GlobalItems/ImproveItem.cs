@@ -13,6 +13,9 @@ public class ImproveItem : GlobalItem, IItemOverrideHover, IItemMiddleClickable
 {
     public override void SetDefaults(Item item)
     {
+        if (Config is null || item is null)
+            return;
+        
         // 最大堆叠
         if (item.maxStack > 1 && Config.ItemMaxStack > item.maxStack && item.DamageType != DamageClass.Melee &&
             !ItemID.Sets.CommonCoin[item.type])
