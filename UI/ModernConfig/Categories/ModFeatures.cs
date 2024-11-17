@@ -25,6 +25,7 @@ public sealed class ModFeatures : Category
         panel.AddValueText(Config, nameof(Config.SpawnRateMaxValue));
         panel.AddToggle(Config, nameof(Config.EmptyAutofisher));
         panel.AddValueSlider(Config, nameof(Config.ExStorageSearchDistance));
+        panel.AddToggle(Config, nameof(Config.ICanSeeForeverAllBag));
         panel.AddToggle(Config, nameof(Config.WandMaterialNoConsume));
     }
 }

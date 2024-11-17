@@ -409,6 +409,9 @@ public class ImproveConfigs : ModConfig
     [Slider]
     public int ExStorageSearchDistance;
 
+    [DefaultValue(false)]
+    public bool ICanSeeForeverAllBag;
+
     [DefaultValue(true)]
     public bool WorldFeaturePanel;
 

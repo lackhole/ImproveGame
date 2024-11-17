@@ -429,6 +429,15 @@ ImproveConfigs: {
 			'''
 	}
 
+	ICanSeeForeverAllBag: {
+		Label: "[centeritem:GoodieBag] 查看摸彩袋可查看全部掉落规则"
+		Tooltip:
+			'''
+			当关闭时，会遵照掉落规则里的设置来决定是否显示
+			当开启时，会显示所有掉落规则
+			'''
+	}
+
 	LoadModItems: {
 		Label: 模组物品加载配置
 		Tooltip: 可选择移除模组内的物品，使其不出现在游戏中
