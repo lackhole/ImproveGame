@@ -407,7 +407,7 @@ public class ModIntegrationsSystem : ModSystem
                             string category = Convert.ToString(args[1]);
                             Texture2D texture = (Texture2D)args[2];
                             string nameKey = Convert.ToString(args[3]);
-                            Texture2D modIcon = (Texture2D)args[3];
+                            Texture2D modIcon = (Texture2D)args[4];
 
                             if (PlayerStatsSystem.Instance.StatsCategories.ContainsKey(category))
                             {
