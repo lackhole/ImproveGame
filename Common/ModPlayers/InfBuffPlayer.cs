@@ -50,6 +50,7 @@ public class InfBuffPlayer : ModPlayer
     /// 用于判断玩家不可开关的被Ban原版无限Buff
     /// </summary>
     static HashSet<int> clearVanillaBuffBan = [];
+
     /// <summary>
     /// 用于判断玩家不可开关的被Ban Mod无限Buff
     /// </summary>
@@ -105,17 +106,30 @@ public class InfBuffPlayer : ModPlayer
         // 从TE中获取所有的无尽Buff物品
         ApplyAvailableBuffs(Get(Player).ExStorageAvailableItems);
 
+        // #region 清除冲突的Buff
+        //
+        // List<int> clearBuffTypes = [];
+        // foreach ((int buffType, List<int> value) in ModIntegrationsSystem.ModdedBuffConflicts)
+        // {
+        //     if (!Main.LocalPlayer.HasBuff(buffType)) continue;
+        //     clearBuffTypes.AddRange(value);
+        // }
+        //
+        // clearBuffTypes.ForEach(Main.LocalPlayer.ClearBuff);
+        //
+        // #endregion
+
         // 清除冲突的Buff
-        foreach (int buffType in ModIntegrationsSystem.ModdedBuffConflicts.Keys)
-        {
-            if (Main.LocalPlayer.HasBuff(buffType))
-            {
-                foreach (int clearedBuffType in ModIntegrationsSystem.ModdedBuffConflicts[buffType])
-                {
-                    Main.LocalPlayer.ClearBuff(clearedBuffType);
-                }
-            }
-        }
+        // foreach (int buffType in ModIntegrationsSystem.ModdedBuffConflicts.Keys)
+        // {
+        //     if (Main.LocalPlayer.HasBuff(buffType))
+        //     {
+        //         foreach (int clearedBuffType in ModIntegrationsSystem.ModdedBuffConflicts[buffType])
+        //         {
+        //             Main.LocalPlayer.ClearBuff(clearedBuffType);
+        //         }
+        //     }
+        // }
 
         // 每隔一段时间更新一次Buff列表
         SetupBuffListCooldown++;
@@ -137,87 +151,96 @@ public class InfBuffPlayer : ModPlayer
     /// </summary>
     private static void ApplyAvailableBuffs(IEnumerable<Item> items)
     {
+        var infBuffPlayer = Get(Main.LocalPlayer);
 
+        HashSet<int> buffTypes = [];
         foreach (Item item in items)
         {
             // 侏儒特判
             if (item.createTile is TileID.GardenGnome)
                 ApplyBuffStation.HasGardenGnome = true;
 
-            var buffTypes = ApplyBuffItem.GetItemBuffType(item);
+            ApplyBuffItem.GetItemBuffType(item).ForEach(buffType => buffTypes.Add(buffType));
 
-            // 清除玩家可以开关的被Ban无限Buff
-            if (clearVanillaBuffBan != null)
+            // 幸运药水
+            infBuffPlayer.LuckPotionBoost = item.type switch
             {
-                HashSet<int> hashBuffTypes = new HashSet<int>(buffTypes);
-                clearVanillaBuffBan.RemoveWhere(banBuff => hashBuffTypes.Contains(banBuff));
-            }
-            if (clearModBuffBan != null)
-            {
-                HashSet<string> hashModBuffs = new HashSet<string>(buffTypes
-                        .Select(buffType => BuffLoader.GetBuff(buffType))
-                        .Where(buff => buff != null)
-                        .Select(modBuff => $"{modBuff.Mod.Name}/{modBuff.Name}")
-                );
-                clearModBuffBan.RemoveWhere(banBuff => hashModBuffs.Contains(banBuff));
-            }
-
-            buffTypes.ForEach(buffType =>
-            {
-
-                if (!CheckInfBuffEnable(buffType))
-                    return;
-
-                // Buff
-                switch (buffType)
-                {
-                    case -1:
-                        break;
-                    default:
-                        Main.LocalPlayer.AddBuff(buffType, 30);
-
-                        // 本地玩家的对应ModPlayer
-                        var modPlayer = Get(Main.LocalPlayer);
-                        // 幸运药水
-                        modPlayer.LuckPotionBoost = item.type switch
-                        {
-                            ItemID.LuckPotion => Math.Max(modPlayer.LuckPotionBoost, 0.1f),
-                            ItemID.LuckPotionGreater => Math.Max(modPlayer.LuckPotionBoost, 0.2f),
-                            _ => modPlayer.LuckPotionBoost
-                        };
-                        break;
-                }
-
-                // Buff站效果设置
-                if (!Config.NoPlace_BUFFTile)
-                    return;
-
-                switch (buffType)
-                {
-                    case BuffID.Campfire:
-                        ApplyBuffStation.HasCampfire = true;
-                        break;
-                    case BuffID.HeartLamp:
-                        ApplyBuffStation.HasHeartLantern = true;
-                        break;
-                    case BuffID.StarInBottle:
-                        ApplyBuffStation.HasStarInBottle = true;
-                        break;
-                    case BuffID.Sunflower:
-                        ApplyBuffStation.HasSunflower = true;
-                        break;
-                    case BuffID.WaterCandle:
-                        ApplyBuffStation.HasWaterCandle = true;
-                        break;
-                    case BuffID.PeaceCandle:
-                        ApplyBuffStation.HasPeaceCandle = true;
-                        break;
-                    case BuffID.ShadowCandle:
-                        ApplyBuffStation.HasShadowCandle = true;
-                        break;
-                }
-            });
+                ItemID.LuckPotion => Math.Max(infBuffPlayer.LuckPotionBoost, 0.1f),
+                ItemID.LuckPotionGreater => Math.Max(infBuffPlayer.LuckPotionBoost, 0.2f),
+                _ => infBuffPlayer.LuckPotionBoost
+            };
         }
+
+        if (clearModBuffBan != null)
+        {
+            HashSet<string> hashModBuffs =
+            [
+                ..buffTypes
+                    .Select(BuffLoader.GetBuff)
+                    .Where(modBuff => modBuff != null)
+                    .Select(modBuff => $"{modBuff.Mod.Name}/{modBuff.Name}")
+            ];
+            clearModBuffBan.RemoveWhere(hashModBuffs.Contains);
+        }
+
+        #region 清除冲突 Buff
+
+        HashSet<int> clearBuffTypes = [];
+        foreach ((int buffType, List<int> value) in ModIntegrationsSystem.ModdedBuffConflicts)
+        {
+            if (!buffTypes.Contains(buffType)) continue;
+            value.ForEach(i => clearBuffTypes.Add(i));
+        }
+
+        // clearBuffTypes.ForEach(buffType => buffTypes.Remove(buffType));
+
+        #endregion
+
+        foreach (var buffType in buffTypes.Where(CheckInfBuffEnable))
+        {
+            if (clearBuffTypes.Contains(buffType))
+                break;
+
+            switch (buffType)
+            {
+                case -1:
+                    break;
+                default:
+                    Main.LocalPlayer.AddBuff(buffType, 30);
+                    break;
+            }
+
+            if (!Config.NoPlace_BUFFTile)
+                return;
+
+            switch (buffType)
+            {
+                case BuffID.Campfire:
+                    ApplyBuffStation.HasCampfire = true;
+                    break;
+                case BuffID.HeartLamp:
+                    ApplyBuffStation.HasHeartLantern = true;
+                    break;
+                case BuffID.StarInBottle:
+                    ApplyBuffStation.HasStarInBottle = true;
+                    break;
+                case BuffID.Sunflower:
+                    ApplyBuffStation.HasSunflower = true;
+                    break;
+                case BuffID.WaterCandle:
+                    ApplyBuffStation.HasWaterCandle = true;
+                    break;
+                case BuffID.PeaceCandle:
+                    ApplyBuffStation.HasPeaceCandle = true;
+                    break;
+                case BuffID.ShadowCandle:
+                    ApplyBuffStation.HasShadowCandle = true;
+                    break;
+            }
+        }
+
+        // 清除玩家可以开关的被Ban无限Buff
+        clearVanillaBuffBan?.RemoveWhere(buffTypes.Contains);
     }
 
     /// <summary>
@@ -243,13 +266,14 @@ public class InfBuffPlayer : ModPlayer
         // 从TE中获取所有的无尽Buff物品
         foreach ((int _, TileEntity tileEntity) in TileEntity.ByID)
         {
-            if (tileEntity is not TEExtremeStorage {UseUnlimitedBuffs: true} storage)
+            if (tileEntity is not TEExtremeStorage { UseUnlimitedBuffs: true } storage)
             {
                 continue;
             }
 
             var alchemyItems = storage.FindAllNearbyChestsWithGroup(ItemGroup.Alchemy);
-            alchemyItems.ForEach(i => GetAvailableItemsFromItems(Main.chest[i].item).ForEach(j => ExStorageAvailableItems.Add(j)) );
+            alchemyItems.ForEach(i =>
+                GetAvailableItemsFromItems(Main.chest[i].item).ForEach(j => ExStorageAvailableItems.Add(j)));
         }
 
         AvailableItemsHash = AvailableItems.Concat(ExStorageAvailableItems).ToHashSet();
@@ -341,7 +365,8 @@ public class InfBuffPlayer : ModPlayer
                     string[] names = buffFullName.Split('/');
                     string modName = names[0];
                     string buffName = names[1];
-                    if (!clearModBuffBan.Contains(buffFullName) && ModContent.TryFind<ModBuff>(modName, buffName, out var modBuff) && type == modBuff.Type)
+                    if (!clearModBuffBan.Contains(buffFullName) &&
+                        ModContent.TryFind<ModBuff>(modName, buffName, out var modBuff) && type == modBuff.Type)
                     {
                         return;
                     }
@@ -384,7 +409,8 @@ public class InfBuffPlayer : ModPlayer
                         string[] names = buffFullName.Split('/');
                         string modName = names[0];
                         string buffName = names[1];
-                        if (!clearModBuffBan.Contains(buffFullName) && ModContent.TryFind<ModBuff>(modName, buffName, out var modBuff) &&
+                        if (!clearModBuffBan.Contains(buffFullName) &&
+                            ModContent.TryFind<ModBuff>(modName, buffName, out var modBuff) &&
                             Player.buffType[i] == modBuff.Type)
                         {
                             Player.DelBuff(i);
