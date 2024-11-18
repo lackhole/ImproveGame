@@ -199,7 +199,7 @@ public class InfBuffPlayer : ModPlayer
         foreach (var buffType in buffTypes.Where(CheckInfBuffEnable))
         {
             if (clearBuffTypes.Contains(buffType))
-                break;
+                continue;
 
             switch (buffType)
             {
@@ -211,7 +211,7 @@ public class InfBuffPlayer : ModPlayer
             }
 
             if (!Config.NoPlace_BUFFTile)
-                break;
+                continue;
 
             switch (buffType)
             {
