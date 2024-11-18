@@ -211,7 +211,7 @@ public class InfBuffPlayer : ModPlayer
             }
 
             if (!Config.NoPlace_BUFFTile)
-                return;
+                break;
 
             switch (buffType)
             {
