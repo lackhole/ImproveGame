@@ -199,7 +199,7 @@ public class ModIntegrationsSystem : ModSystem
         AddBuffIntegration(gensokyo, "OniSake", true, "Buff_SakeBoth");
         AddBuffIntegration(gensokyo, "HoshigumaDish", true, "Debuff_SakeHoshiguma");
         AddBuffIntegration(gensokyo, "IbarakiBox", true, "Buff_SakeIbaraki");
-        AddBuffIntegration(gensokyo, "EagleRaviProvisions", true, "Buff_DangoPower1", "Buff_DangoPower2",
+        AddBuffIntegration(gensokyo, "EagleRaviProvisions", false, "Buff_DangoPower1", "Buff_DangoPower2",
             "Buff_DangoPower3", "Buff_DangoPower4", "Buff_DangoPower5");
         AddInfBuffsConsume(gensokyo, "JellyStone");
         AddBuffConflicts(gensokyo, "Buff_SakeBoth", BuffID.Tipsy, "Buff_SakeIbaraki", "Debuff_SakeHoshiguma");

@@ -188,7 +188,7 @@ public class InfBuffPlayer : ModPlayer
         HashSet<int> clearBuffTypes = [];
         foreach ((int buffType, List<int> value) in ModIntegrationsSystem.ModdedBuffConflicts)
         {
-            if (!buffTypes.Contains(buffType)) continue;
+            if (!buffTypes.Contains(buffType) || !CheckInfBuffEnable(buffType)) continue;
             value.ForEach(i => clearBuffTypes.Add(i));
         }
 
@@ -237,6 +237,12 @@ public class InfBuffPlayer : ModPlayer
                     ApplyBuffStation.HasShadowCandle = true;
                     break;
             }
+        }
+
+        // 二次清理冲突 Buff
+        foreach (var buffType in clearBuffTypes)
+        {
+            Main.LocalPlayer.ClearBuff(buffType);
         }
 
         // 清除玩家可以开关的被Ban无限Buff
