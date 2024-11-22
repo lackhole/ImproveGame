@@ -166,9 +166,9 @@ namespace ImproveGame.Content.Tiles
             if (FishingTimer > fishingCooldown / fishingSpeedBonus)
             {
                 FishingTimer = 0;
-                _lavaFishing = false;
-                _tackleBox = false;
-                _fishingSkill = 0;
+                LavaFishing = false;
+                TackleBox = false;
+                FishingSkill = 0;
                 if (accAvailable)
                     ApplyAccessories(stat);
                 FishingCheck();
@@ -182,27 +182,22 @@ namespace ImproveGame.Content.Tiles
             }
         }
 
-        private bool _lavaFishing;
-        private bool _tackleBox;
-        private int _fishingSkill;
+        public bool LavaFishing;
+        public bool TackleBox;
+        public int FishingSkill;
 
-        private void ApplyAccessories(FishingStat stat)
+        public void ApplyAccessories(FishingStat stat)
         {
-            _lavaFishing = stat.LavaFishing;
-            _tackleBox = stat.TackleBox;
-            _fishingSkill += stat.Power;
+            LavaFishing = stat.LavaFishing;
+            TackleBox = stat.TackleBox;
+            FishingSkill += stat.Power;
         }
 
         public void FishingCheck()
         {
             var player = GetClosestPlayer(Position);
 
-            FishingAttempt fisher = default;
-            fisher.X = locatePoint.X;
-            fisher.Y = locatePoint.Y;
-            fisher.bobberType = fishingPole.shoot;
-            GetFishingPondState(fisher.X, fisher.Y, out fisher.inLava, out fisher.inHoney, out bool inShimmer,
-                out fisher.waterTilesCount, out fisher.chumsInWater);
+            FishingAttempt fisher = GetFisher(out bool inShimmer);
             if (fisher.waterTilesCount < 75)
             {
                 SetFishingTip(Autofisher.TipType.NotEnoughWater);
@@ -215,7 +210,6 @@ namespace ImproveGame.Content.Tiles
                 return;
             }
 
-            fisher.playerFishingConditions = GetFishingConditions();
             if (fisher.playerFishingConditions.BaitItemType == ItemID.TruffleWorm)
             {
                 SetFishingTip(Autofisher.TipType.FishingWarning);
@@ -261,12 +255,105 @@ namespace ImproveGame.Content.Tiles
                 return;
             }
 
-            fisher.fishingLevel = fisher.playerFishingConditions.FinalFishingLevel;
             if (fisher.fishingLevel == 0)
                 return;
 
+            SetFishingTip(Autofisher.TipType.FishingPower, fisher.fishingLevel);
+
+            if (fisher.waterTilesCount < fisher.waterNeededToFish)
+                SetFishingTip(Autofisher.TipType.FullFishingPower, fisher.fishingLevel, fisher.waterQuality);
+
+            int fishChance = (fisher.fishingLevel + 75) / 2;
+            if (Main.rand.Next(100) > fishChance)
+                return;
+
+            //FishingCheck_ProbeForQuestFish(ref fisher);
+            //FishingCheck_RollEnemySpawns(ref fisher);
+
+            AutofishItemListener.ListeningAutofisher = this;
+
+            try
+            {
+                if (Main.netMode is NetmodeID.SinglePlayer)
+                {
+                    RollItemDrop(ref fisher);
+
+                    if (fisher.rolledItemDrop != 0)
+                    {
+                        GiveCatchToStorage(player, fisher.rolledItemDrop);
+                        //Main.NewText($"[i:{fisher.rolledItemDrop}]");
+                    }
+                }
+                else
+                {
+                    RollItemRequest.SendTo(this, player.whoAmI);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            } finally
+            {
+                AutofishItemListener.ListeningAutofisher = null;
+            }
+        }
+
+        public void RollItemDrop(ref FishingAttempt fisher)
+        {
+            // 伪装一个proj，用来调用Projectile.FishingCheck_RollItemDrop
+            var fakeProj = new Projectile
+            {
+                owner = 255
+            };
+
+            Main.player[255].Center = Position.ToWorldCoordinates();
+            Main.player[255].whoAmI = 255; // 玩家不进入世界初始化，是没有whoAmI的
+            TileCounter tileCounter = new();
+            tileCounter.ScanAndExportToMain(Position);
+            tileCounter.Simulate(Main.player[255]);
+            tileCounter.FargosFountainSupport(Main.player[255]);
+
+            // AssemblyPublicizer 使得 FishingCheck_RollItemDrop 可以直接访问
+            fakeProj.FishingCheck_RollItemDrop(ref fisher);
+
+            AdvancedPopupRequest sonar = new();
+            Vector2 sonarPosition = new(-1145141f, -919810f); // 直接fake到世界外面
+            PlayerLoader.CatchFish(Main.player[255], fisher, ref fisher.rolledItemDrop, ref fisher.rolledEnemySpawn,
+                ref sonar, ref sonarPosition);
+
+            // 单人模式和客户端里这还作为视效的判定，因此得强制更新
+            if (Main.netMode is NetmodeID.SinglePlayer or NetmodeID.MultiplayerClient)
+                Main.LocalPlayer.ForceUpdateBiomes();
+        }
+
+        public FishingAttempt GetFisher(out bool inShimmer)
+        {
+            var player = GetClosestPlayer(Position);
+
+            FishingAttempt fisher = default;
+            fisher.X = locatePoint.X;
+            fisher.Y = locatePoint.Y;
+            fisher.bobberType = fishingPole.shoot;
+            GetFishingPondState(fisher.X, fisher.Y, out fisher.inLava, out fisher.inHoney, out inShimmer,
+                out fisher.waterTilesCount, out fisher.chumsInWater);
+            if (fisher.waterTilesCount < 75)
+            {
+                return fisher;
+            }
+
+            if (inShimmer)
+            {
+                return fisher;
+            }
+
+            fisher.playerFishingConditions = GetFishingConditions();
+
+            fisher.fishingLevel = fisher.playerFishingConditions.FinalFishingLevel;
+            if (fisher.fishingLevel == 0)
+                return fisher;
+
             fisher.CanFishInLava = ItemID.Sets.CanFishInLava[fisher.playerFishingConditions.PoleItemType] ||
-                                   ItemID.Sets.IsLavaBait[fisher.playerFishingConditions.BaitItemType] || _lavaFishing;
+                                   ItemID.Sets.IsLavaBait[fisher.playerFishingConditions.BaitItemType] || LavaFishing;
             if (fisher.chumsInWater > 0)
                 fisher.fishingLevel += 11;
 
@@ -276,7 +363,6 @@ namespace ImproveGame.Content.Tiles
             if (fisher.chumsInWater > 2)
                 fisher.fishingLevel += 3;
 
-            SetFishingTip(Autofisher.TipType.FishingPower, fisher.fishingLevel);
             fisher.waterNeededToFish = 300;
             float num = Main.maxTilesX / 4200;
             num *= num;
@@ -293,8 +379,6 @@ namespace ImproveGame.Content.Tiles
                 fisher.fishingLevel = (int)(fisher.fishingLevel * fisher.waterQuality);
 
             fisher.waterQuality = 1f - fisher.waterQuality;
-            if (fisher.waterTilesCount < fisher.waterNeededToFish)
-                SetFishingTip(Autofisher.TipType.FullFishingPower, fisher.fishingLevel, fisher.waterQuality);
 
             if (player.active && !player.dead)
             {
@@ -308,10 +392,6 @@ namespace ImproveGame.Content.Tiles
                     fisher.fishingLevel = (int)(fisher.fishingLevel * (1.1 + Main.rand.NextFloat() * 0.3));
                 }
             }
-
-            int fishChance = (fisher.fishingLevel + 75) / 2;
-            if (Main.rand.Next(100) > fishChance)
-                return;
 
             fisher.heightLevel = 0;
             if (Main.remixWorld)
@@ -365,51 +445,10 @@ namespace ImproveGame.Content.Tiles
 
             FishingCheck_RollDropLevels(player, fisher.fishingLevel, out fisher.common, out fisher.uncommon,
                 out fisher.rare, out fisher.veryrare, out fisher.legendary, out fisher.crate);
-            //FishingCheck_ProbeForQuestFish(ref fisher);
-            //FishingCheck_RollEnemySpawns(ref fisher);
+            // FishingCheck_ProbeForQuestFish(ref fisher);
+            // FishingCheck_RollEnemySpawns(ref fisher);
 
-            // 伪装一个proj，用反射调用Projectile.FishingCheck_RollItemDrop
-            var fakeProj = new Projectile
-            {
-                owner = 255
-            };
-
-            AutofishItemListener.ListeningAutofisher = this;
-
-            try
-            {
-                Main.player[255].Center = Position.ToWorldCoordinates();
-                Main.player[255].whoAmI = 255; // 玩家不进入世界初始化，是没有whoAmI的
-                TileCounter tileCounter = new();
-                tileCounter.ScanAndExportToMain(Position);
-                tileCounter.Simulate(Main.player[255]);
-                tileCounter.FargosFountainSupport(Main.player[255]);
-
-                // AssemblyPublicizer 使得 FishingCheck_RollItemDrop 可以直接访问
-                fakeProj.FishingCheck_RollItemDrop(ref fisher);
-
-                AdvancedPopupRequest sonar = new();
-                Vector2 sonarPosition = new(-1145141f, -919810f); // 直接fake到世界外面
-                PlayerLoader.CatchFish(Main.player[255], fisher, ref fisher.rolledItemDrop, ref fisher.rolledEnemySpawn,
-                    ref sonar, ref sonarPosition);
-
-                if (fisher.rolledItemDrop != 0)
-                {
-                    GiveCatchToStorage(player, fisher.rolledItemDrop);
-                    //Main.NewText($"[i:{fisher.rolledItemDrop}]");
-                }
-
-                // 单人模式里这还作为视效的判定，因此得强制更新
-                if (Main.netMode == NetmodeID.SinglePlayer)
-                    Main.LocalPlayer.ForceUpdateBiomes();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            } finally
-            {
-                AutofishItemListener.ListeningAutofisher = null;
-            }
+            return fisher;
         }
 
         public void GiveCatchToStorage(Player player, int itemType)
@@ -581,7 +620,7 @@ namespace ImproveGame.Content.Tiles
             if (chanceDenominator < 1f)
                 chanceDenominator = 1f;
 
-            if (_tackleBox)
+            if (TackleBox)
                 chanceDenominator += 1f;
 
             // 诱饵消耗概率仅为手动钓鱼的 40%
@@ -701,8 +740,8 @@ namespace ImproveGame.Content.Tiles
 
         public TEAutofisher()
         {
-            _tackleBox = false;
-            _fishingSkill = 0;
+            TackleBox = false;
+            FishingSkill = 0;
         }
 
         private int GetFishingPondSize(int x, int y, ref bool lava, ref bool honey, ref bool shimmer, ref int chumCount)
@@ -748,7 +787,7 @@ namespace ImproveGame.Content.Tiles
                 return result;
 
             var player = GetClosestPlayer(Position);
-            int num = result.BaitPower + result.PolePower + _fishingSkill;
+            int num = result.BaitPower + result.PolePower + FishingSkill;
             result.LevelMultipliers = Fishing_GetPowerMultiplier(result.Pole, result.Bait, player);
             result.FinalFishingLevel = (int)(num * result.LevelMultipliers);
             return result;
@@ -996,10 +1035,10 @@ namespace ImproveGame.Content.Tiles
         {
             writer.Write(locatePoint.X);
             writer.Write(locatePoint.Y);
-            ItemIO.Send(fishingPole, writer, true);
-            ItemIO.Send(bait, writer, true);
-            ItemIO.Send(accessory, writer, true);
-            writer.Write(fish);
+            writer.Write(fishingPole);
+            writer.Write(bait);
+            writer.Write(accessory);
+            writer.Write(fish, writeFavorite: true);
             writer.Write(ExcludedItems);
 
             var flags = new BitsByte(
@@ -1019,7 +1058,7 @@ namespace ImproveGame.Content.Tiles
             fishingPole = ItemIO.Receive(reader, true);
             bait = ItemIO.Receive(reader, true);
             accessory = ItemIO.Receive(reader, true);
-            fish = reader.ReadItemArray();
+            fish = reader.ReadItemArray(readFavorite: true);
             ExcludedItems = reader.ReadListItemTypeData();
 
             var flags = (BitsByte)reader.ReadByte();

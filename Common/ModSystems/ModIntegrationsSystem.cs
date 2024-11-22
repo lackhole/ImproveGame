@@ -164,6 +164,9 @@ public class ModIntegrationsSystem : ModSystem
         AddBuffIntegration(calamityMod, "EffigyOfDecay", true, "EffigyOfDecayBuff");
         AddBuffIntegration(calamityMod, "CrimsonEffigy", true, "CrimsonEffigyBuff");
         AddBuffIntegration(calamityMod, "CorruptionEffigy", true, "CorruptionEffigyBuff");
+        AddFishingAccessoryIntegration(calamityMod, "EnchantedPearl", 2f, 10, true, true);
+        AddFishingAccessoryIntegration(calamityMod, "AlluringBait", 2f, 30, true, true);
+        AddFishingAccessoryIntegration(calamityMod, "SupremeBaitTackleBoxFishingStation", 5f, 80, true, true);
         PlayerStatsSystem.CalamityIntegration(calamityMod);
     }
 
@@ -187,6 +190,14 @@ public class ModIntegrationsSystem : ModSystem
 
         AddBuffIntegration(fargowiltas, "Omnistation", true, "Omnistation");
         AddBuffIntegration(fargowiltas, "Omnistation2", true, "Omnistation");
+        
+        if (!ModLoader.TryGetMod("FargowiltasSouls", out Mod fargowiltasSouls))
+            return;
+        
+        AddFishingAccessoryIntegration(fargowiltasSouls, "AnglerEnchant", 5f, 10, true, true);
+        AddFishingAccessoryIntegration(fargowiltasSouls, "TrawlerSoul", 5f, 60, true, true);
+        AddFishingAccessoryIntegration(fargowiltasSouls, "DimensionSoul", 5f, 60, true, true);
+        AddFishingAccessoryIntegration(fargowiltasSouls, "EternitySoul", 5f, 60, true, true);
     }
 
     private static void DoGensokyoIntegration()
@@ -194,7 +205,7 @@ public class ModIntegrationsSystem : ModSystem
         if (!ModLoader.TryGetMod("Gensokyo", out Mod gensokyo))
             return;
 
-        
+
         AddBuffIntegration(gensokyo, "ButterflyPheromones", true, "Buff_ButterflyPheromones");
         AddBuffIntegration(gensokyo, "OniSake", true, "Buff_SakeBoth");
         AddBuffIntegration(gensokyo, "HoshigumaDish", true, "Debuff_SakeHoshiguma");
@@ -205,7 +216,8 @@ public class ModIntegrationsSystem : ModSystem
         AddBuffConflicts(gensokyo, "Buff_SakeBoth", BuffID.Tipsy, "Buff_SakeIbaraki", "Debuff_SakeHoshiguma");
         AddBuffConflicts(gensokyo, "Buff_SakeIbaraki", BuffID.Tipsy, "Debuff_SakeHoshiguma");
         AddBuffConflicts(gensokyo, "Debuff_SakeHoshiguma", BuffID.Tipsy);
-        AddBuffConflicts(gensokyo, "Buff_DangoPower5", "Buff_DangoPower4", "Buff_DangoPower3", "Buff_DangoPower2", "Buff_DangoPower1");
+        AddBuffConflicts(gensokyo, "Buff_DangoPower5", "Buff_DangoPower4", "Buff_DangoPower3", "Buff_DangoPower2",
+            "Buff_DangoPower1");
         AddBuffConflicts(gensokyo, "Buff_DangoPower4", "Buff_DangoPower3", "Buff_DangoPower2", "Buff_DangoPower1");
         AddBuffConflicts(gensokyo, "Buff_DangoPower3", "Buff_DangoPower2", "Buff_DangoPower1");
         AddBuffConflicts(gensokyo, "Buff_DangoPower2", "Buff_DangoPower1");
@@ -282,6 +294,13 @@ public class ModIntegrationsSystem : ModSystem
         // 属于是自我测试了
         Call("AddHomeTpItem", mod.Find<ModItem>(itemName).Type, isPotion, isComebackItem);
     }
+
+    private static void AddFishingAccessoryIntegration(Mod mod, string itemName, float speed, int power, bool tackleBox,
+        bool lavaFishing)
+    {
+        FishingStatLookup[mod.Find<ModItem>(itemName).Type] = new FishingStat(power, speed, tackleBox, lavaFishing);
+    }
+
     private static void DoShopLookupIntegration()
     {
         if (!ModLoader.TryGetMod("ShopLookup", out Mod mod))
@@ -294,10 +313,14 @@ public class ModIntegrationsSystem : ModSystem
                 .Add<PaintWand>(ConfigCondition.AvailablePaintWandC, gold: 5)
                 .Add<MoveChest>(ConfigCondition.AvailableMoveChestC, gold: 15)
                 .Add<WallPlace>(Item.buyPrice(gold: 8), Condition.DownedKingSlime, ConfigCondition.AvailableWallPlaceC)
-                .Add<SpaceWand>(Item.buyPrice(gold: 12, silver: 50), Condition.DownedKingSlime, ConfigCondition.AvailableSpaceWandC)
-                .Add<LiquidWand>(Item.buyPrice(gold: 20), Condition.DownedEowOrBoc, ConfigCondition.AvailableLiquidWandC)
-                .Add<StarburstWand>(Item.buyPrice(gold: 50), Condition.Hardmode, ConfigCondition.AvailableStarburstWandC)
-                .Add<ConstructWand>(Item.buyPrice(gold: 30), Condition.Hardmode, ConfigCondition.AvailableConstructWandC));
+                .Add<SpaceWand>(Item.buyPrice(gold: 12, silver: 50), Condition.DownedKingSlime,
+                    ConfigCondition.AvailableSpaceWandC)
+                .Add<LiquidWand>(Item.buyPrice(gold: 20), Condition.DownedEowOrBoc,
+                    ConfigCondition.AvailableLiquidWandC)
+                .Add<StarburstWand>(Item.buyPrice(gold: 50), Condition.Hardmode,
+                    ConfigCondition.AvailableStarburstWandC)
+                .Add<ConstructWand>(Item.buyPrice(gold: 30), Condition.Hardmode,
+                    ConfigCondition.AvailableConstructWandC));
         mod.Call(3, ImproveGame.Instance, "Locator", TextureAssets.Item[ModContent.ItemType<AetherGlobe>()].Value,
             new NPCShop(-1, "Locator")
                 .Add<FloatingIslandGlobe>(gold: 8)
@@ -313,7 +336,8 @@ public class ModIntegrationsSystem : ModSystem
                 .Add<ExtremeStorage>(ConfigCondition.AvailableExtremeStorageC, gold: 12)
                 .Add<Autofisher>(ConfigCondition.AvailableAutofisherC, gold: 4)
                 .Add<DetectorDrone>(ConfigCondition.AvailableDetectorDroneC, gold: 2, silver: 20)
-                .Add<StorageCommunicator>(Item.buyPrice(gold: 50), Condition.Hardmode, ConfigCondition.AvailableExtremeStorageC)
+                .Add<StorageCommunicator>(Item.buyPrice(gold: 50), Condition.Hardmode,
+                    ConfigCondition.AvailableExtremeStorageC)
                 .Add<BaitSupplier>(ConfigCondition.AvailableBaitSupplierC, gold: 30)
                 .Add<PotionBag>(ConfigCondition.AvailablePotionBagC, gold: 2, silver: 50)
                 .Add<Dummy>(silver: 50)
@@ -352,6 +376,7 @@ public class ModIntegrationsSystem : ModSystem
                             {
                                 ModdedInfBuffsIgnore.Add(ignore);
                             }
+
                             return true;
                         }
                     case "AddPotion":
@@ -368,6 +393,7 @@ public class ModIntegrationsSystem : ModSystem
                             {
                                 ModdedInfBuffsConsume.Add(consume);
                             }
+
                             return true;
                         }
                     case "BuffConflict":
@@ -426,7 +452,8 @@ public class ModIntegrationsSystem : ModSystem
                             string nameKey = Convert.ToString(args[2]);
                             Func<string> value = (Func<string>)args[3];
 
-                            if (PlayerStatsSystem.Instance.StatsCategories.TryGetValue(category, out BaseStatsCategory proCat))
+                            if (PlayerStatsSystem.Instance.StatsCategories.TryGetValue(category,
+                                    out BaseStatsCategory proCat))
                             {
                                 proCat.BaseProperties.Add(new BaseStat(proCat, nameKey, value, true));
                                 return true;
@@ -438,7 +465,10 @@ public class ModIntegrationsSystem : ModSystem
                     case "AddHomeTpItem":
                         {
                             List<int> items = AsListOfInt(args[1]); // Item IDs
-                            bool isPotion = Convert.ToBoolean(args[2]); // Whether the item should meet the Infinite Potion requirement (stacked over 30 by default and can be changed via mod config)
+                            bool
+                                isPotion = Convert
+                                    .ToBoolean(args[
+                                        2]); // Whether the item should meet the Infinite Potion requirement (stacked over 30 by default and can be changed via mod config)
                             bool isComebackItem = Convert.ToBoolean(args[3]); // Potion of Return like item
 
                             foreach (int item in items)
@@ -446,6 +476,7 @@ public class ModIntegrationsSystem : ModSystem
                                 HomeTeleportingPlayer.HomeTeleportingItems.Add(
                                     new HomeTeleportingItem(item, isPotion, isComebackItem));
                             }
+
                             return false;
                         }
                     // 获取弹药链序列
