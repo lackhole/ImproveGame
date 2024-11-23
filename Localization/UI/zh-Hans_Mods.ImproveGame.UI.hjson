@@ -428,6 +428,14 @@ Autofisher: {
 		自动存储
 		每分钟将渔获自动存入最近的箱子
 		'''
+	AccBoost:
+		'''
+		[i:{IconID}] 饰品对钓鱼机的加成：
+		    钓鱼速率：{Speed}
+		    渔力加成：{Power}
+		'''
+	AccBoostTackle: "    降低鱼饵消耗几率"
+	AccBoostLava: "    可在熔岩中钓鱼"
 }
 
 MapLayer: {

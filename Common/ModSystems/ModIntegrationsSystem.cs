@@ -164,9 +164,9 @@ public class ModIntegrationsSystem : ModSystem
         AddBuffIntegration(calamityMod, "EffigyOfDecay", true, "EffigyOfDecayBuff");
         AddBuffIntegration(calamityMod, "CrimsonEffigy", true, "CrimsonEffigyBuff");
         AddBuffIntegration(calamityMod, "CorruptionEffigy", true, "CorruptionEffigyBuff");
-        AddFishingAccessoryIntegration(calamityMod, "EnchantedPearl", 2f, 10, true, true);
-        AddFishingAccessoryIntegration(calamityMod, "AlluringBait", 2f, 30, true, true);
-        AddFishingAccessoryIntegration(calamityMod, "SupremeBaitTackleBoxFishingStation", 5f, 80, true, true);
+        AddFishingAccIntegration(calamityMod, "EnchantedPearl", 2f, 10, false, false);
+        AddFishingAccIntegration(calamityMod, "AlluringBait", 2f, 30, false, false);
+        AddFishingAccIntegration(calamityMod, "SupremeBaitTackleBoxFishingStation", 5f, 80, true, true);
         PlayerStatsSystem.CalamityIntegration(calamityMod);
     }
 
@@ -194,10 +194,10 @@ public class ModIntegrationsSystem : ModSystem
         if (!ModLoader.TryGetMod("FargowiltasSouls", out Mod fargowiltasSouls))
             return;
         
-        AddFishingAccessoryIntegration(fargowiltasSouls, "AnglerEnchant", 5f, 10, true, true);
-        AddFishingAccessoryIntegration(fargowiltasSouls, "TrawlerSoul", 5f, 60, true, true);
-        AddFishingAccessoryIntegration(fargowiltasSouls, "DimensionSoul", 5f, 60, true, true);
-        AddFishingAccessoryIntegration(fargowiltasSouls, "EternitySoul", 5f, 60, true, true);
+        AddFishingAccIntegration(fargowiltasSouls, "AnglerEnchant", 5f, 10, true, true);
+        AddFishingAccIntegration(fargowiltasSouls, "TrawlerSoul", 5f, 60, true, true);
+        AddFishingAccIntegration(fargowiltasSouls, "DimensionSoul", 5f, 60, true, true);
+        AddFishingAccIntegration(fargowiltasSouls, "EternitySoul", 5f, 60, true, true);
     }
 
     private static void DoGensokyoIntegration()
@@ -295,7 +295,7 @@ public class ModIntegrationsSystem : ModSystem
         Call("AddHomeTpItem", mod.Find<ModItem>(itemName).Type, isPotion, isComebackItem);
     }
 
-    private static void AddFishingAccessoryIntegration(Mod mod, string itemName, float speed, int power, bool tackleBox,
+    private static void AddFishingAccIntegration(Mod mod, string itemName, float speed, int power, bool tackleBox,
         bool lavaFishing)
     {
         FishingStatLookup[mod.Find<ModItem>(itemName).Type] = new FishingStat(power, speed, tackleBox, lavaFishing);
