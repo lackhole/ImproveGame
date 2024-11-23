@@ -1,8 +1,10 @@
-﻿namespace ImproveGame.UI.ModernConfig.Categories;
+﻿using ImproveGame.Content.Items.Coin;
+
+namespace ImproveGame.UI.ModernConfig.Categories;
 
 public sealed class ModItemSettings : Category
 {
-    public override int ItemIconId => ModContent.ItemType<Content.Items.SpaceWand>();
+    public override int ItemIconId => ModContent.ItemType<CoinOne>();
 
     public override void AddOptions(ConfigOptionsPanel panel)
     {

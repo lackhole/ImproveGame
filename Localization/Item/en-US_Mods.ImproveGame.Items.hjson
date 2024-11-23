@@ -45,6 +45,7 @@ CreateWand: {
 }
 
 WallPlace: {
+	PureName: Wand of Technology
 	DisplayName: Wand of Technology (Placing)
 	Tooltip:
 		'''

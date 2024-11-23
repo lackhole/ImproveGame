@@ -43,7 +43,7 @@ Conditions: {
 	AvailableStarburstWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.StarburstWand.DisplayName}"
 	AvailablePotionBag: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.PotionBag.DisplayName}"
 	AvailableSpaceWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.SpaceWand.DisplayName}"
-	AvailableWallPlace: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.WallPlace.DisplayName}"
+	AvailableWallPlace: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.WallPlace.PureName}"
 	AvailablePaintWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.PaintWand.DisplayName}"
 	AvailableBannerChest: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.BannerChest.DisplayName}"
 	AvailableConstructWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.ConstructWand.DisplayName}"

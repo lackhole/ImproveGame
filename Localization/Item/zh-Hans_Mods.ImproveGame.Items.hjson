@@ -46,6 +46,7 @@ CreateWand: {
 }
 
 WallPlace: {
+	PureName: 科技魔杖
 	DisplayName: 科技魔杖（放置器模式）
 	Tooltip:
 		'''

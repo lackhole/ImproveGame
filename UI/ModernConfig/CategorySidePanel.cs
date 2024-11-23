@@ -10,7 +10,6 @@ public sealed class CategorySidePanel : SUIPanel
     {
         new PlayerAbility(),
         new ItemSettings(),
-        new ModItemSettings(),
         new PlantSettings(),
         new NpcSettings(),
         new EnemySettings(),
@@ -20,6 +19,7 @@ public sealed class CategorySidePanel : SUIPanel
         new ModFeatures(),
         new VisualAndInterface(),
         new Minimap(),
+        new ModItemSettings(),
     };
 
     internal static readonly Dictionary<string, CategoryCard> Cards = new();
