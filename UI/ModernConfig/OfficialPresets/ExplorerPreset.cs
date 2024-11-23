@@ -7,7 +7,8 @@ namespace ImproveGame.UI.ModernConfig.OfficialPresets;
 
 public class ExplorerPreset : OfficialPreset
 {
-    public override void ApplyPreset(ImproveConfigs modConfig, UIConfigs uiConfig)
+    public override void ApplyPreset(ImproveConfigs modConfig, UIConfigs uiConfig,
+        AvailableModItemConfigs modItemConfig)
     {
         modConfig.SuperVoidVault = false;
         modConfig.SmartVoidVault = false;

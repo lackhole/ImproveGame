@@ -766,7 +766,7 @@ ImproveConfigs: {
 
 AvailableModItemConfigs: {
 	DisplayName: 模组物品加载配置
-	Available: 可以获取
+	Available: "Obtainable "
 
 	AvailableMagickWand: {
 		Label: "[centeritem:ImproveGame/MagickWand] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.MagickWand.DisplayName}"
@@ -784,7 +784,7 @@ AvailableModItemConfigs: {
 	}
 
 	AvailableWallPlace: {
-		Label: "[centeritem:ImproveGame/WallPlace] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.WallPlace.DisplayName}"
+		Label: "[centeritem:ImproveGame/WallPlace] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.WallPlace.PureName}"
 		Tooltip: ""
 	}
 

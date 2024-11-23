@@ -25,29 +25,30 @@ Presets: {
 	Label: Presets
 	Tooltip: There are presets by Quality of Terraria for batch configuration. You may also create your own presets
 	PlayerPresetTooltip: A player-defined preset
+	DefaultPresetName: My Preset
 
 	ExplorerPreset: {
 		Label: "[centeritem:GravityGlobe] Explorer"
 		Tooltip: Best for vanilla-like playthroughs. Explore while facing typical challenges with moderate assistance. Might work well with mods like Thorium or Spirit
-		Link: TODO Add Wiki page
+		Link: https://github.com/ForOne-Club/ImproveGame/wiki/Config-Preset#explorer
 	}
 
 	WarriorPreset: {
 		Label: "[centeritem:EmpressBlade] Fighter"
 		Tooltip: Stop digging and start fighting! Skip most grindings. Might work well with mods like Calamity or Fargo's Souls
-		Link: TODO Add Wiki page
+		Link: https://github.com/ForOne-Club/ImproveGame/wiki/Config-Preset#fighter
 	}
 
 	VanillaPreset: {
 		Label: "[centeritem:MusicBoxCredits] Vanilla Enjoyer"
 		Tooltip: Just like vanilla. Play with few QoL features
-		Link: TODO Add Wiki page
+		Link: https://github.com/ForOne-Club/ImproveGame/wiki/Config-Preset#vanilla-enjoyer
 	}
 
 	AddPreset: {
 		Label: "[centeritem:ImproveGame/AddIconDummy] Save as Preset"
 		Tooltip: Saves the current config as a preset
-		Link: TODO Add Wiki page
+		Link: https://github.com/ForOne-Club/ImproveGame/wiki/Config-Preset#adding-a-preset
 	}
 
 	OpenFolder: {

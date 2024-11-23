@@ -6,7 +6,8 @@ namespace ImproveGame.UI.ModernConfig.OfficialPresets;
 
 public class WarriorPreset : OfficialPreset
 {
-    public override void ApplyPreset(ImproveConfigs modConfig, UIConfigs uiConfig)
+    public override void ApplyPreset(ImproveConfigs modConfig, UIConfigs uiConfig,
+        AvailableModItemConfigs modItemConfig)
     {
         modConfig.SuperVoidVault = true;
         modConfig.SmartVoidVault = true;
