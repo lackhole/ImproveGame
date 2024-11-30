@@ -50,6 +50,7 @@ namespace ImproveGame.Common.Configs
             [DefaultValue(true)] public bool BrustRangeFixed;
             [DefaultValue(true)] public bool BrustDestroyTile;
             [DefaultValue(true)] public bool BrustDestroyWall;
+            [DefaultValue(false)] public bool BrustDestroyChest;
             public bool LiquidAbsorption;
             public short LiquidSelectedType;
 
@@ -104,6 +105,7 @@ namespace ImproveGame.Common.Configs
             WandMode.BrustRangeFixed = WandSystem.FixedMode;
             WandMode.BrustDestroyTile = WandSystem.TileMode;
             WandMode.BrustDestroyWall = WandSystem.WallMode;
+            WandMode.BrustDestroyChest = WandSystem.ChestMode;
             WandMode.LiquidAbsorption = WandSystem.AbsorptionMode;
             WandMode.LiquidSelectedType = WandSystem.LiquidMode;
             WandMode.PaintMode = WandSystem.PaintWandMode;
@@ -161,6 +163,7 @@ namespace ImproveGame.Common.Configs
                 WandSystem.FixedMode = WandMode.BrustRangeFixed;
                 WandSystem.TileMode = WandMode.BrustDestroyTile;
                 WandSystem.WallMode = WandMode.BrustDestroyWall;
+                WandSystem.ChestMode = WandMode.BrustDestroyChest;
                 WandSystem.AbsorptionMode = WandMode.LiquidAbsorption;
                 WandSystem.LiquidMode = WandMode.LiquidSelectedType;
                 WandSystem.PaintWandMode = WandMode.PaintMode;

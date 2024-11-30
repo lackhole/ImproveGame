@@ -62,21 +62,9 @@ public class ShellShipInBottle_Shimmered : ModItem
             return null;
         }
 
-        QuickShimmerSystem.Unlocked = true;
+        QuickShimmerUnlockPacket.Unlock();
         WorldGen.BroadcastText(NetworkText.FromKey("Mods.ImproveGame.UI.QuickShimmer.Unlocked"), Color.Pink);
         return true;
-    }
-
-    public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame,
-        Color drawColor, Color itemColor, Vector2 origin, float scale)
-    {
-        base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
-    }
-
-    public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation,
-        float scale, int whoAmI)
-    {
-        base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
     }
 }
 
@@ -113,5 +101,25 @@ public class QuickShimmerSystem : ModSystem
     public override void ClearWorld()
     {
         Unlocked = false;
+    }
+}
+
+public class QuickShimmerUnlockPacket : NetModule
+{
+    /// <summary>
+    /// 这个包只要一发，就会解锁快捷微光功能，所以“解锁”就是发个包罢了
+    /// </summary>
+    public static void Unlock()
+    {
+        var module = NetModuleLoader.Get<QuickShimmerUnlockPacket>();
+        module.Send(runLocally: true);
+    }
+
+    public override void Receive()
+    {
+        QuickShimmerSystem.Unlocked = true;
+
+        if (Main.netMode is NetmodeID.Server)
+            Send(-1, Sender);
     }
 }

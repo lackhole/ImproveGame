@@ -42,25 +42,26 @@ namespace ImproveGame.Content.Items
             if (TileMode && tile.HasTile)
             {
                 TryKillTile(i, j, player);
-                CheckChestDestroy(i, j);
+                CheckChestDestroy(player, i, j);
             }
 
             return true;
         }
 
-        private bool CheckChestDestroy(int i, int j)
+        private bool CheckChestDestroy(Player player, int i, int j)
         {
             var tile = Main.tile[i, j];
             // 先一步if判断再下一步，不要每次都FindChestByGuessing，性能损耗太大
             if (!TileID.Sets.IsAContainer[tile.TileType] || !ChestMode)
                 return false;
 
-            int chestIndex = Chest.FindChestByGuessing(i, j);
+            var origin = GetTileOrigin(i, j);
+            int chestIndex = Chest.FindChest(origin.X, origin.Y);
             if (chestIndex == -1 || !Main.chest.IndexInRange(chestIndex))
                 return false;
 
             var chest = Main.chest[chestIndex];
-            if (Chest.IsLocked(i, j) || chest?.item is null)
+            if (Chest.IsLocked(chest.x, chest.y) || chest?.item is null)
             {
                 return false;
             }
@@ -69,6 +70,8 @@ namespace ImproveGame.Content.Items
             for (int k = 0; k < chest.item.Length; k++)
                 if (!chest.item[k].IsAir)
                     SpawnTileBreakItem(i, j, ref chest.item[k], "ChestBrokenFromBlastsWand");
+            // 爆箱子
+            TryKillTile(i, j, player);
             return true;
         }
 
@@ -158,7 +161,11 @@ namespace ImproveGame.Content.Items
                     }
 
                     if (WandSystem.TileMode && Main.tile[x, y].HasTile)
+                    {
                         TryKillTile(x, y, player);
+                        ChestMode = WandSystem.ChestMode;
+                        CheckChestDestroy(player, x, y);
+                    }
 
                     if (UIConfigs.Instance.ExplosionEffect)
                         BongBong(new Vector2(x, y) * 16f, 16, 16);
