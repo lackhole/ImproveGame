@@ -929,20 +929,7 @@ namespace ImproveGame.Content.Tiles
                     SpawnDropItem(ref fish[k]);
         }
 
-        private void SpawnDropItem(ref Item item)
-        {
-            var position = Position.ToWorldCoordinates();
-            int i = Item.NewItem(new EntitySource_Misc("FishingMachine"), (int)position.X, (int)position.Y, 32, 32,
-                item.type);
-            item.position = Main.item[i].position;
-            Main.item[i] = item;
-            var drop = Main.item[i];
-            item = new Item();
-            drop.velocity.Y = -2f;
-            drop.velocity.X = Main.rand.NextFloat(-4f, 4f);
-            drop.favorited = false;
-            drop.newAndShiny = false;
-        }
+        private void SpawnDropItem(ref Item item) => SpawnTileBreakItem(Position, ref item, "FishingMachine");
 
         // 返回的是物品禁用状态，true就是没禁用，false就是禁用了
         public bool ToggleItem(Item item)

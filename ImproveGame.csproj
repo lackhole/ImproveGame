@@ -26,4 +26,7 @@
 			<Visible>false</Visible>
 		</None>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Assets\Images\UI\Brust\" />
+	</ItemGroup>
 </Project>
