@@ -71,7 +71,7 @@ namespace ImproveGame.UI
                 UseKey = true,
                 TextOrKey = "Mods.ImproveGame.UI.DummyConfiguration.Title",
                 TextAlign = new Vector2(0f, 0.5f),
-                TextScale = 0.45f,
+                TextScale = 0.5f,
                 Height = StyleDimension.Fill,
                 Width = StyleDimension.Fill,
                 DragIgnore = true,
@@ -144,15 +144,14 @@ namespace ImproveGame.UI
                 fPanel.BgColor = Color.Black * .125f;
                 var fieldName = new SUIText
                 {
-                    IsLarge = true,
                     UseKey = true,
                     TextOrKey = $"Mods.ImproveGame.UI.DummyConfiguration.fieldName.{fInfo.Name}",
                     TextAlign = new Vector2(0f, 0f),
-                    TextScale = 0.35f,
+                    TextScale = 1f,
                     Height = new StyleDimension(40, 0),
                     Width = StyleDimension.Fill,
                     DragIgnore = true,
-                    Left = new StyleDimension(16f, 0f)
+                    Left = new StyleDimension(10f, 0f)
 
                 };
                 fieldName.JoinParent(fPanel);

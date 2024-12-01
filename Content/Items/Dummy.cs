@@ -46,7 +46,19 @@ public class Dummy : ModItem
         else
         {
             //for(int n =0;n < 50;n++)
-            SyncDummyModule.Get(Main.MouseWorld + Main.rand.NextVector2Circular(64,64), player.whoAmI, DummyNPC.LocalConfig).Send(runLocally: true);
+            // 确保不要完全和已有的重叠
+            var spawnPosition = Main.MouseWorld;
+            for (var i = 0; i < Main.npc.Length; i++)
+            {
+                var npc = Main.npc[i];
+                if (!npc.active || npc.ModNPC is not DummyNPC dummy || npc.Center != spawnPosition)
+                    continue;
+
+                spawnPosition += new Vector2(4);
+                // 重新搜，因为可能会和index位于它之前的重叠
+                i = -1;
+            }
+            SyncDummyModule.Get(spawnPosition, player.whoAmI, DummyNPC.LocalConfig).Send(runLocally: true);
         }
 
         return true;

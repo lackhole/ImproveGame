@@ -397,7 +397,7 @@ OpenBag: {
 QuickShimmer: {
 	Title: Quick Shimmer
 	TipText: Items transmuted are staged here
-	Open: Transmute All
+	Open: Transmute
 	Stop: Stop
 	EmptyText: Shimmer Transmuting
 	NotFullyDisplayed: "{0} other items are currently hidden"
