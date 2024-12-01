@@ -254,7 +254,9 @@ Dummy: {
 		Chat commands:
 		 /dummy info → view dummy stats
 		 /help dummy → get dummy usage
-		(Doesn't work in multiplayer.)
+		 Left click to spawn Dummy on mouse
+		 Right click to remove the chosen dummy
+		 Middle click to show configuration panel
 		'''
 	CannotUse: This item currently does not work in multiplayer.
 }
