@@ -177,36 +177,34 @@ namespace ImproveGame.UI
                 else if (fType == typeof(int))
                 {
                     SUISlider<int> sUISlider = new SUISlider<int>(
-                        () => (int)fInfo.GetValue(DummyNPC.LocalConfig),
-                        obj =>
-                        {
-                            fInfo.SetValueDirect(__makeref(DummyNPC.LocalConfig), obj);
-                            SyncDummyModule.Get(null, Main.myPlayer, DummyNPC.LocalConfig).Send(runLocally: true);
-                        }, "",
-                        fInfo.Name switch 
-                        {
-                            "LifeMax"=>1,
-                            "AIStyle" => -1,
-                            "Defense" or "Damage" or _ =>0,
-                        },
-                        fInfo.Name switch
-                        {
-                            "LifeMax" => 400000,
-                            "AIStyle" => 123,
-                            "Defense" or "Damage" or _ => 1000,
-                        }, fInfo.Name switch
-                        {
-                            "LifeMax" => 200000,
-                            "AIStyle" => -1,
-                            "Defense" or "Damage" or _ => 0,
-                        }
-                        )
+                    () => (int)fInfo.GetValue(DummyNPC.LocalConfig),
+                    obj =>
+                    {
+                        fInfo.SetValueDirect(__makeref(DummyNPC.LocalConfig), obj);
+                        SyncDummyModule.Get(null, Main.myPlayer, DummyNPC.LocalConfig).Send(runLocally: true);
+                    }, "",
+                    fInfo.Name == "LifeMax" ? 1 : 0, fInfo.Name == "LifeMax" ? 400000 : 1000, fInfo.Name == "LifeMax" ? 200000 : 0
+                    )
                     {
                         HAlign = 1f,
                         Width = new StyleDimension(180, 0),
                         Height = StyleDimension.Fill
                     };
                     sUISlider.JoinParent(fPanel);
+                }
+                else if (fType == typeof(DummyConfig.AIType))
+                {
+                    SUIDropdownList<DummyConfig.AIType> list = new(() => (DummyConfig.AIType)fInfo.GetValue(DummyNPC.LocalConfig), obj =>
+                    {
+                        fInfo.SetValueDirect(__makeref(DummyNPC.LocalConfig), obj);
+                        SyncDummyModule.Get(null, Main.myPlayer, DummyNPC.LocalConfig).Send(runLocally: true);
+                    }, "")
+                    {
+                        HAlign = 1f,
+                        Width = new StyleDimension(180, 0),
+                        Height = StyleDimension.Fill
+                    };
+                    list.JoinParent(fPanel);
 
                 }
                 else

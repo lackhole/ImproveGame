@@ -163,7 +163,7 @@ public class DummyNPC : ModNPC
         npc.SetBaseValues(56, 74, Config.LifeMax, false,
             value: 0, damage: Config.Damage, defense: Config.Defense);
         npc.HitSound = SoundID.NPCHit1;
-        npc.aiStyle = Config.AIStyle;
+        //npc.aiStyle = (int)Config.AIStyle;
         if (ModContent.TryFind("FargowiltasSouls", "ClippedWingsBuff", out ModBuff buff)) 
         {
             npc.buffImmune[buff.Type] = true;
