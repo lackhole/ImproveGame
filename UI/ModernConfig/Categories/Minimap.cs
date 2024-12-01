@@ -17,6 +17,8 @@ public sealed class Minimap : Category
         panel.AddValueSlider(uiConfig, nameof(uiConfig.MarkPyramid));
         panel.AddValueSlider(uiConfig, nameof(uiConfig.MarkPlantera));
         panel.AddValueSlider(uiConfig, nameof(uiConfig.MarkEnchantedSword));
+        panel.AddValueSlider(uiConfig, nameof(uiConfig.MarkMarbleCave));
+        panel.AddValueSlider(uiConfig, nameof(uiConfig.MarkGraniteCave));
         panel.AddValueSlider(uiConfig, nameof(uiConfig.MarkEmptyAutofisher));
     }
 }

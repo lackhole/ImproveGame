@@ -980,6 +980,16 @@ UIConfigs: {
 		Tooltip: 在地图上显示的已标记的{$ItemName.EnchantedSword}的图标的大小，设为0以隐藏图标
 	}
 
+	MarkMarbleCave: {
+		Label: "[centeritem:ImproveGame/MarbleCaveGlobe] 大理石洞图标大小"
+		Tooltip: 在地图上显示的已标记的大理石洞的图标的大小，设为0以隐藏图标
+	}
+
+	MarkGraniteCave: {
+		Label: "[centeritem:ImproveGame/GraniteCaveGlobe] 花岗岩洞图标大小"
+		Tooltip: 在地图上显示的已标记的花岗岩洞的图标的大小，设为0以隐藏图标
+	}
+
 	MarkEmptyAutofisher: {
 		Label: "[centeritem:ImproveGame/Autofisher] 缺少鱼饵的钓鱼机图标大小"
 		Tooltip: 在地图上显示的所有缺少鱼饵的钓鱼机的图标的大小，设为0以隐藏图标
