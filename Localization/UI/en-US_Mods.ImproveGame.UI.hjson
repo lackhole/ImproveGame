@@ -411,7 +411,24 @@ QuickShimmer: {
 		'''
 }
 
-DummyConfiguration.Title: Dummy Configuration
+DummyConfiguration: {
+	Title: Dummy Configuration
+
+	fieldName: {
+		LockHP: Lock Life
+		LifeMax: Maximum Life
+		Defense: Defense
+		Damage: Contact Damage
+		ShowBox: Show Hitbox
+		ShowDamageData: Show Damage Stats
+		ShowNameOnHover: Show NPC Name
+		Immortal: Not count as Target
+		NoGravity: Not Affected By Gravity
+		NoTileCollide: Disable Tile Collision
+		KnockBackResist: Knockback coefficient
+		AIStyle: AI Style
+	}
+}
 
 Autofisher: {
 	Accessory: Accessories for fishing

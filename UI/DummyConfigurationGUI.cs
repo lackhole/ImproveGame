@@ -146,7 +146,7 @@ namespace ImproveGame.UI
                 {
                     IsLarge = true,
                     UseKey = true,
-                    TextOrKey = $"Mods.ImproveGame.NPC.fieldName.{fInfo.Name}",
+                    TextOrKey = $"Mods.ImproveGame.UI.DummyConfiguration.fieldName.{fInfo.Name}",
                     TextAlign = new Vector2(0f, 0f),
                     TextScale = 0.35f,
                     Height = new StyleDimension(40, 0),
@@ -183,7 +183,23 @@ namespace ImproveGame.UI
                             fInfo.SetValueDirect(__makeref(DummyNPC.LocalConfig), obj);
                             SyncDummyModule.Get(null, Main.myPlayer, DummyNPC.LocalConfig).Send(runLocally: true);
                         }, "",
-                        fInfo.Name == "LifeMax" ? 1 : 0, fInfo.Name == "LifeMax" ? 400000 : 1000, fInfo.Name == "LifeMax" ? 200000 : 0
+                        fInfo.Name switch 
+                        {
+                            "LifeMax"=>1,
+                            "AIStyle" => -1,
+                            "Defense" or "Damage" or _ =>0,
+                        },
+                        fInfo.Name switch
+                        {
+                            "LifeMax" => 400000,
+                            "AIStyle" => 123,
+                            "Defense" or "Damage" or _ => 1000,
+                        }, fInfo.Name switch
+                        {
+                            "LifeMax" => 200000,
+                            "AIStyle" => -1,
+                            "Defense" or "Damage" or _ => 0,
+                        }
                         )
                     {
                         HAlign = 1f,
@@ -234,7 +250,13 @@ namespace ImproveGame.UI
             SoundEngine.PlaySound(SoundID.MenuOpen);
             Enabled = true;
             StartTimer.Open();
-            MainPanel.SetPosPixels(Main.MouseScreen.X, Main.MouseScreen.Y);
+
+            var vec = Main.MouseScreen;
+            vec /= Main.UIScale;
+            float zoom = Main.GameZoomTarget * Main.ForcedMinimumZoom;
+            vec = (vec - Main.ScreenSize.ToVector2() * .5f) * zoom + Main.ScreenSize.ToVector2() * .5f;
+
+            MainPanel.SetPosPixels(vec.X, vec.Y);
             MainPanel.Recalculate();
         }
 

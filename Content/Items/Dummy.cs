@@ -34,6 +34,7 @@ public class Dummy : ModItem
         {
             foreach (var npc in Main.npc)
             {
+
                 if (npc.active && npc.ModNPC is DummyNPC dummy && dummy.Owner == player.whoAmI && npc.HasPlayerTarget && npc.target == player.whoAmI && npc.Hitbox.Contains(Main.MouseWorld.ToPoint()))
                 {
                     //dummy.Disappear();
@@ -44,16 +45,21 @@ public class Dummy : ModItem
         }
         else
         {
-            SyncDummyModule.Get(Main.MouseWorld, player.whoAmI, DummyNPC.LocalConfig).Send(runLocally: true);
+            //for(int n =0;n < 50;n++)
+            SyncDummyModule.Get(Main.MouseWorld + Main.rand.NextVector2Circular(64,64), player.whoAmI, DummyNPC.LocalConfig).Send(runLocally: true);
         }
 
         return true;
     }
     public override void HoldStyle(Player player, Rectangle heldItemFrame)
     {
-        if (PlayerInput.MouseInfo.MiddleButton == ButtonState.Pressed && !DummyConfigurationUI.Instance.Enabled) 
+        if (PlayerInput.MouseInfo.MiddleButton == ButtonState.Pressed && player.itemAnimation == 0)
         {
-            DummyConfigurationUI.Instance.Open();
+            if (!DummyConfigurationUI.Instance.Enabled)
+                DummyConfigurationUI.Instance.Open();
+            else
+                DummyConfigurationUI.Instance.Close();
+            player.itemAnimation = player.itemAnimationMax = 30;
         }
         base.HoldStyle(player, heldItemFrame);
     }

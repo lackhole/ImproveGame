@@ -104,6 +104,7 @@ public class SyncDummyModule : NetModule
                 {
                     dummy.Config = config;
                     dummy.SetDefaults();
+                    n.life = n.lifeMax;
                 }
             }
         }
@@ -111,10 +112,14 @@ public class SyncDummyModule : NetModule
         {
             NPC npc = NPC.NewNPCDirect(null, 0, 0, ModContent.NPCType<DummyNPC>(), target: owner);
             npc.Center = position.Value;
+            //var tileCoord = position.Value.ToTileCoordinates();
+            //npc.ai[0] = tileCoord.X;
+            //npc.ai[1] = tileCoord.Y;
             var dummy = npc.ModNPC as DummyNPC;
             dummy.Owner = owner;
             dummy.Config = config;
             dummy.SetDefaults();
+            npc.life = npc.lifeMax = config.LifeMax;
             for (int i = 0; i < 20; i++)
             {
                 int dust = Dust.NewDust(npc.position, npc.width, npc.height, DustID.Torch, Scale: 2f);
@@ -155,16 +160,28 @@ public class DummyNPC : ModNPC
     public override void SetDefaults()
     {
         NPC npc = NPC;
-        //Config = LocalConfig;
         npc.SetBaseValues(56, 74, Config.LifeMax, false,
             value: 0, damage: Config.Damage, defense: Config.Defense);
         npc.HitSound = SoundID.NPCHit1;
-        npc.aiStyle = -1;
-        //npc.life = npc.lifeMax = Config.LifeMax;
+        npc.aiStyle = Config.AIStyle;
+        if (ModContent.TryFind("FargowiltasSouls", "ClippedWingsBuff", out ModBuff buff)) 
+        {
+            npc.buffImmune[buff.Type] = true;
+        }
         DummyDPS.Parent = this;
     }
-
-    private float HitScale { get => NPC.ai[0]; set => NPC.ai[0] = value; }
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(HitScale);
+        base.SendExtraAI(writer);
+    }
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        HitScale = reader.ReadSingle();
+        base.ReceiveExtraAI(reader);
+    }
+    //private float HitScale { get => NPC.ai[0]; set => NPC.ai[0] = value; }
+    private float HitScale { get; set; }
 
     public void Reset()
     {

@@ -26,6 +26,7 @@ public struct DummyConfig
     public bool NoTileCollide = true;
     [Annotate]
     public float KnockBackResist = 0f;
-
+    [Annotate]
+    public int AIStyle = -1;
     public DummyConfig() { }
 }

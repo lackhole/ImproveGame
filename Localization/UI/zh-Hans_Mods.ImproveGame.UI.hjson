@@ -409,7 +409,24 @@ QuickShimmer: {
 		'''
 }
 
-DummyConfiguration.Title: 假人配置
+DummyConfiguration: {
+	Title: 假人配置
+
+	fieldName: {
+		LockHP: 锁定生命值
+		LifeMax: 最大生命值
+		Defense: 防御
+		Damage: 触碰伤害
+		ShowBox: 显示碰撞范围
+		ShowDamageData: 显示伤害数据
+		ShowNameOnHover: 显示 NPC 名称
+		Immortal: 不被视作目标
+		NoGravity: 不受重力影响
+		NoTileCollide: 关闭物块碰撞
+		KnockBackResist: 击退系数
+		AIStyle: AI类型
+	}
+}
 
 Autofisher: {
 	Accessory: 钓鱼饰品
