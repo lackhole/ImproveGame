@@ -623,15 +623,15 @@ ImproveConfigs: {
 
 	ModifyNPCHappiness: {
 		Label: "[centeritem:LifeCrystal] Fixed NPC Happiness"
-		Tooltip: ""
+		Tooltip: "Fix NPC Price Modifier ('happiness') to a set value"
 	}
 
 	NPCHappiness: {
-		Label: "[centeritem:LifeCrystal] NPC Happiness"
+		Label: "[centeritem:LifeCrystal] NPC Price Modifier (%)"
 		Tooltip:
 			'''
-			The smaller the value set, the cheaper it is to buy items from NPCs,
-			and the higher the price of items sold to NPCs.
+			The smaller the value set, the 'happier' NPCs are, the cheaper it is to buy items from NPCs, and the higher the price of items sold to NPCs.
+			NPCs always sell pylon when the value is at or below 90
 			'''
 	}
 

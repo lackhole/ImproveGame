@@ -634,12 +634,16 @@ ImproveConfigs: {
 
 	ModifyNPCHappiness: {
 		Label: "[centeritem:LifeCrystal] 固定 NPC 快乐度"
-		// Tooltip: ""
+		Tooltip: "将NPC价格修正系数（即“快乐度”）固定为特定值"
 	}
 
 	NPCHappiness: {
-		Label: "[centeritem:LifeCrystal] NPC 快乐度"
-		Tooltip: 设置的值越小从 NPC 购买物品价格越便宜，卖给 NPC 物品价格越高
+		Label: "[centeritem:LifeCrystal] NPC 价格修正系数(%)"
+		Tooltip:
+			'''
+			设置的值越小，NPC越快乐，从NPC购买物品价格越便宜，卖给NPC物品价格越高
+			该值≤90时，NPC会出售晶塔
+			'''
 	}
 
 	NoSleepRestrictions: {
