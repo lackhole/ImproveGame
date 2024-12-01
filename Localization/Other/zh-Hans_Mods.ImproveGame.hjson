@@ -22,34 +22,32 @@ MoonPhases: {
 }
 
 ItemDropRule: {
-	Drop: 时掉落
+	DropWhenEnabled: 开启了“{0}”时掉落
+	DropCoinOne: “敌人钱币掉落倍率”拉满且开启了“{$Mods.ImproveGame.Conditions.AvailableCoinOne}”时掉落
 	WandDrop: 玩家拥有当前物品时不会再次掉落
-	// SpaceWandDrop: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.SpaceWand.DisplayName}{$Mods.ImproveGame.ItemDropRule.Drop}"
-	// WallPlaceDrop: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.WallPlace.DisplayName}{$Mods.ImproveGame.ItemDropRule.Drop}"
-	CoinOneDrop: 敌人钱币掉落倍率拉满且{$Mods.ImproveGame.Configs.ModItemLoadConfigs.Available} [centeritem:ImproveGame/CoinOne]  {$Mods.ImproveGame.Items.CoinOne.DisplayName} {$Mods.ImproveGame.ItemDropRule.Drop}
 }
 
 Conditions: {
-	Not: 不
-	// AvailableAutofisher: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.Autofisher.DisplayName}"
-	// AvailableActuationRodMkII: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.ActuationRodMkII.DisplayName}"
-	// AvailableBaitSupplier: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.BaitSupplier.DisplayName}"
-	// AvailableExtremeStorage: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.ExtremeStorage.DisplayName}"
-	// AvailableLiquidWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.LiquidWand.DisplayName}"
-	// NotAvailableLiquidWand: "{$Mods.ImproveGame.Conditions.Not}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.LiquidWand.DisplayName}"
-	// AvailableLiquidWandAdvanced: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.LiquidWandAdvanced.DisplayName}"
-	// AvailableMagickWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.MagickWand.DisplayName}"
-	// NotAvailableMagickWand: "{$Mods.ImproveGame.Conditions.Not}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.MagickWand.DisplayName}"
-	// AvailableStarburstWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.StarburstWand.DisplayName}"
-	// AvailablePotionBag: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.PotionBag.DisplayName}"
-	// AvailableSpaceWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.SpaceWand.DisplayName}"
-	// AvailableWallPlace: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.WallPlace.PureName}"
-	// AvailablePaintWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.PaintWand.DisplayName}"
-	// AvailableBannerChest: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.BannerChest.DisplayName}"
-	// AvailableConstructWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.ConstructWand.DisplayName}"
-	// AvailableCreateWand: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.CreateWand.DisplayName}"
-	// AvailableDetectorDrone: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.DetectorDrone.DisplayName}"
-	// AvailableMoveChest: "{$Mods.ImproveGame.Configs.AvailableModItemConfigs.AvailableMoveChest}{$Mods.ImproveGame.Items.MoveChest.DisplayName}"
+	// AvailableAutofisher: "{$Mods.ImproveGame.Items.Autofisher.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableActuationRodMkII: "{$Mods.ImproveGame.Items.ActuationRodMkII.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableBaitSupplier: "{$Mods.ImproveGame.Items.BaitSupplier.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableExtremeStorage: "{$Mods.ImproveGame.Items.ExtremeStorage.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableLiquidWand: "{$Mods.ImproveGame.Items.LiquidWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// NotAvailableLiquidWand: "{$Mods.ImproveGame.Items.LiquidWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Unavailable}"
+	// AvailableLiquidWandAdvanced: "{$Mods.ImproveGame.Items.LiquidWandAdvanced.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableMagickWand: "{$Mods.ImproveGame.Items.MagickWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// NotAvailableMagickWand: "{$Mods.ImproveGame.Items.MagickWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Unavailable}"
+	// AvailableStarburstWand: "{$Mods.ImproveGame.Items.StarburstWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailablePotionBag: "{$Mods.ImproveGame.Items.PotionBag.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableSpaceWand: "{$Mods.ImproveGame.Items.SpaceWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableWallPlace: "{$Mods.ImproveGame.Items.WallPlace.PureName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailablePaintWand: "{$Mods.ImproveGame.Items.PaintWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableBannerChest: "{$Mods.ImproveGame.Items.BannerChest.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableConstructWand: "{$Mods.ImproveGame.Items.ConstructWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableCreateWand: "{$Mods.ImproveGame.Items.CreateWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableDetectorDrone: "{$Mods.ImproveGame.Items.DetectorDrone.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableMoveChest: "{$Mods.ImproveGame.Items.MoveChest.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	// AvailableCoinOne: "{$Mods.ImproveGame.Items.CoinOne.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 }
 
 CombatText: {

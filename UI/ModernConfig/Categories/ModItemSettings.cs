@@ -4,7 +4,7 @@ namespace ImproveGame.UI.ModernConfig.Categories;
 
 public sealed class ModItemSettings : Category
 {
-    public override int ItemIconId => ModContent.ItemType<CoinOne>();
+    public override int ItemIconId => ModContent.ItemType<Content.Items.Placeable.ExtremeStorage>();
 
     public override void AddOptions(ConfigOptionsPanel panel)
     {

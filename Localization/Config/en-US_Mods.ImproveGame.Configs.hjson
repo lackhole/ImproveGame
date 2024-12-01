@@ -419,11 +419,11 @@ ImproveConfigs: {
 	}
 
 	ICanSeeForeverAllBag: {
-		Label: "[centeritem:GoodieBag] 查看摸彩袋可查看全部掉落规则"
+		Label: "[centeritem:GoodieBag] Grab Bag Details Show Hidden Drop Rules"
 		Tooltip:
 			'''
-			当关闭时，会遵照掉落规则里的设置来决定是否显示
-			当开启时，会显示所有掉落规则
+			When disabled, the drop rule code determines whether to hide.
+			When enabled, hidden rules are always displayed.
 			'''
 	}
 
@@ -623,7 +623,7 @@ ImproveConfigs: {
 
 	ModifyNPCHappiness: {
 		Label: "[centeritem:LifeCrystal] Fixed NPC Happiness"
-		Tooltip: "Fix NPC Price Modifier ('happiness') to a set value"
+		Tooltip: Fix NPC Price Modifier ('happiness') to a set value
 	}
 
 	NPCHappiness: {
@@ -765,96 +765,97 @@ ImproveConfigs: {
 }
 
 AvailableModItemConfigs: {
-	DisplayName: 模组物品加载配置
-	Available: "Obtainable "
+	DisplayName: Mod Item Config
+	Available: " Obtainable"
+	Unavailable: " Unobtainable"
 
 	AvailableMagickWand: {
-		Label: "[centeritem:ImproveGame/MagickWand] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.MagickWand.DisplayName}"
+		Label: "[centeritem:ImproveGame/MagickWand] {$Mods.ImproveGame.Items.MagickWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableSpaceWand: {
-		Label: "[centeritem:ImproveGame/SpaceWand] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.SpaceWand.DisplayName}"
+		Label: "[centeritem:ImproveGame/SpaceWand] {$Mods.ImproveGame.Items.SpaceWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableStarburstWand: {
-		Label: "[centeritem:ImproveGame/StarburstWand] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.StarburstWand.DisplayName}"
+		Label: "[centeritem:ImproveGame/StarburstWand] {$Mods.ImproveGame.Items.StarburstWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableWallPlace: {
-		Label: "[centeritem:ImproveGame/WallPlace] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.WallPlace.PureName}"
+		Label: "[centeritem:ImproveGame/WallPlace] {$Mods.ImproveGame.Items.WallPlace.PureName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableCreateWand: {
-		Label: "[centeritem:ImproveGame/CreateWand] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.CreateWand.DisplayName}"
+		Label: "[centeritem:ImproveGame/CreateWand] {$Mods.ImproveGame.Items.CreateWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableLiquidWand: {
-		Label: "[centeritem:ImproveGame/LiquidWand] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.LiquidWand.DisplayName}"
+		Label: "[centeritem:ImproveGame/LiquidWand] {$Mods.ImproveGame.Items.LiquidWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailablePotionBag: {
-		Label: "[centeritem:ImproveGame/PotionBag] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.PotionBag.DisplayName}"
+		Label: "[centeritem:ImproveGame/PotionBag] {$Mods.ImproveGame.Items.PotionBag.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableBannerChest: {
-		Label: "[centeritem:ImproveGame/BannerChest] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.BannerChest.DisplayName}"
+		Label: "[centeritem:ImproveGame/BannerChest] {$Mods.ImproveGame.Items.BannerChest.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableAutofisher: {
-		Label: "[centeritem:ImproveGame/Autofisher] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.Autofisher.DisplayName}"
+		Label: "[centeritem:ImproveGame/Autofisher] {$Mods.ImproveGame.Items.Autofisher.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailablePaintWand: {
-		Label: "[centeritem:ImproveGame/PaintWand] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.PaintWand.DisplayName}"
+		Label: "[centeritem:ImproveGame/PaintWand] {$Mods.ImproveGame.Items.PaintWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableConstructWand: {
-		Label: "[centeritem:ImproveGame/ConstructWand] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.ConstructWand.DisplayName}"
+		Label: "[centeritem:ImproveGame/ConstructWand] {$Mods.ImproveGame.Items.ConstructWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableMoveChest: {
-		Label: "[centeritem:ImproveGame/MoveChest] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.MoveChest.DisplayName}"
+		Label: "[centeritem:ImproveGame/MoveChest] {$Mods.ImproveGame.Items.MoveChest.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableCoinOne: {
-		Label: "[centeritem:ImproveGame/CoinOne] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.CoinOne.DisplayName}"
+		Label: "[centeritem:ImproveGame/CoinOne] {$Mods.ImproveGame.Items.CoinOne.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableExtremeStorage: {
-		Label: "[centeritem:ImproveGame/ExtremeStorage] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.ExtremeStorage.DisplayName}"
+		Label: "[centeritem:ImproveGame/ExtremeStorage] {$Mods.ImproveGame.Items.ExtremeStorage.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableDetectorDrone: {
-		Label: "[centeritem:ImproveGame/DetectorDrone] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.DetectorDrone.DisplayName}"
+		Label: "[centeritem:ImproveGame/DetectorDrone] {$Mods.ImproveGame.Items.DetectorDrone.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableBaitSupplier: {
-		Label: "[centeritem:ImproveGame/BaitSupplier] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.BaitSupplier.DisplayName}"
+		Label: "[centeritem:ImproveGame/BaitSupplier] {$Mods.ImproveGame.Items.BaitSupplier.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableLiquidWandAdvanced: {
-		Label: "[centeritem:ImproveGame/LiquidWandAdvanced] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.LiquidWandAdvanced.DisplayName}"
+		Label: "[centeritem:ImproveGame/LiquidWandAdvanced] {$Mods.ImproveGame.Items.LiquidWandAdvanced.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 
 	AvailableActuationRodMkII: {
-		Label: "[centeritem:ImproveGame/ActuationRodMkII] {$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}{$Mods.ImproveGame.Items.ActuationRodMkII.DisplayName}"
+		Label: "[centeritem:ImproveGame/ActuationRodMkII] {$Mods.ImproveGame.Items.ActuationRodMkII.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 		Tooltip: ""
 	}
 }
@@ -1113,11 +1114,7 @@ DisableNonPlayerBombsExplosionsType: {
 
 	FTW: {
 		Label: For the Worthy Only
-		Tooltip:
-			'''
-			Only in For the Worthy worlds, bombs produced by pots,
-			shaking trees or the Mech Prime do not destroy tiles
-			'''
+		Tooltip: Only in For the Worthy worlds, bombs produced by pots, shaking trees or the Mech Prime do not destroy tiles
 	}
 
 	FTWAndExplosives: {

@@ -108,8 +108,8 @@ ItemSettings: {
 }
 
 ModItemSettings: {
-	Label: 模组物品
-	Tooltip: 可在此处修改一些更好的体验新增物品的设置，并且还可以调整部分物品是否可以获取。
+	Label: Mod Items
+	Tooltip: Here you can modify some of the settings for Quality of Terraria items, and adjust whether some items are obtainable.
 }
 
 VisualAndInterface: {

@@ -88,7 +88,7 @@ BannerChest: {
 	Tooltip:
 		'''
 		Stores your banners
-		[c/0099ff:<left>] while banner a potion to deposit
+		[c/0099ff:<left>] while holding a banner to deposit
 		[c/0099ff:<right>] to open banner box
 		{TooltipByKeybind}
 		Automatically collect picked up banners,
