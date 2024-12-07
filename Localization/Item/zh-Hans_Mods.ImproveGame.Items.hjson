@@ -180,7 +180,7 @@ GlobeBase: {
 	Reveal: "{1}在地图上标记了{0}"
 	RevealPlantera: "{0}在地图上标记了{$NPCName.Plantera}"
 	RevealEnchantedSword: "{0}在地图上标记了{$ItemName.EnchantedSword}"
-	NotFound: 本世界没有{0}的数据，原因可能是创建地图时未启用更好的体验 v1.6.6+
+	NotFound: 本世界没有{0}的数据，原因可能是创建地图时未启用更好的体验最新版
 }
 
 AetherGlobe.BiomeName: 以太

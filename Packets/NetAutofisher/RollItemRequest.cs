@@ -1,4 +1,5 @@
-﻿using ImproveGame.Common.ModPlayers;
+﻿using ImproveGame.Common.GlobalItems;
+using ImproveGame.Common.ModPlayers;
 using ImproveGame.Common.ModSystems;
 using ImproveGame.Content.Tiles;
 
@@ -55,8 +56,20 @@ public class RollItemRequest : NetModule
             case NetmodeID.Server:
                 if (_rolledItemDrop != 0)
                 {
-                    var player = TEAutofisher.GetClosestPlayer(autofisher.Position);
-                    autofisher.GiveCatchToStorage(player, _rolledItemDrop);
+                    AutofishItemListener.ListeningAutofisher = autofisher;
+
+                    try
+                    {
+                        var player = TEAutofisher.GetClosestPlayer(autofisher.Position);
+                        autofisher.GiveCatchToStorage(player, _rolledItemDrop);
+                    }
+                    catch
+                    {
+                        // ignored
+                    } finally
+                    {
+                        AutofishItemListener.ListeningAutofisher = null;
+                    }
                 }
 
                 break;
