@@ -240,9 +240,19 @@ public class ImprovePlayer : ModPlayer
         if (!Config.SuperVault) return;
 
         if (BigBagGUI.Instance.Enabled && BigBagGUI.Instance.StartTimer.AnyOpen)
+        {
             BigBagGUI.Instance.Close();
+        }
         else
+        {
+            bool oldInventory = Main.playerInventory;
+
             BigBagGUI.Instance.Open();
+
+            // 假设也按了物品栏快捷键...
+            if (PlayerInput.Triggers.JustPressed.Inventory)
+                Main.playerInventory = oldInventory;
+        }
     }
 
     private static void PressBuffTrackerKeybind()
