@@ -199,13 +199,13 @@ EnchantedSwordGlobe.NotFound: Couldn't find more Enchanted Sword Shrines
 
 # 在大理石洞全部标记完了的情况下到显示，花岗岩洞的文本亦是如此
 MarbleCaveGlobe: {
-	BiomeName: 大理石洞
-	NotFound: 未能找到更多的大理石洞
+	BiomeName: Marble Cave
+	NotFound: No more marble cave found.
 }
 
 GraniteCaveGlobe: {
-	BiomeName: 花岗岩洞
-	NotFound: 未能找到更多的花岗岩洞
+	BiomeName: Granite Cave
+	NotFound: No more granite cave found.
 }
 
 DetectorDrone: {
@@ -222,8 +222,8 @@ DevMark: {
 	DisplayName: Developer's Mark
 	Tooltip:
 		'''
-		When in the inventory, Wand of Construction will not consume materials
-		Only works in single player
+		When in the inventory, Wand of Construction will not consume materials (Only works in single player)
+		Use with fishing machine opened to automatically fill it with fishing equipment
 		[c/ff0000:Developer's item]
 		'''
 }

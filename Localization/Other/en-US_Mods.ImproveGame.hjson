@@ -414,7 +414,11 @@ Keybinds: {
 
 	HomeKeybind: {
 		DisplayName: Use Recall Items
-		Tip: Use home-returning items in inventory (Return Potion > Recall Potion > magic mirrors)
+		Tip:
+			'''
+			Use home-returning items in inventory (Return Potion > Recall Potion > magic mirrors)
+			Potions can only be used if "Infinite Potion" is enabled and the required amount is reached
+			'''
 	}
 
 	OpenBagGUI: {
