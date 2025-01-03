@@ -72,7 +72,7 @@ PotionBag: {
 	DisplayName: Potion Bag
 	Tooltip:
 		'''
-		Stores you buff potions
+		Stores your buff potions
 		[c/0099ff:<left>] while holding a potion to deposit
 		[c/0099ff:<right>] to open potion bag
 		{TooltipByKeybind}
