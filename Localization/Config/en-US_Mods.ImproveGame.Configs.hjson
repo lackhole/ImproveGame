@@ -261,6 +261,11 @@ ImproveConfigs: {
 		Tooltip: Makes all the herbs able to bloom and to drop seeds in any condition
 	}
 
+	PumpkinGrowsFaster: {
+		Label: "[centeritem:1725] 南瓜迅速生长"
+		Tooltip: 使南瓜生长的更快
+	}
+
 	StaffOfRegenerationAutomaticPlanting: {
 		Label: "[centeritem:213] Staff/Axe of Regrowth Auto-Plant"
 		Tooltip: Automatically plants the gathered herb when using the Staff/Axe of Regrowth

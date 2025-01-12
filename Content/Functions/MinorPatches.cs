@@ -269,6 +269,8 @@ namespace ImproveGame.Content.Functions
                 Player_PlaceThing_Tiles_BlockPlacementForAssortedThings;
             // “草药” 是否掉落成熟时候物品
             On_WorldGen.IsHarvestableHerbWithSeed += WorldGen_IsHarvestableHerbWithSeed;
+            // “南瓜”生长速度
+            IL_WorldGen.GrowPumpkin += WorldGen_GrowPumpkin;
             // 旅商永远不离开
             On_WorldGen.UnspawnTravelNPC += TravelNPCStay;
             // 修改旗帜需求
@@ -401,6 +403,23 @@ namespace ImproveGame.Content.Functions
             On_Main.UpdateAudio += GraveyardMusicRemoval;
             // 墓地迷雾
             On_AmbientWindSystem.Update += GraveyardMistRemoval;
+        }
+
+        private void WorldGen_GrowPumpkin(ILContext il)
+        {
+            var c = new ILCursor(il);
+
+            if (!c.TryGotoNext(MoveType.AfterLabel, x => x.Next == null))
+                return;
+
+            c.Emit(OpCodes.Ldarg_0);
+            c.Emit(OpCodes.Ldarg_1);
+            c.Emit(OpCodes.Ldarg_2);
+            c.EmitDelegate<Action<int, int, int>>((i, j, type) =>
+            {
+                if (Config.PumpkinGrowsFaster)
+                    WorldGen.GrowPumpkin(i, j, type);
+            });
         }
 
         private void GraveyardMistRemoval(On_AmbientWindSystem.orig_Update orig, AmbientWindSystem self)

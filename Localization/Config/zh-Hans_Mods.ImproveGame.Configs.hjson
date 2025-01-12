@@ -269,6 +269,11 @@ ImproveConfigs: {
 		Tooltip: 使所有草药可以在任何时候开花，收获种子。
 	}
 
+	PumpkinGrowsFaster: {
+		Label: "[centeritem:1725] 南瓜迅速生长"
+		Tooltip: 使南瓜生长的更快
+	}
+
 	StaffOfRegenerationAutomaticPlanting: {
 		Label: "[centeritem:213] 再生法杖/再生之斧自动种植"
 		Tooltip: 使用再生法杖或再生之斧收获时，会自动种植草药

@@ -264,6 +264,9 @@ public class ImproveConfigs : ModConfig
     public bool AlchemyGrassAlwaysBlooms;
 
     [DefaultValue(false)]
+    public bool PumpkinGrowsFaster;
+
+    [DefaultValue(false)]
     public bool StaffOfRegenerationAutomaticPlanting;
 
     [DefaultValue(true)]

@@ -41,6 +41,7 @@ public class VanillaPreset : OfficialPreset
         modConfig.BestiaryQuickUnlock = false;
         modConfig.AlchemyGrassGrowsFaster = false;
         modConfig.AlchemyGrassAlwaysBlooms = false;
+        modConfig.PumpkinGrowsFaster = false;
         modConfig.StaffOfRegenerationAutomaticPlanting = false;
         modConfig.NoBiomeSpread = false;
         modConfig.RespawnWithFullHP = false;
