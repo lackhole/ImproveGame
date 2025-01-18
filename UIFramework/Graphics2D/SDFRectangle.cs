@@ -60,6 +60,7 @@ public class SDFRectangle
         parameters["uBorder"].SetValue(border);
         parameters["uBorderColor"].SetValue(borderColor.ToVector4());
         parameters["uInnerShrinkage"].SetValue(innerShrinkage);
+        parameters["uTransition"].SetValue(new Vector2(-1, 0.5f) / Main.UIScale);
         ApplyPass(0);
         BaseDrawRectangle(pos, size, rounded);
     }
@@ -73,6 +74,7 @@ public class SDFRectangle
         _effect.Parameters["uTransform"].SetValue(GetMatrix(ui));
         _effect.Parameters["uBackgroundColor"].SetValue(backgroundColor.ToVector4());
         _effect.Parameters["uInnerShrinkage"].SetValue(innerShrinkage);
+        _effect.Parameters["uTransition"].SetValue(new Vector2(-1, 0.5f) / Main.UIScale);
         ApplyPass(1);
         BaseDrawRectangle(pos, size, rounded);
     }
@@ -86,6 +88,7 @@ public class SDFRectangle
         _effect.Parameters["uTransform"].SetValue(GetMatrix(ui));
         _effect.Parameters["uBackgroundColor"].SetValue(backgroundColor.ToVector4());
         _effect.Parameters["uShadowSize"].SetValue(shadow);
+        _effect.Parameters["uTransition"].SetValue(new Vector2(-1, 0.5f) / Main.UIScale);
         ApplyPass(2);
         BaseDrawRectangle(pos, size, rounded + new Vector4(shadow));
     }
