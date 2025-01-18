@@ -20,7 +20,7 @@
 			<Visible>false</Visible>
 		</None>
 		<None Include="./changelog.txt;./description.txt;./description_workshop.txt;./description_workshop_en.txt">
-			<Visible>false</Visible>
+			<Visible>true</Visible>
 		</None>
 		<None Include=".gitignore;.gitattributes;./.editorconfig;./LICENSE">
 			<Visible>false</Visible>
