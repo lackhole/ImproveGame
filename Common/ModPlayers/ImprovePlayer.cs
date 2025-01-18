@@ -251,7 +251,7 @@ public class ImprovePlayer : ModPlayer
 
             // 假设也按了物品栏快捷键...
             if (PlayerInput.Triggers.JustPressed.Inventory)
-                Main.playerInventory = oldInventory;
+                OperateInventory(oldInventory);
         }
     }
 

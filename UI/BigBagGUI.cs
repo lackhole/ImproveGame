@@ -276,7 +276,7 @@ public class BigBagGUI : BaseBody
         StartTimer.Open();
 
         SoundEngine.PlaySound(SoundID.MenuOpen);
-        Main.playerInventory = true;
+        OperateInventory(true);
     }
 
     public void Close()
