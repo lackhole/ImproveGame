@@ -262,8 +262,8 @@ ImproveConfigs: {
 	}
 
 	PumpkinGrowsFaster: {
-		Label: "[centeritem:1725] 南瓜迅速生长"
-		Tooltip: 使南瓜生长的更快
+		Label: "[centeritem:1725] Accelerate Pumpkin Growth"
+		Tooltip: Makes all the pumpkins grow faster
 	}
 
 	StaffOfRegenerationAutomaticPlanting: {
@@ -978,13 +978,13 @@ UIConfigs: {
 	}
 
 	MarkMarbleCave: {
-		Label: "[centeritem:ImproveGame/MarbleCaveGlobe] 大理石洞图标大小"
-		Tooltip: 在地图上显示的已标记的大理石洞的图标的大小，设为0以隐藏图标
+		Label: "[centeritem:ImproveGame/MarbleCaveGlobe] Marble Cave Icon Size"
+		Tooltip: Size of map icons of marked Marble Caves, set to 0 to hide
 	}
 
 	MarkGraniteCave: {
-		Label: "[centeritem:ImproveGame/GraniteCaveGlobe] 花岗岩洞图标大小"
-		Tooltip: 在地图上显示的已标记的花岗岩洞的图标的大小，设为0以隐藏图标
+		Label: "[centeritem:ImproveGame/GraniteCaveGlobe] Granite Cave Icon Size"
+		Tooltip: Size of map icons of marked Granite Caves, set to 0 to hide
 	}
 
 	MarkEmptyAutofisher: {
