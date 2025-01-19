@@ -124,7 +124,7 @@ public class BigBagGUI : BaseBody
         var view = new View
         {
             Width = { Precent = 1f },
-            Height = { Pixels = 2.5f },
+            Height = { Pixels = 2f },
             BgColor = UIStyle.PanelBorder,
             RelativeMode = RelativeMode.Vertical,
             Spacing = new Vector2(-1f),
