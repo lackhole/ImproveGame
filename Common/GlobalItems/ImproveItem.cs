@@ -11,6 +11,7 @@ namespace ImproveGame.Common.GlobalItems;
 
 public class ImproveItem : GlobalItem, IItemOverrideHover, IItemMiddleClickable
 {
+
     public override void SetDefaults(Item item)
     {
         if (Config is null || item is null)
@@ -269,6 +270,8 @@ public class ImproveItem : GlobalItem, IItemOverrideHover, IItemMiddleClickable
         {
             tooltips.Add(new(Mod, "CreateWall", "CreateWall: " + item.createWall));
         }
+
+        tooltips.Add(new(Mod, "InternalName", "InternalName: " + ItemID.Search.GetName(item.type)));
     }
 
     public override bool PreDrawInInventory(Item item, SpriteBatch sb, Vector2 position, Rectangle frame,

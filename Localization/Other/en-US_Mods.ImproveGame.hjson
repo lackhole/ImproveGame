@@ -439,6 +439,22 @@ Keybinds: {
 		DisplayName: Special Interactions
 		Tip: Interact with some items, e.g. mounts and Piggy Bank
 	}
+
+	CopyItemName: {
+		DisplayName: 快速复制物品内部名称
+		Tip: 按下后将会复制光标悬停处物品的内部名称
+	}
+
+	CopyItemName_Switch: {
+		DisplayName: 切换复制名称的模式
+		Tip:
+			'''
+			按下后，将会切换 {$Mods.ImproveGame.Keybinds.CopyItemName.DisplayName} 按键所复制的名称格式
+			在以下两个模式中切换：
+			- 复制光标悬停处物品的内部名称
+			- 复制光标悬停处物品的内部全名称（也就是模组名/物品名的形式）
+			'''
+	}
 }
 
 Projectiles: {

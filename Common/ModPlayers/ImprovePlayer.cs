@@ -1,4 +1,5 @@
-﻿using ImproveGame.Common.GlobalNPCs;
+﻿using ImproveGame.Common.GlobalItems;
+using ImproveGame.Common.GlobalNPCs;
 using ImproveGame.Common.ModSystems;
 using ImproveGame.Content.Items;
 using ImproveGame.Content.Items.ItemContainer;
@@ -228,6 +229,8 @@ public class ImprovePlayer : ModPlayer
             PressAutoTrashKeybind();
         if (KeybindSystem.MasterControlKeybind.JustPressed)
             PressMasterControlKeybind();
+        if (KeybindSystem.CopyItemNameSwitchKeybind.JustPressed)
+            KeybindItem.SwitchCopyMode ^= true;
 
         // 下面是操作类快捷键
         if (Player.DeadOrGhost) return;

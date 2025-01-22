@@ -23,6 +23,8 @@ public class KeybindSystem : ModSystem
     public static ModKeybind DiscordRodKeybind { get; private set; }
     public static ModKeybind HomeKeybind { get; private set; }
     public static ModKeybind ItemInteractKeybind { get; private set; }
+    public static ModKeybind CopyItemNameKeybind { get; private set; }
+    public static ModKeybind CopyItemNameSwitchKeybind { get; private set; }
 
     private static readonly Dictionary<string, string> ZhTranslationKeybind = new()
     {
@@ -55,6 +57,8 @@ public class KeybindSystem : ModSystem
         DiscordRodKeybind = KeybindLoader.RegisterKeybind(Mod, "DiscordRodKeybind", "U");
         HomeKeybind = KeybindLoader.RegisterKeybind(Mod, "HomeKeybind", "Home");
         ItemInteractKeybind = KeybindLoader.RegisterKeybind(Mod, "ItemInteract", "Mouse3");
+        CopyItemNameKeybind = KeybindLoader.RegisterKeybind(Mod, "CopyItemName", "X");
+        CopyItemNameSwitchKeybind = KeybindLoader.RegisterKeybind(Mod, "CopyItemName_Switch", "LeftControl");
     }
 
     public override void PostUpdateEverything()
@@ -167,5 +171,7 @@ public class KeybindSystem : ModSystem
         DiscordRodKeybind = null;
         HomeKeybind = null;
         ItemInteractKeybind = null;
+        CopyItemNameKeybind = null;
+        CopyItemNameSwitchKeybind = null;
     }
 }
