@@ -48,6 +48,9 @@ Conditions: {
 	AvailableDetectorDrone: "{$Mods.ImproveGame.Items.DetectorDrone.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 	AvailableMoveChest: "{$Mods.ImproveGame.Items.MoveChest.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
 	AvailableCoinOne: "{$Mods.ImproveGame.Items.CoinOne.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"
+	EnableQuickShimmer: "{$Mods.ImproveGame.UI.QuickShimmer.Title}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Enable}"
+	EnableMinimapMark: Structure Markers{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Enable}
+	EnableWeatherControl: "{$Mods.ImproveGame.UI.WeatherGUI.Title}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Enable}"
 }
 
 CombatText: {

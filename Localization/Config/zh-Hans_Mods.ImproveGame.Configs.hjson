@@ -712,7 +712,7 @@ ImproveConfigs: {
 		Tooltip:
 			'''
 			可以调节风向、月相、降雨，肉后还能调节时间，在总控面板中打开
-			使用气候之书后即可解锁此功能，解锁状态跟随世界存档
+			使用天气之书后即可解锁此功能，解锁状态跟随世界存档
 			'''
 	}
 
@@ -781,6 +781,7 @@ AvailableModItemConfigs: {
 	DisplayName: 模组物品加载配置
 	Available: 可获取
 	Unavailable: 不可获取
+	Enable: 启用
 
 	AvailableMagickWand: {
 		// Label: "[centeritem:ImproveGame/MagickWand] {$Mods.ImproveGame.Items.MagickWand.DisplayName}{$Mods.ImproveGame.Configs.AvailableModItemConfigs.Available}"

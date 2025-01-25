@@ -1,4 +1,6 @@
-﻿namespace ImproveGame.Content.Items.Globes;
+﻿using ImproveGame.Common.Conditions;
+
+namespace ImproveGame.Content.Items.Globes;
 
 public class GraniteCaveGlobe : ModItem
 {
@@ -8,7 +10,7 @@ public class GraniteCaveGlobe : ModItem
 
     public override LocalizedText DisplayName => GetLocalizedText(nameof(DisplayName));
 
-    public override LocalizedText Tooltip => GetLocalizedText(nameof(Tooltip));
+    public override LocalizedText Tooltip => GetLocalizedText(nameof(Tooltip) + "_1");
 
     public override void SetDefaults()
     {
@@ -29,6 +31,7 @@ public class GraniteCaveGlobe : ModItem
             .AddRecipeGroup(RecipeGroupID.IronBar, 4)
             .AddIngredient(ItemID.Ruby)
             .AddTile(TileID.WorkBenches)
+            .AddCondition(ConfigCondition.EnableMinimapMarkC)
             .Register();
     
     public override bool CanUseItem(Player player)

@@ -1,4 +1,5 @@
-﻿using ImproveGame.Common.ModSystems;
+﻿using ImproveGame.Common.Conditions;
+using ImproveGame.Common.ModSystems;
 using ImproveGame.Packets.WorldFeatures;
 
 namespace ImproveGame.Content.Items.Globes;
@@ -11,7 +12,7 @@ public class EnchantedSwordGlobe : ModItem
 
     public override LocalizedText DisplayName => GetLocalizedText(nameof(DisplayName));
 
-    public override LocalizedText Tooltip => GetLocalizedText(nameof(Tooltip));
+    public override LocalizedText Tooltip => GetLocalizedText(nameof(Tooltip) + "_1");
 
     public override void SetDefaults()
     {
@@ -32,6 +33,7 @@ public class EnchantedSwordGlobe : ModItem
             .AddIngredient(ItemID.StoneBlock, 150)
             .AddIngredient(ItemID.FallenStar, 3)
             .AddTile(TileID.Anvils)
+            .AddCondition(ConfigCondition.EnableMinimapMarkC)
             .Register();
     
     public override bool CanUseItem(Player player)

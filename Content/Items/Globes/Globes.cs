@@ -1,4 +1,5 @@
-﻿using ImproveGame.Common.ModSystems;
+﻿using ImproveGame.Common.Conditions;
+using ImproveGame.Common.ModSystems;
 
 namespace ImproveGame.Content.Items.Globes;
 
@@ -12,7 +13,8 @@ public class AetherGlobe : GlobeBase
         recipe.AddIngredient(ItemID.Glass, 10)
             .AddIngredient(ItemID.StoneBlock, 80)
             .AddRecipeGroup(RecipeSystem.AnyGem, 6)
-            .AddTile(TileID.WorkBenches);
+            .AddTile(TileID.WorkBenches)
+            .AddCondition(ConfigCondition.EnableMinimapMarkC);
 }
 
 public class DungeonGlobe : GlobeBase
@@ -23,7 +25,8 @@ public class DungeonGlobe : GlobeBase
         recipe.AddRecipeGroup(RecipeGroupID.Sand, 10)
             .AddIngredient(ItemID.DirtBlock, 30)
             .AddIngredient(ItemID.StoneBlock, 50)
-            .AddTile(TileID.WorkBenches);
+            .AddTile(TileID.WorkBenches)
+            .AddCondition(ConfigCondition.EnableMinimapMarkC);
 }
 
 public class TempleGlobe : GlobeBase
@@ -37,7 +40,8 @@ public class TempleGlobe : GlobeBase
             .AddIngredient(ItemID.MudBlock, 100)
             .AddIngredient(ItemID.JungleSpores, 3)
             .AddIngredient(ItemID.Stinger, 3)
-            .AddTile(TileID.WorkBenches);
+            .AddTile(TileID.WorkBenches)
+            .AddCondition(ConfigCondition.EnableMinimapMarkC);
 }
 
 public class PyramidGlobe : GlobeBase
@@ -46,7 +50,8 @@ public class PyramidGlobe : GlobeBase
 
     protected override Recipe AddCraftingMaterials(Recipe recipe) =>
         recipe.AddRecipeGroup(RecipeGroupID.Sand, 50)
-            .AddTile(TileID.WorkBenches);
+            .AddTile(TileID.WorkBenches)
+            .AddCondition(ConfigCondition.EnableMinimapMarkC);
 }
 
 public class FloatingIslandGlobe : GlobeBase
@@ -60,5 +65,6 @@ public class FloatingIslandGlobe : GlobeBase
         recipe.AddIngredient(ItemID.Glass, 18)
             .AddRecipeGroup(RecipeGroupID.Wood, 100)
             .AddIngredient(ItemID.Rope, 100)
-            .AddTile(TileID.WorkBenches);
+            .AddTile(TileID.WorkBenches)
+            .AddCondition(ConfigCondition.EnableMinimapMarkC);
 }

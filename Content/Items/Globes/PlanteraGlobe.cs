@@ -1,4 +1,5 @@
-﻿using ImproveGame.Packets.WorldFeatures;
+﻿using ImproveGame.Common.Conditions;
+using ImproveGame.Packets.WorldFeatures;
 
 namespace ImproveGame.Content.Items.Globes;
 
@@ -10,7 +11,7 @@ public class PlanteraGlobe : ModItem
 
     public override LocalizedText DisplayName => GetLocalizedText(nameof(DisplayName));
 
-    public override LocalizedText Tooltip => GetLocalizedText(nameof(Tooltip));
+    public override LocalizedText Tooltip => GetLocalizedText(nameof(Tooltip) + "_1");
 
     public override void SetDefaults()
     {
@@ -32,6 +33,7 @@ public class PlanteraGlobe : ModItem
             .AddIngredient(ItemID.RichMahogany, 30)
             .AddIngredient(ItemID.JungleSpores, 1)
             .AddTile(TileID.MythrilAnvil)
+            .AddCondition(ConfigCondition.EnableMinimapMarkC)
             .Register();
     
     public override bool CanUseItem(Player player)
