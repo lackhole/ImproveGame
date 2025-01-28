@@ -1,10 +1,17 @@
 ﻿using ImproveGame.Common.Conditions;
 using ImproveGame.Common.ModSystems;
+using ImproveGame.Content.Items.Globes.Core;
+using ImproveGame.Content.Projectiles;
 
 namespace ImproveGame.Content.Items.Globes;
 
-public class AetherGlobe : GlobeBase
+public class AetherGlobe : OnceForAllGlobe
 {
+    public class AetherGlobeProj : GlobeProjBase
+    {
+        public override ModItem GetModItemDummy() => ModContent.GetInstance<AetherGlobe>();
+    }
+
     public override StructureDatas.UnlockID StructureType => StructureDatas.UnlockID.Shimmer;
 
     public override bool NotFoundCheck() => StructureDatas.ShimmerPosition == default;
@@ -17,8 +24,13 @@ public class AetherGlobe : GlobeBase
             .AddCondition(ConfigCondition.EnableMinimapMarkC);
 }
 
-public class DungeonGlobe : GlobeBase
+public class DungeonGlobe : OnceForAllGlobe
 {
+    public class DungeonGlobeProj : GlobeProjBase
+    {
+        public override ModItem GetModItemDummy() => ModContent.GetInstance<DungeonGlobe>();
+    }
+
     public override StructureDatas.UnlockID StructureType => StructureDatas.UnlockID.Dungeon;
 
     protected override Recipe AddCraftingMaterials(Recipe recipe) =>
@@ -29,8 +41,13 @@ public class DungeonGlobe : GlobeBase
             .AddCondition(ConfigCondition.EnableMinimapMarkC);
 }
 
-public class TempleGlobe : GlobeBase
+public class TempleGlobe : OnceForAllGlobe
 {
+    public class TempleGlobeProj : GlobeProjBase
+    {
+        public override ModItem GetModItemDummy() => ModContent.GetInstance<TempleGlobe>();
+    }
+
     public override StructureDatas.UnlockID StructureType => StructureDatas.UnlockID.Temple;
 
     public override bool NotFoundCheck() => StructureDatas.TemplePosition == default;
@@ -44,8 +61,13 @@ public class TempleGlobe : GlobeBase
             .AddCondition(ConfigCondition.EnableMinimapMarkC);
 }
 
-public class PyramidGlobe : GlobeBase
+public class PyramidGlobe : OnceForAllGlobe
 {
+    public class PyramidGlobeProj : GlobeProjBase
+    {
+        public override ModItem GetModItemDummy() => ModContent.GetInstance<PyramidGlobe>();
+    }
+
     public override StructureDatas.UnlockID StructureType => StructureDatas.UnlockID.Pyramids;
 
     protected override Recipe AddCraftingMaterials(Recipe recipe) =>
@@ -54,8 +76,13 @@ public class PyramidGlobe : GlobeBase
             .AddCondition(ConfigCondition.EnableMinimapMarkC);
 }
 
-public class FloatingIslandGlobe : GlobeBase
+public class FloatingIslandGlobe : OnceForAllGlobe
 {
+    public class FloatingIslandGlobeProj : GlobeProjBase
+    {
+        public override ModItem GetModItemDummy() => ModContent.GetInstance<FloatingIslandGlobe>();
+    }
+
     public override StructureDatas.UnlockID StructureType => StructureDatas.UnlockID.FloatingIslands;
 
     public override bool NotFoundCheck() =>

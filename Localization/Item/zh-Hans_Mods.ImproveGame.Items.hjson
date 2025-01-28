@@ -198,11 +198,21 @@ PyramidGlobe: {
 }
 
 TempleGlobe.BiomeName: 丛林神庙
-# 在世界上没有花苞或花苞全部标记完了的情况下显示，附魔剑的文本亦是如此
-PlanteraGlobe.NotFound: 未能找到更多的世纪之花球茎
-EnchantedSwordGlobe.NotFound: 未能找到更多的石中附魔剑
 
-# 在大理石洞全部标记完了的情况下到显示，花岗岩洞的文本亦是如此
+# NotFound在世界上没有花苞或花苞全部标记完了的情况下显示，附魔剑的文本亦是如此
+PlanteraGlobe: {
+	// BiomeName: "{$NPCName.Plantera}"
+	NotFound: 未能找到更多的世纪之花球茎
+	// Reveal: "{0} marked up {$NPCName.Plantera} on the map."
+}
+
+EnchantedSwordGlobe: {
+	// BiomeName: "{$ItemName.EnchantedSword}"
+	NotFound: 未能找到更多的石中附魔剑
+	// Reveal: "{0} marked up {$ItemName.EnchantedSword} on the map."
+}
+
+# NotFound在大理石洞全部标记完了的情况下到显示，花岗岩洞的文本亦是如此
 MarbleCaveGlobe: {
 	BiomeName: 大理石洞
 	NotFound: 未能找到更多的大理石洞
