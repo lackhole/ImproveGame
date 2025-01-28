@@ -38,6 +38,7 @@ public static class ItemExtensions
         string searchContent = stringLowered ? searchString : RemoveSpaces(searchString.ToLower());
 
         UIPlayerSetting setting = Main.LocalPlayer.GetModPlayer<UIPlayerSetting>();
+        bool fuzzySearch = setting.FuzzySearch;
         bool tooltipSearch = setting.SearchTooltip;
 
         string currentLanguageName = RemoveSpaces(
@@ -46,13 +47,19 @@ public static class ItemExtensions
                     : Lang.GetItemNameValue(item.type))
             .ToLower();
 
+        if (fuzzySearch)
+        {
+            if (FuzzySearch.Find(searchContent, currentLanguageName, 1).Any())
+                return true;
+        }
+
         if (currentLanguageName.Contains(searchContent))
             return true;
 
         if (Language.ActiveCulture.Name is not "zh-Hans") return false;
 
         string pinyin = RemoveSpaces(PinyinConvert.GetPinyinForAutoComplete(currentLanguageName));
-        return pinyin.Contains(searchContent);
+        return fuzzySearch ? FuzzySearch.Find(searchContent, pinyin, 1).Any() : pinyin.Contains(searchContent);
     }
 
     #endregion

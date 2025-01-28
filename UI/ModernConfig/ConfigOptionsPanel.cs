@@ -1,4 +1,5 @@
-﻿using ImproveGame.UI.ModernConfig.FakeCategories;
+﻿using FuzzySearchNet;
+using ImproveGame.UI.ModernConfig.FakeCategories;
 using ImproveGame.UI.ModernConfig.OfficialPresets;
 using ImproveGame.UI.ModernConfig.OptionElements;
 using ImproveGame.UI.ModernConfig.OptionElements.PresetElements;
@@ -132,9 +133,8 @@ public sealed partial class ConfigOptionsPanel : SUIPanel
         // 转换成标准字符串搜索输入
         var optionNames = _allOptions
             .Select(o => ItemTagRegex().Replace(o.Label, "")).ToList();
-        string searchContent = text;
         // 调用DeepSeek写的搜索方法
-        var results = TextSearch(searchContent, optionNames);
+        var results = TextSearch(text, optionNames);
         // 对结果进行处理
         foreach (SearchResult result in results)
         {

@@ -16,8 +16,6 @@ partial class MyUtils
         public bool ContainsOriginalSubstring { get; set; }
         // 拼音是否包含拼音关键词子串
         public bool ContainsPinyinSubstring { get; set; }
-        // 处理后英文是否包含处理后的英文关键词子串
-        public bool ContainsEnglishSubstring { get; set; }
         // Levenshtein 距离
         public int LevenshteinDistance { get; set; }
         // 拼音匹配的 Levenshtein 距离
@@ -25,7 +23,7 @@ partial class MyUtils
         // 综合评分
         public int MatchScore { get; set; }
 
-        public bool HasAnyMatch => ContainsOriginalSubstring || ContainsPinyinSubstring || ContainsEnglishSubstring;
+        public bool HasAnyMatch => ContainsOriginalSubstring || ContainsPinyinSubstring;
     }
 
     /// <summary>
@@ -42,46 +40,43 @@ partial class MyUtils
             {
                 OriginalIndex = index,
                 OriginalText = text,
-                Pinyin = PinyinConvert.GetPinyinForAutoComplete(text), // 中文转拼音
+                Pinyin = ProcessEnglish(PinyinConvert.GetPinyinForAutoComplete(text)), // 中文转拼音
                 ProcessedEnglish = ProcessEnglish(text),               // 处理英文（小写、去空格）
             })
             .ToList();
 
-        // 处理关键词：生成拼音和英文版本
-        string processedEnglishKeyword = ProcessEnglish(keyword);
-
+        // 标准化搜索关键词
+        keyword = ProcessEnglish(keyword);
+        // 获取关键词对应拼音内容
+        string keywordPinyin = ProcessEnglish(PinyinConvert.GetPinyinForAutoComplete(keyword));
+        
         // 计算匹配度
         foreach (var item in processedTexts)
         {
             // 检查原始文本是否包含关键词（不区分大小写）
-            item.ContainsOriginalSubstring = item.OriginalText
+            item.ContainsOriginalSubstring = item.ProcessedEnglish
                 .Contains(keyword, StringComparison.OrdinalIgnoreCase);
 
-            // 检查原始文本拼音是否包含关键词（不区分大小写）
+            // 检查原始文本拼音是否包含拼音关键词（不区分大小写）
             item.ContainsPinyinSubstring = item.Pinyin
-                .Contains(keyword, StringComparison.OrdinalIgnoreCase);
+                .Contains(keywordPinyin, StringComparison.OrdinalIgnoreCase);
 
-            // 检查处理后的英文是否包含处理后的关键词
-            item.ContainsEnglishSubstring = item.ProcessedEnglish
-                .Contains(processedEnglishKeyword, StringComparison.OrdinalIgnoreCase);
-
-            // 计算 Levenshtein 距离（统一转小写）
+            // 计算 Levenshtein 距离
             item.LevenshteinDistance = CalculateLevenshteinDistance(
-                keyword.ToLower(),
-                item.OriginalText.ToLower()
+                keyword,
+                item.ProcessedEnglish
             );
 
-            // 计算拼音下的 Levenshtein 距离（统一转小写）
+            // 计算拼音下的 Levenshtein 距离
             item.LevenshteinDistancePinyin = CalculateLevenshteinDistance(
-                keyword.ToLower(),
+                keyword,
                 item.Pinyin
             );
             
             // 综合评分公式
             int score = 0;
-            if (item.ContainsOriginalSubstring) score += 300;
-            if (item.ContainsPinyinSubstring) score += 200;
-            if (item.ContainsEnglishSubstring) score += 100;
+            if (item.ContainsOriginalSubstring) score += 120;
+            if (item.ContainsPinyinSubstring) score += 100;
             // 距离越小，得分越高，原始文本距离比重比拼音大，计算最终得分
             item.MatchScore = score - item.LevenshteinDistance * 5 - item.LevenshteinDistancePinyin;
         }
@@ -110,7 +105,7 @@ partial class MyUtils
     /// <summary>
     /// 处理英文：移除空格并转为小写
     /// </summary>
-    static string ProcessEnglish(string text)
+    public static string ProcessEnglish(string text)
     {
         return text.Replace(" ", "").ToLowerInvariant();
     }

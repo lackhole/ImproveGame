@@ -75,7 +75,8 @@ public class ModernConfigOption : TimerView
 
         base.Draw(spriteBatch);
 
-        DrawDebugText(spriteBatch);
+        if (displayConditionAttribute.IsVisible)
+            DrawDebugText(spriteBatch);
     }
 
     // 为了让UI之间实际上无间隔，防止鼠标滑过时Tooltip文字闪现，这里重写绘制，而不使用Spacing
