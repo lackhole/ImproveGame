@@ -484,33 +484,33 @@ ImproveConfigs: {
 	}
 
 	MostTreeMin: {
-		Label: "[centeritem:9] 普遍树最小高度 (默认: 7)"
-		// Tooltip: ""
+		Label: "[centeritem:9] 普遍树最小高度"
+		Tooltip: 默认: 7
 	}
 
 	MostTreeMax: {
-		Label: "[centeritem:9] 普遍树最大高度 (默认: 12)"
-		// Tooltip: ""
+		Label: "[centeritem:9] 普遍树最大高度"
+		Tooltip: 默认: 12
 	}
 
 	PalmTreeMin: {
-		Label: "[centeritem:2504] 棕榈树最小高度 (默认: 10)"
-		// Tooltip: ""
+		Label: "[centeritem:2504] 棕榈树最小高度"
+		Tooltip: 默认: 10
 	}
 
 	PalmTreeMax: {
-		Label: "[centeritem:2504] 棕榈树最大高度 (默认: 20)"
-		// Tooltip: ""
+		Label: "[centeritem:2504] 棕榈树最大高度"
+		Tooltip: 默认: 20
 	}
 
 	GemTreeMin: {
-		Label: "[centeritem:4856] 宝石树最小高度 (默认: 7)"
-		// Tooltip: ""
+		Label: "[centeritem:4856] 宝石树最小高度"
+		Tooltip: 默认: 7
 	}
 
 	GemTreeMax: {
-		Label: "[centeritem:4856] 宝石树最大高度 (默认: 12)"
-		// Tooltip: ""
+		Label: "[centeritem:4856] 宝石树最大高度"
+		Tooltip: 默认: 12
 	}
 
 	Headers: {

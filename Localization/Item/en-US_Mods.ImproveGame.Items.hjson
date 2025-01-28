@@ -183,8 +183,6 @@ GlobeBase: {
 		'''
 	AlreadyRevealed: "{0} has already been marked"
 	Reveal: "{1} marked up {0} on the map."
-	RevealPlantera: "{0} marked up {$NPCName.Plantera} on the map."
-	RevealEnchantedSword: "{0} marked up {$ItemName.EnchantedSword} on the map."
 	NotFound: Data of {0} is not present, it's likely that newest QoT was not enabled during world creation
 }
 

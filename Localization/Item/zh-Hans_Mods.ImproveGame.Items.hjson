@@ -183,8 +183,6 @@ GlobeBase: {
 		'''
 	AlreadyRevealed: 这个世界已经标记过{0}了
 	Reveal: "{1}在地图上标记了{0}"
-	RevealPlantera: "{0}在地图上标记了{$NPCName.Plantera}"
-	RevealEnchantedSword: "{0}在地图上标记了{$ItemName.EnchantedSword}"
 	NotFound: 本世界没有{0}的数据，原因可能是创建地图时未启用更好的体验最新版
 }
 
@@ -203,13 +201,13 @@ TempleGlobe.BiomeName: 丛林神庙
 PlanteraGlobe: {
 	// BiomeName: "{$NPCName.Plantera}"
 	NotFound: 未能找到更多的世纪之花球茎
-	// Reveal: "{0} marked up {$NPCName.Plantera} on the map."
+	Reveal: "{0}在地图上标记了{$NPCName.Plantera}"
 }
 
 EnchantedSwordGlobe: {
 	// BiomeName: "{$ItemName.EnchantedSword}"
 	NotFound: 未能找到更多的石中附魔剑
-	// Reveal: "{0} marked up {$ItemName.EnchantedSword} on the map."
+	Reveal: "{0}在地图上标记了{$ItemName.EnchantedSword}"
 }
 
 # NotFound在大理石洞全部标记完了的情况下到显示，花岗岩洞的文本亦是如此

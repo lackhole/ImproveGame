@@ -473,33 +473,33 @@ ImproveConfigs: {
 	}
 
 	MostTreeMin: {
-		Label: "[centeritem:9] Minimum Regular Tree Height (Default: 7)"
-		Tooltip: ""
+		Label: "[centeritem:9] Minimum Regular Tree Height"
+		Tooltip: Default: 7
 	}
 
 	MostTreeMax: {
-		Label: "[centeritem:9] Maximum Regular Tree Height (Default: 12)"
-		Tooltip: ""
+		Label: "[centeritem:9] Maximum Regular Tree Height"
+		Tooltip: Default: 12
 	}
 
 	PalmTreeMin: {
-		Label: "[centeritem:2504] Minimum Palm Tree Height (Default: 10)"
-		Tooltip: ""
+		Label: "[centeritem:2504] Minimum Palm Tree Height"
+		Tooltip: Default: 10
 	}
 
 	PalmTreeMax: {
-		Label: "[centeritem:2504] Maximum Palm Tree Height (Default: 20)"
-		Tooltip: ""
+		Label: "[centeritem:2504] Maximum Palm Tree Height"
+		Tooltip: Default: 20
 	}
 
 	GemTreeMin: {
-		Label: "[centeritem:4856] Minimum Gem Tree Height (Default: 7)"
-		Tooltip: ""
+		Label: "[centeritem:4856] Minimum Gem Tree Height"
+		Tooltip: Default: 7
 	}
 
 	GemTreeMax: {
-		Label: "[centeritem:4856] Maximum Gem Tree Height (Default: 12)"
-		Tooltip: ""
+		Label: "[centeritem:4856] Maximum Gem Tree Height"
+		Tooltip: Default: 12
 	}
 
 	Headers: {

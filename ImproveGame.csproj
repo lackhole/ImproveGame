@@ -9,6 +9,10 @@
 		<PackageReference Include="FuzzySearch.Net" Version="0.3.3" />
 		<PackageReference Include="Solaestas.tModLoader.ModBuilder" Version="1.6.1" />
 	</ItemGroup>
+	<PropertyGroup>
+		<!--自动打开DragonLens-->
+		<DebugMod>DragonLens</DebugMod>
+	</PropertyGroup>
 	<ItemGroup>
 		<Reference Include="lib\*.dll" />
 		<ModReference Include="lib\*.dll" />
